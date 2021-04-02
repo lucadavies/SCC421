@@ -1,0 +1,44 @@
+REGEX:
+Ternary:			\?.+:
+Lambda expressions C#:		\)\s*=>
+Lambda expressions Java:	\)\s*->
+Null-coalesce:			\?\?
+Null-conditional:		\?\.
+Unary increment:		\+\+
+Unary decrement:		--
+Compound assignment:		\s([+\-*/]|(\?\?))=
+Foreach C#:			foreach\s*\(.*in.*\)
+Foreach JS:			foreach\(.*\)
+Foreach Java:			for\s?\(.*:.*\)
+
+LANGUAGE PRESENCE:
+CONSTRUCT		C#	JS	JAVA
+Ternary			o	o	o
+Lambda			o	o	o
+Null-coalesce:		o	o	x
+Null-conditional:	o	o	x
+Unary increment:	o	o	o
+Unary decrement:	o	o	o
+Compound assignment:	o	o	o
+Foreach:		o	o	o
+
+CATEGORIES:
+Ternary
+- Regular if with single statements
+- Expression (acts in a single line such that an if statement couldn't replace it "simply")
+- Emulate null-coalesce
+Lambda
+- In-line (event) handlers
+- In-line map/reduce functions
+Null-coalesce
+- Throw null-value based exceptions
+- Null-handling (e.g. replacing null with string.Empty)
+- Init. (use existing or create new if null)
+- Primary/secondary
+Null-conditional
+- Null protection
+Unary increment
+Unary decrement
+Compound assignment
+Foreach
+- For loop on iterables/enumerables 

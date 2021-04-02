@@ -1,0 +1,9 @@
+- are developers aware of the constructs
+- do developers use the constructes
+- do software companies' policies encourage use of the constructs
+- do developers think these contsructs are better
+	- for brevity
+	- for code efficiency (speed)
+	- for clarity
+- do developers think that these contsructs are better used in some langauges than others
+- would developers rewrite code to use or not use the constructs
