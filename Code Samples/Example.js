@@ -1,68 +1,92 @@
 // TERNARY
-    //1 
-    const dirPath = dirRelative ? path.join(root, dirRelative) : root;
-    //-
-    const dirPath;
-    if (dirRelative)
+    //1
+    function getFee(isMember)
     {
-        dirPath = path.join(root, dirRelative);
-    }
-    else
-    {
-        dirPath = root;
+        return (isMember ? '$2.00' : '$10.00');
     }
 
-    //2
-    function unparsePerson (d) {
-        return d.name +
-          (d.email ? ' <' + d.email + '>' : '') +
-          (d.url ? ' (' + d.url + ')' : '')
-      }
-    //-
-    function unparsePerson (d) {
-        rName = d.name
-        if (d.email) {
-            rName = rName + ' <' + d.email + '>'
+    function getFee(isMember)
+    {
+        if (isMember)
+        {
+            return '$2.00';
         }
-        
-        if (d.url) {
-            rName = rName + ' (' + d.url + ')'
+        else
+        {
+            return '$10.00'
         }
-        return rName
     }
 
 // ANONYMOUS FUNCTIONS
-
+    a => a + 100;
+    //-
+    function plus100(a)
+    {
+        return a + 100;
+    }
 // NULL-COALESCE
+    const maybeNullValue = null;
+    //setup
+    var valA = maybeNullValue ?? "default for A";
+    //-
+    if (maybeNullValue != null)
+    {
+        valA = maybeNullValue;
+    }
+    else
+    {
+        valA = "default for A";
+    }
 
 // NULL-CONDITIONAL
-
+    const adventurer =
+    {
+        name: 'Alice',
+        cat:
+        {
+            name: 'Dinah'
+        }
+    };
+    var dogName;
+    //setup
+    dogName = adventurer.dog?.name;
+    //-
+    if (adventurer.dog != undefined)
+    {
+        dogName = adventurer.dog.name;
+    }
+    
 // UNARY INC/DECR.
-    for (let i = 0; i < 25; i++)
-        deps[i] = '1.0.0'
+    var x;
+    var y;
+    var z
+    //setup
+    x = 3;
+    y = x++;
+    z = ++x;
     //-
-    for (let i = 0; i < 25; i = i + 1)
-        deps[i] = '1.0.0'
+    x = 3;
+    y = x;
+    x = x + 1;
+    z = x + 1;
+    x = x + 1;
 
-    if (++runs === 1)
-        throw Object.assign(new Error('nope'), { code: 'EOTP' })
-    //-
-    runs = runs + 1
-    if (runs === 1)
-        throw Object.assign(new Error('nope'), { code: 'EOTP' })
 // COMPOUND ASSIGNMENT
-    p += piece.length + arg.length
+    var a = 2;
+    //setup
+    a += 3;
     //-
-    p = p + piece.length + arg.length
-
-    timings[pName] += value
-    //-
-    timings[pName] = timings[pName] + value
+    a = a + 3;
 // FOREACH
-    updateList.forEach((tag) => {
-        setDistTag(tag, version, otp)
-    })
+    let cars = ["BMW", "Volvo", "Mini"];
+    let text = "";
+    //setup
+    for (let x of cars)
+    {
+        text += x + "<br>";
+    }
     //-
-    for (var i = 0; i < updateList.length; i++) {
-        setDistTag(updateList[i], version, otp)
+    for (var i = 0; i < cars.length; i++)
+    {
+        text += cars[i] + "<br>"
     }

@@ -1,48 +1,83 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Consumer;
+
+public class Example
+{
 // TERNARY
-    //1 
-    void setB(String a) {
-        b = (a == null || a.length() < 1) ? null : a.substring(1);
+    String DisplayTempA(double temp)
+    {
+        return temp < 20.0 ? "Cold." : "Perfect!";
     }
-
-    void setD(String a) {
-        if (a == null || a.legnth() < 1) {
-            b = null;
-        }
-        else {
-            a.substring(1);
-        }
-    }
-
-    //2
-    public Boolean[] getArray() {
-        Boolean[] value = array != null ? array : new Boolean[0];
-        return value;
-    }
-    
-    public Boolean[] getArray() {
-        Boolean[] value;
-        if (array != null)
+    //-
+    String DisplayTempB(double temp)
+    {
+        if (temp < 20.0)
         {
-            value = array;
+            return "Cold.";
         }
         else
         {
-            value = new Boolean[0];
+            return "Perfect!";
         }
     }
 
-    //3
+// LAMBDA EXPRESSIONS
+    Consumer<String> greetA = (name) ->
+    {
+        String greeting = "Hello " + name + "!";
+        System.out.println(greeting);
+    };
+    //-
+    void greetB(String name)
+    {
+        String greeting = "Hello " + name + "!";
+        System.out.println(greeting);
+    }
 
-// ANONYMOUS FUNCTIONS
-
-// NULL-COALESCE
-
-// NULL-CONDITIONAL
-
-// UNARY INC.
-
-// UNARY DECR.
+// UNARY INC/DECR.
+    void incrDecr()
+    {
+        int x;
+        int y;
+        int z;
+        //setup
+        x = 3;
+        y = x++;
+        z = ++x;
+        //-
+        x = 3;
+        y = x;
+        x = x + 1;
+        z = x + 1;
+        x = x + 1;
+    }
 
 // COMPOUND ASSIGNMENT
+    void compoundAssign()
+    {
+        int d = 2;
+        //setup
+        d += 3;
+        //-
+        d = d + 3;
+    }
 
 // FOREACH
+    void foreach()
+    {
+        ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(10, 99, 4, 65, 38, 42));
+        int total = 0;
+        //setup
+        for (int i : nums)
+        {
+            total += i;
+        }
+        //-
+        for (int i = 0; i < nums.size(); i++)
+        {
+            total += nums.get(i);
+        }
+    }
+    
+}

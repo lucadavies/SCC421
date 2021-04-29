@@ -1,5 +1,8 @@
 Report/Ref/
 Code Repos/
+Code Samples/.sonarqube
+Code Samples/C#
+Code Samples/.scannerwork
 .vs
 *.aux
 *.blg

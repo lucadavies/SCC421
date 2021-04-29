@@ -1,101 +1,102 @@
+using System;
+using System.Collections.Generic;
+
 // TERNARY
-    int logP = xDirection ? logPixelsX : logPixelsY;
+    string DisplayTempA(double temp)
+    {
+        return temp < 20.0 ? "Cold." : "Perfect!";
+    }
     //-
-    int logP;
-    if (xDirection)
+    string DisplayTempB(double temp)
     {
-        logP = logPixelsX;
-    }
-    else
-    {
-        logP = logPixelsY;
-    }
-
-    int newHeight = (subtitleSize.IsEmpty ? (titleSize.Height + 2 * PanelHeaderVerticalPadding) : (titleSize.Height + subtitleSize.Height + 3 * PanelHeaderVerticalPadding));
-    //-
-    int newHeight;
-    if (subtitleSize.IsEmpty)
-    {
-       newHeight = titleSize.Height + 2 * PanelHeaderVerticalPadding;
-    }
-    else
-    {
-        titleSize.Height + subtitleSize.Height + 3 * PanelHeaderVerticalPadding;
-    }
-
-// LAMBDA EXPRESSIONS
-    private protected int _options;
-
-    private protected bool GetOption(int option) => (_options & option) != 0;
-    //-
-    private protected int _options;
-
-    private protected bool GetOption(int option)
-    {
-        return (_options & option) != 0;
-    } 
-
-    void Foo()
-    {
-        //...
-        child1.Validating += (sender, e) =>
+        if (temp < 20.0)
         {
-            Assert.Same(child1, sender);
-            Assert.False(e.Cancel);
-            child1ValidatingCallCount++;
-            e.Cancel = cancel;
-        };
-        //...
+            return "Cold.";
+        }
+        else
+        {
+            return "Perfect!";
+        }
     }
+// LAMBDA EXPRESSIONS
+    Action<string> greetA = name =>
+    {
+        string greeting = "Hello " + name + "!";
+        Console.WriteLine(greeting);
+    };
     //-
-    void Foo()
+    void greetB(string name)
     {
-        //...
-        child1.Validating += handler;
-        //...
-    }
-
-    void handler(object sender, EventArgs e)
-    {
-        Assert.Same(child1, sender);
-        Assert.False(e.Cancel);
-        child1ValidatingCallCount++;
-        e.Cancel = cancel;
+        string greeting = $"Hello {name}!";
+        Console.WriteLine(greeting);
     }
 
 // NULL-COALESCE
-    Graphics = graphics ?? throw new ArgumentNullException(nameof(graphics));
+    int? a = null;
+    //setup
+    int b = a ?? -1;
     //-
-    if (graphics != null)
+    int c = 0;
+    if (a != null)
     {
-        Graphics = graphics;
+        c = a.Value;
     }
     else
     {
-        throw new ArgumentNullException(nameof(graphics));
+        c = -1;
     }
 
-    
 // NULL-CONDITIONAL
-    PropertyDescriptor pd = _itemShape?.Find(propertyName, true);
+    Person p = new Person();
+    //setup
+    var name = p?.firstName;
     //-
-    PropertyDescriptor pd;
-    if (_itemShape != null)
+    if (p.firstName != null)
     {
-        pd = _itemShape.Find(propertyName, true);
+        name = p.firstName;
     }
     else
     {
-        pd = null;
+        name = (default(string));
     }
 
+// UNARY INC/DECR.
+    int x;
+    int y;
+    int z;
+    //setup
+    x = 3;
+    y = x++;
+    z = ++x;
+    //-
+    x = 3;
+    y = x;
+    x = x + 1;
+    z = x + 1;
+    x = x + 1;
+
+// COMPOUND ASSIGNMENT
+    int d = 2;
+    //setup
+    d += 3;
+    //-
+    d = d + 3;
 // FOREACH
-    foreach (Form f in OpenForms)
+    List<int> nums = new List<int> {10, 99, 4, 65, 38, 42};
+    int total = 0;
+    //setup
+    foreach (int i in nums)
     {
-        f.UseWaitCursor = s_useWaitCursor;
+        total += i;
+    }
+    //-
+    for (int i = 0; i < nums.Count; i++)
+    {
+        total += nums[i];
     }
 
-    for (int i = 0; i < OpenForms.Count; i++)
-    {
-        OpenForms[i].UseWaitCursor = s_useWaitCursor;
-    }
+//-----------
+class Person
+{
+    public string firstName { get; set; }
+}
