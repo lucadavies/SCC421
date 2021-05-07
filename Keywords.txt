@@ -1,0 +1,7 @@
+style
+ternary / conditional / ?: / elvis
+null / coalesce / ?? / ?. / ?[
+lambda / arrow / => / ->
+foreach / for each
+unary / increment / decrement / ++ / --
+compound / assign / += / -= / *= / /= / |= / &=

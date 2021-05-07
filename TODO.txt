@@ -1,0 +1,5 @@
+- Stack Overflow
+- Github Issues
+- Git commit 
+- Interviews
+- Grey Lit.
