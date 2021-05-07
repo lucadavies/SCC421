@@ -61,7 +61,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         
         \begin{itemize}
             \item Ternary/in-line If Statements ( \codeword{a ? b : c} )
-            \item Null-coalesce ( \codeword{a ?? b} ) and Null-conditional Operators ( \codeword{a?.b} )
+            \item Null-coalesce ( \codeword{a ?? b} ) and Null-conditional Operators ( \codeword{a?.b} / \codeword{a?[x]b})
             \item Lambda Expressions and Anonymous Functions ( \codeword{(a) => { b; }} )
             \item Additional constructs:
             \begin{itemize}
@@ -100,8 +100,7 @@ Some text
         \label{fig:timeline}
     \end{figure}
 \end{landscape}
-\section{Not sure}
-\label{sec:dunno}   % MOVE THIS LABEL WITH THE BELOW LIST
+\section{Study Design}
     \subsection{Constructs}
     \label{subsec:constructs}
     Need this in detail somewhere.
@@ -123,17 +122,52 @@ Some text
         \item Unary Increment Operator
         \item Compound Assignment Operators
     \end{itemize}
-\section{Survey}
+
+    \subsection{Survey}
+        Using Qualtrics blah blah blah
+        \subsubsection{Questions}
+            The survey was designed to address the following questions:
+            \begin{itemize}
+                \item Are the participants \emph{aware} of the constructs?
+                \item Do the participants \emph{use} the constructs?
+                \item Are participants \emph{encouraged to use} the constructs?
+                \item Do the participants think these constructs are better for:
+                    \subitem brevity?
+                    \subitem clarity?
+                    \subitem efficiency/performance?
+                \item Do the participants think that the constructs are better used in some languages than in others?
+                \item Do participants rewrite code \emph{to use} or \emph{to not use} the constructs?
+            \end{itemize}      
+            
+            Hypothesis/expected results
+        \subsubsection{Participants}
+            Who?
+            Where from?
+            How many?
+        \subsubsection{Content}
+            How are questions above addressed?
+    \subsection{Static Code Analysis}
+            Using multiple tools, which?
+        \subsubsection{Sample Code Files}
+            One per language, features examples of the basic and advanced form of all constructs
+        \subsubsection{Open Source Repositories}
+            Selection process?
+            Big enough to assume reasonable presence of constructs
+    \subsection{Git Commit Analysis}
+        Keywords used
+    
+\section{Results}
+    \subsection{Survey}
+            []
+    \subsection{Static Code Analysis}
         []
-\section{Code Analysis}
-    []
-    \subsection{Sample Code}
-        []
-        \begin{itemize}
-            \item Picked up basic for in place of JS for-to (not for/each)
-        \end{itemize}
-    \subsection{Real-World Code Bases}
-        []
+        \subsubsection{Sample Code Files}
+            Bugger all picked up, tools do not care
+            \begin{itemize}
+                \item Picked up basic for in place of JS for-to (not for/each)
+            \end{itemize}
+        \subsubsection{Real-World Code Bases}
+            []
 \section{Conclusion}
 \label{sec:conclusion}
     []
