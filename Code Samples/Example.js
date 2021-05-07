@@ -13,12 +13,12 @@
         }
         else
         {
-            return '$10.00'
+            return '$10.00';
         }
     }
 
 // ANONYMOUS FUNCTIONS
-    a => a + 100;
+    var p100 = a => a + 100;
     //-
     function plus100(a)
     {
