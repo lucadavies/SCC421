@@ -3,6 +3,8 @@ Code Repos/
 Code Samples/.sonarqube
 Code Samples/C#
 Code Samples/.scannerwork
+Example Reports/
+Ref/
 .vs
 *.aux
 *.blg
