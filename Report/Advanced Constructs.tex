@@ -103,61 +103,127 @@ Some text
 \section{Study Design}
     \subsection{Constructs}
     \label{subsec:constructs}
-    Need this in detail somewhere.
+    The section will give a more detail description of each of the constructs to be examined. The constructs were selected as they are all replaceable with simpler syntax (in most scenarios - lambdas being a occasional exception, see section \ref{subsec:lambdas}) and, together, they represent a range of commonality from long-used compound assignment and unary increment operators at one end of the scale to much newer additions such as the null-coalescing and -conditional operators. The constructs are as follows:
     \begin{itemize}
         \item Ternary/in-line If Statements
             \begin{itemize}
-                \item Reduces the common \codeword{if} \dots \codeword{else} \dots pattern into a single line of the form \codeword{a ? b : c}, where \codeword{a} is a conditional expression, \codeword{b} is the body of the \codeword{if} and \codeword{c} is the body of the \codeword{else}.
+                \item Reduces the common \codeword{if} \dots \codeword{else} \dots pattern into a single line of the form \codeword{a ? b : c}, where \codeword{a} is a conditional expression, \codeword{b} is the body of the \codeword{if} and \codeword{c} is the body of the \codeword{else}. While it may be possible in some languages to have multiple statement in the `b' and `c' sections of a ternary, but standard syntax only permits a single statement.
             \end{itemize}
         \item Lambdas and Anonymous Functions
             \begin{itemize}
-                \item A lambda expression is any expression involving a function used as an argument, just as in Lambda Calculus. Though this is not required, lambdas most often take the form of anonymous (unnamed) functions defined in-line. \citep{javaLambdas}
+                \item A lambda expression is any expression involving a function used as an argument, just as in Lambda Calculus. Though this is not required, lambdas most often take the form of anonymous (unnamed) functions defined in-line. \citep{javaLambdas}.
             \end{itemize}
         \item Null-coalescing Operator
             \begin{itemize}
-                \item Used to provide a default value in place of a null value. Replaces a null-check (using an if statement) with a single assignment of the form \newline\codeword{a = possiblyNullValue  ?? valueIfNull} where \codeword{a} is of a nullable type. \citep{gunnerson2012programmer}
+                \item Used to provide a default value in place of a null value. Replaces a null-check (using an if statement) with a single assignment of the form \newline\codeword{a = possiblyNullValue  ?? valueIfNull} where \codeword{a} is of a nullable type. \citep{cs5Spec}.
             \end{itemize}
         \item Null-conditional Operator
+            \begin{itemize}
+                \item Used to access a member or element of its operand \emph{if and only if} that operand evaluates to non-null. Otherwise, it returns null. \citep{cs6Spec}. This allows a member/element access operation to be carried out without a null-check on the base operand, only on the evaluated value.
+            \end{itemize}
          \item Foreach Loops
+            \begin{itemize}
+                \item Used to simplify for loops for the purposes of iterating over an abstract data structure, usually a type of some form of collection of like objects; those that can be indexed into to retrieve an element. For example, in C\#, a \codeword{foreach} loop may be used to iterate over the elements of an instance of any class that implements the \codeword{IEnumerable} interface. The same applies to Java with its \codeword{Iterable} interface. In C\#, if \codeword{numList} is of type \codeword{List<int>}:
+                \\
+                \codeword{for (int i = 0; i < numList.Count; i++)}\\
+                \{\\
+                \hspace*{1cm}\codeword{total += numList[i];}\\
+                \}
+                \\\\
+                Can be written as:\\
+                \codeword{foreach (int num in numList)}\\
+                \{\\
+                \hspace*{1cm}\codeword{total += num;}\\
+                \}
+            \end{itemize}
         \item Unary Increment Operator
+            \begin{itemize}
+                \item Used to increment or decrement an integer variable by one. Often seen in for loops to increment the index variable.
+                \item For example:\\
+                \codeword{a = a + 1;}\\\\
+                Can be written as:\\
+                \codeword{a++;}
+            \end{itemize}
         \item Compound Assignment Operators
+            \begin{itemize}
+                \item Used to effectively ``append'' to a variable's value, compressing three references to variables/literals into two. In most supporting languages, a compound assignment operator exists for all basic arithmetic operators, logic operators and some others (such as in string concatenation).
+                \item For example:\\
+                \codeword{a = a * 2;}\\\\
+                Can be written as:\\
+                \codeword{a *= 2}
+            \end{itemize}
     \end{itemize}
 
     \subsection{Survey}
-        Using Qualtrics blah blah blah
+        One of the facets of this study was to capture and analyse the perceptions and thoughts of a number of professional software developers with regard to the constructs being examined. This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies.
         \subsubsection{Questions}
-            The survey was designed to address the following questions:
-            \begin{itemize}
+        \label{subsec:surveyQuestions}
+            Prior to designing, it was established that the survey must be able to provide insight that may help to answer the following questions:
+            \begin{enumerate}
                 \item Are the participants \emph{aware} of the constructs?
                 \item Do the participants \emph{use} the constructs?
                 \item Are participants \emph{encouraged to use} the constructs?
                 \item Do the participants think these constructs are better for:
-                    \subitem brevity?
-                    \subitem clarity?
-                    \subitem efficiency/performance?
+                \begin{enumerate}
+                    \item brevity?
+                    \item clarity?
+                    \item code efficiency/performance?
+                \end{enumerate}  
                 \item Do the participants think that the constructs are better used in some languages than in others?
                 \item Do participants rewrite code \emph{to use} or \emph{to not use} the constructs?
-            \end{itemize}      
+            \end{enumerate}
             
             Hypothesis/expected results
         \subsubsection{Participants}
-            Who?
-            Where from?
-            How many?
-        \subsubsection{Content}
-            How are questions above addressed?
+            Participants were recruited passively from within the Information Systems Services department (ISS) within Lancaster University by means of a blanket email sent out to all teams and filtered down via regular communications channels within the department. This gathered 40 responses in total, 23 of which completed the survey and may be considered valid responses.
+            
+            Due to the distribution method, there is no guarantee that all respondents are software developers by profession, however, all participants had a minimum of one year of programming experience, nearly half falling into the 1-4 years of experience category, with three participants having between 10 and 14 years experience and the remaining 8 having over 20 years of experience. This statistic was the only personal data collected and does not identify participants.
+        \subsubsection{Questions}
+            The survey was created using Qualtrics, as provided by Lancaster University, and consisted of a maximum of 16 questions and a minimum of 2 questions (depending on certain answers).
+            Participants were first asked to indicate which of the constructs they were aware of so that only questions and option relating to those constructs they were aware of were shown to them. For each construct they were of, participants were asked to a series of questions design to address the questions listed in section \ref{subsec:surveyQuestions}, focussing on: frequency of usage, reasons to and to not use each construct, perception on code performance, and perception of industry-wide usage per-language.
+            
+            Lastly, participants were asked if they had any further comments, which invited some very interesting points that will be discussed alongside the rest of the results in section \ref{subsec:results}.
     \subsection{Static Code Analysis}
-            Using multiple tools, which?
+        Static code analysis is concerned with checking programs and code for errors without the need to actually execute it. That is, a static code analysis tool will read the source code (or the compiled intermediary language in some cases), construct some form of abstract model of the program and then run a series of tests (often pattern-matching in nature) to detect well-known possible pit-falls, bugs, and problems \cite{staticCodeAnalysis}.
+
+        These tools will often make recommendations on how source code may be improved in numerous way beyond explicit bugs and problems, such as stylistic improvement that make use of advanced syntax whatever given language is being analysed - advanced syntax akin to the constructs being examined here. Accordingly, static analysis tools were employed to investigate whether or not they made any recommendations for or against any of the constructs in question. SonarQube and Semgrep were selected for this purpose as they both support all three languages being subject to analysis, they are both under recent, active development, and because they both have free variants. Both tools were run against sample control code files and large open source repositories in the earlier mentioned three languages: C\#, JavaScript, and Java.
+            
         \subsubsection{Sample Code Files}
-            One per language, features examples of the basic and advanced form of all constructs
+            The sample code files were created to act as a baseline or control test to see if SonarQube or Semgrep made any note at all about the bare usage and/or inclusion of any of the constructs.
+
+            Each file contains a bare (non-contextualised) example of each of the constructs placed directly alongside their `simple syntax' functionally equivalent counterparts. Each file is valid syntax for its language, and all of them may be executed, though none of them have a true entry point or way to actually \emph{run} the code within itself - the functions and methods are present purely to \emph{be present} so that they may be analysed by SonarQube and Semgrep. Though there are differences between the three languages, the form of the sample code was kept as similar as possible to preserve their purpose as control samples, without adding deliberately unusual syntax that may contaminate the output of SonarQube and Semgrep.
         \subsubsection{Open Source Repositories}
-            Selection process?
-            Big enough to assume reasonable presence of constructs
+            Four large, open source code repositories were selected from GitHub to be analysed for this study, one each in C\# and JavaScript, and two in Java. The selection process was simple: 
     \subsection{Git Commit Analysis}
-        Keywords used
+        To supplement the static analysis of the repositories, manual, by-hand analysis of the commits made to these repositories was also undertaken.
+
+        The goal of this branch of the study was to understand if and how standards are being maintained within the repositories within reference to the constructs and to general style-keeping. This was carried out by cloning the repository and examining the commit history using \codeword{git log}. A list of keywords were run against the commit history using the \codeword{--grep=<pattern>} option to \codeword{git log}. The keywords used are listed below:
+        
+        \begin{center}
+            \begin{tabular}{ | l | l | }
+                \hline
+                \textbf{General} & style \\
+                \hline
+                \textbf{Ternary} & ternary, conditional, \codeword{?:}, elvis \\
+                \hline
+                \textbf{Null coalesce/conditional} & null, coalesce, conditional, \codeword{??}, \codeword{?.}, \codeword{?[} \\
+                \hline
+                \textbf{Lambda} & lambda, arrow, \codeword{=>}, \codeword{->} \\
+                \hline
+                \textbf{For each} & foreach, for each \\
+                \hline
+                \textbf{Unary Operators} & unary, increment, decrement, ++, -{}- \\
+                \hline
+                \textbf{Compound Operators} & compound, assign, \codeword{+=}, \codeword{-=}, \codeword{*=}, \codeword{/=}, \codeword{|=}, \codeword{&=} \\
+                \hline
+            \end{tabular}
+        \end{center}
+
+        Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on usage of any of the constructs. Each type of change was documented and counted per commit.
     
 \section{Results}
     \subsection{Survey}
+    \label{subsec:results}
             []
     \subsection{Static Code Analysis}
         []
