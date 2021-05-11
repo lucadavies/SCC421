@@ -13,14 +13,23 @@
 \usepackage{pdflscape}
 \usepackage{listings}
 \usepackage{xparse}
+\usepackage{hyperref}
+
 \graphicspath{{../Figures/}}
 \bibliographystyle{agsm}
 \NewDocumentCommand{\codeword}{v}{%
 \texttt{{#1}}%
 }
 \lstset{language=C,keywordstyle={\bfseries}}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
-\title{\textbf{Examining the Effects of Advanced Programming Constructs}}
+\title{\textbf{Examining the Usage of Advanced Programming Constructs}}
 \author{
 Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 \date{4th June 2021}
@@ -87,7 +96,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \item To examine a small number of large open-source repositories to assess whether these constructs are used consistently in practice
         \end{itemize}
     \subsection{Report Structure}
-        The remainder of this report will discuss ...
+        The remainder of this report will first detail further background research directly and indirectly related to this topic, before describing the methods and design of the study, followed by the results and information gained from the study, discussion on these results, before final conclusions.
 \newpage
 \section{Background}
 \label{sec:background}
@@ -101,6 +110,7 @@ Some text
         \label{fig:timeline}
     \end{figure}
 \end{landscape}
+\newpage
 \section{Study Design}
     \subsection{Constructs}
     \label{subsec:constructs}
@@ -156,9 +166,10 @@ Some text
     \end{itemize}
 
     \subsection{Survey}
+    \label{subsec:survey}
         One of the facets of this study was to capture and analyse the perceptions and thoughts of a number of professional software developers with regard to the constructs being examined. This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies.
         \subsubsection{Questions}
-        \label{subsec:surveyQuestions}
+        \label{subsubsec:surveyQuestions}
             Prior to designing, it was established that the survey must be able to provide insight that may help to answer the following questions:
             \begin{enumerate}
                 \item Are the participants \emph{aware} of the constructs?
@@ -181,7 +192,7 @@ Some text
             Due to the distribution method, there is no guarantee that all respondents are software developers by profession, however, all participants had a minimum of one year of programming experience, nearly half falling into the 1-4 years of experience category, with three participants having between 10 and 14 years experience and the remaining 8 having over 20 years of experience. This statistic was the only personal data collected and does not identify participants.
         \subsubsection{Questions}
             The survey was created using Qualtrics, as provided by Lancaster University, and consisted of a maximum of 16 questions and a minimum of 2 questions (depending on certain answers).
-            Participants were first asked to indicate which of the constructs they were aware of so that only questions and option relating to those constructs they were aware of were shown to them. For each construct they were of, participants were asked to a series of questions design to address the questions listed in section \ref{subsec:surveyQuestions}, focussing on: frequency of usage, reasons to and to not use each construct, perception on code performance, and perception of industry-wide usage per-language.
+            Participants were first asked to indicate which of the constructs they were aware of so that only questions and option relating to those constructs they were aware of were shown to them. For each construct they were of, participants were asked to a series of questions design to address the questions listed in section \ref{subsubsec:surveyQuestions}, focussing on: frequency of usage, reasons to and to not use each construct, perception on code performance, and perception of industry-wide usage per-language.
             
             Lastly, participants were asked if they had any further comments, which invited some very interesting points that will be discussed alongside the rest of the results in section \ref{subsec:results}.
     \subsection{Static Code Analysis}
@@ -221,10 +232,43 @@ Some text
         \end{center}
 
         Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on usage of any of the constructs. Each type of change was documented and counted per commit.
-    
+
+\newpage
 \section{Results}
     \subsection{Survey}
     \label{subsec:results}
+        As described in section \ref{subsec:survey}, a survey was conducted with a number of experienced professional software developers and programmers. This revealed a number of interesting patterns of usage (or lack of, therein) of the constructs, and some interesting perceptions that may prove useful in future research focussed on performance and usage in the wider industry.
+
+        The following sections will detail the discovered patterns, grouped by the overarching category of information acquired in the survey.
+        \subsubsection{Awareness}
+            Awareness of the constructs was gathered by a simple multiple choice question with a binary yes/no for each. 
+            //
+            Hypothesis: \textit{All participants will be aware of unary and compound operators, most will be aware of ternary/in-line if-statements and lambdas, some will be aware of null-coalesce, and few will be aware of null-conditionals.}
+            //
+            Results: All participants were aware of unary operators and ternary/in-line if-statements, nearly all were aware of compound operators and lambdas, and most were aware of null-coalesce and null-conditional. Figure \ref{fig:awareness} shows these results in a graphic format.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\textwidth]{awareness}
+                \caption{Percentage of participants aware of each construct}
+                \label{fig:awareness}
+            \end{figure}
+
+            The hypothesis was partially met, the most stand-out discrepancy being that though the relative position was as predicted, \emph{absolute} awareness of the null-coalesce and -conditional operators was markedly higher than expected. This can likely be attributed to the fact that participants were all from within ISS, where the  technology stack contains a significant amount of C\#, in which these operators are often seen. If the survey were repeated over more diverse and broad range of developers working in more varied technology stacks (for example, those focussed much more on Java, or C/C++), it is reasonable to assume that awareness of these operators would be less. This is a trend that is repeated elsewhere in the results set.
+            It is also of note (if not significantly so) that not \emph{all} participants were aware of compound assignment operators, whereas all participants \emph{were} aware of ternaries - a ranking inverse to what was expected. However, the difference in the numbers are not statistically significant, comprising no more than one or two responses. To draw any conclusion from this datum would require it being replicated in a greater sample set.
+        \subsubsection{Usage Frequency}
+            To assess how often participants use each of the constructs, they were asked specifically: \textit{In places where they can be used, how often do you use each of these constructs in your code?}, that is, ``for every chance you \emph{could} use the construct, how often do you?''
+            
+            It was the extreme ends of the scales in this question that provided the most interesting results. Firstly, and perhaps reassuringly, only one data point was recorded, for any construct, under the `never' option, with just one respondent indicating that they never use the null-coalesce operator. Conversely, `for each' was the most selected construct in the `always' category, with 44\% selecting this option, followed closely by compound assignment operators with 41\%.
+
+            Across all constructs, the majority of responses fell into the `frequently' category, holding 39\% of the total selections, with the `sometimes' option at 27\% not far behind.
+        \subsubsection{Reasons To Use}
+            []
+        \subsubsection{Reasons To Not Use}
+            []
+        \subsubsection{Performance}
+            []
+        \subsubsection{Usage In Wider Industry}
             []
     \subsection{Static Code Analysis}
         []
@@ -235,6 +279,7 @@ Some text
             \end{itemize}
         \subsubsection{Real-World Code Bases}
             []
+\newpage
 \section{Conclusion}
 \label{sec:conclusion}
     []
@@ -254,12 +299,15 @@ Some text
         \end{itemize}
     \subsection{Reflections}
         []
+        %survey: what does "complexity" mean? Computational? That'd be covered by slow/faster?
     \subsection{Negative Impacting Circumstances}
         The on-going coronavirus pandemic is still very much a factor in the lives us all. :(
     \subsection{Future Research}
         []
     \subsection{Closing Statement}
         []
+
+\newpage
 \bibliography{ref}
 \newpage
 \section*{Appendix}
