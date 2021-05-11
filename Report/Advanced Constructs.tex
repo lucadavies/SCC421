@@ -241,11 +241,11 @@ Some text
 
         The following sections will detail the discovered patterns, grouped by the overarching category of information acquired in the survey.
         \subsubsection{Awareness}
-            Awareness of the constructs was gathered by a simple multiple choice question with a binary yes/no for each. 
-            //
+            Awareness of the constructs was gathered by a simple multiple choice question with a binary yes/no for each. Participants could indicate whether or not were familiar with all, some, or none of the constructs.
+            \\\newline
             Hypothesis: \textit{All participants will be aware of unary and compound operators, most will be aware of ternary/in-line if-statements and lambdas, some will be aware of null-coalesce, and few will be aware of null-conditionals.}
-            //
-            Results: All participants were aware of unary operators and ternary/in-line if-statements, nearly all were aware of compound operators and lambdas, and most were aware of null-coalesce and null-conditional. Figure \ref{fig:awareness} shows these results in a graphic format.
+            \\\newline
+            All participants were aware of unary operators and ternary/in-line if-statements, nearly all were aware of compound operators and lambdas, and most were aware of null-coalesce and null-conditional. Figure \ref{fig:awareness} shows these results in a graphic format.
 
             \begin{figure}[htbp]
                 \centering
@@ -258,12 +258,36 @@ Some text
             It is also of note (if not significantly so) that not \emph{all} participants were aware of compound assignment operators, whereas all participants \emph{were} aware of ternaries - a ranking inverse to what was expected. However, the difference in the numbers are not statistically significant, comprising no more than one or two responses. To draw any conclusion from this datum would require it being replicated in a greater sample set.
         \subsubsection{Usage Frequency}
             To assess how often participants use each of the constructs, they were asked specifically: \textit{In places where they can be used, how often do you use each of these constructs in your code?}, that is, ``for every chance you \emph{could} use the construct, how often do you?''
-            
-            It was the extreme ends of the scales in this question that provided the most interesting results. Firstly, and perhaps reassuringly, only one data point was recorded, for any construct, under the `never' option, with just one respondent indicating that they never use the null-coalesce operator. Conversely, `for each' was the most selected construct in the `always' category, with 44\% selecting this option, followed closely by compound assignment operators with 41\%.
+            \\\newline
+            Hypothesis: \textit{Unary and compound operators are used always, for each loops are used either always or frequently, ternaries and lambdas are used sometimes, and null-coalesce and null-conditional are used rarely.}
+            \\\newline
+            It was the extreme ends of the scales in this question that provided the most interesting results here. Firstly, and perhaps reassuringly, only one data point was recorded, for any construct, under the `never' option, with just one respondent indicating that they never use the null-coalesce operator. Conversely, `for each' was the most selected construct in the `always' category, with 44\% of participants selecting this option, followed closely by compound assignment operators at 41\%.
 
-            Across all constructs, the majority of responses fell into the `frequently' category, holding 39\% of the total selections, with the `sometimes' option at 27\% not far behind.
+            Across all constructs, the majority of responses fell into the `frequently' category, holding 39\% of the total selections, with the `sometimes' category at 27\%. This general erring toward the more frequent end of the scale holds not only for the collective dataset but also for each construct when examined individually, as may be seen in figure \ref{fig:freqUse}
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.8\textwidth]{freqUse}
+                \caption{Frequency with which participants said they used advanced constructs, grouped by construct}
+                \label{fig:freqUse}
+            \end{figure}
+
+            As is visible in figure \ref{fig:freqUse}, the usage of lambdas in moderation is the most agreed upon data point here, with just over 70\% of responses labelled `sometimes' for lambdas. This aligns with the hypothesis for lambdas. This is likely explainable by a variety of reasons, not least is the fact that lambdas are very powerful and complex structures, much more so than the other constructs being studied, and as such, the number of situations where they \emph{can} be used likely greatly exceeds the number situations where they \emph{should} be used. This distinction around lambdas becomes more apparent in later questions.
+            Of note, again, is the misalignment of the hypothesis with the results of the null-coalesce and null-conditional operators. Although the numbers of participants familiar with these operators is fewer, those that were aware of them do not shy away from them, using them with comparatively similar frequency to the other constructs.
         \subsubsection{Reasons To Use}
-            []
+            Participants were then asked to indicate \emph{why} they chose to use each given construct. The four options were presented:
+            \begin{itemize}
+                \item ``It is company style''
+                \item ``It makes code clearer''
+                \item ``It makes codes simpler''
+                \item ``It makes code run faster''
+            \end{itemize}
+            All, some, or none of the options may have been selected. Where the exclusive option ``None of these'' was selected, participants were prompted to give their own reason.
+            \\\newline
+            Hypothesis: \textit{Style is a primary factor for usage of ternary if-statements, null-coalesce, null-conditional, for each, unary operators. Reasons of simplicity are also key for usage of lambdas, null-coalesce, null-conditional, for each, and unary and compound operators. Additionally, lambdas and for each make code clearer. Null-coalesce may also be used for reasons of speed/efficiency.}
+            \\\newline
+
+            `Well yes but actually no.'
         \subsubsection{Reasons To Not Use}
             []
         \subsubsection{Performance}
@@ -299,7 +323,12 @@ Some text
         \end{itemize}
     \subsection{Reflections}
         []
-        %survey: what does "complexity" mean? Computational? That'd be covered by slow/faster?
+        \begin{itemize}
+            \item survey: what does "complexity" mean? Computational? That'd be covered by slow/faster?
+            \item GitHub repo selection: mistakenly thought it was `top of all repos for lang., it was not. (Check Tracy emails for reference and remedy, time permitting)'
+        \end{itemize}
+
+        
     \subsection{Negative Impacting Circumstances}
         The on-going coronavirus pandemic is still very much a factor in the lives us all. :(
     \subsection{Future Research}
