@@ -47,15 +47,13 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     Date: 01/06/2021
 \newpage
 \section*{Abstract}
-    As time has gone on, languages have become more developed themselves more advanced syntax constructs have been added alongside many "quality of life" type structures to make the writing code not only more efficient but also easier for developers. This report examines a number of these advanced constructs, drawing together both data from surveys taken by professional developers and data from analysis of a small number of large, active, open source code bases. Using a short but broad survey, data was collected on developers usage of these constructs and they provided information on how they felt these constructs affected their code and how often they used them, and how they thought they existed within the context of the wider industry. Analysis of code was carried using a combination of both simple regular expressions and via the user of lightweight tool to aid in the bulk processing of a large volume of source code file. It was found that ... don't know yet. FINISH ABSTRACT.
+    As time has gone on, languages have become more developed themselves more advanced syntax constructs have been added alongside many "quality of life" type structures to make the writing code not only more efficient but also easier for developers. This report examines a number of these advanced constructs, drawing together both data from surveys taken by professional developers and data from analysis of a small number of large, active, open source code bases. Using a short but broad survey, data was collected on developers usage of these constructs and they provided information on how they felt these constructs affected their code and how often they used them, and how they thought they existed within the context of the wider industry. Analysis of code was carried using a combination of both simple regular expressions and via the user of lightweight tool to aid in the bulk processing of a large volume of source code file. It was found that ... don't know yet. FINISH ABSTRACT WITH RESULTS.
     \newline
     \newline
     [Is there any working docs?]
 \newpage
 \tableofcontents
 \newpage
-
-% https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/
 
 \section{Introduction}
     \subsection{Overview}
@@ -101,6 +99,24 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 \section{Background}
 \label{sec:background}
 TODO as a matter of urgency...
+\\
+\cite{paradigmForStyleResearch}: style is intuitive, (1988) not much formal theory to style rules, easy to describe, hard to explain. Different styles are: general, contradictory, no conflict resolution, highly subjective (applies to auto analysers too), Berry-Meeking style score \emph{unrelated} to error proneness (additional ref here, page 1) Split style into typographic and structural (I'm concerned with structural, albeit fine-grained).
+Good quote: `It is the "perception and judgment" a writer exercises in selecting "from equally correct expressions, the one best suited to his material, audience, and intention'
+Readability and efficiency at odds with each other
+... more to be had here, 1988 is VERY old
+\\
+\cite{autoStyleFeedbackAtScale}: length is not a sole indicator ``excessive terseness is often worse than than verbosity'' (i.e. longer CAN be better).
+\\
+\cite{scaleDrivenHints} Even in 2016, nearly 30 years after \cite{paradigmForStyleResearch}, we still don't have a definite way to judge `good' style (see page 130/sec7 limitations)
+\\
+\cite{effectiveJava}: one of the defining Java style guides, `prefer for-each loops over traditional for loops' - aligns with data! Point this out later... This however is the only relevant reference to any of the constructs being studied (lambdas are talked about, but not in a directly relevant context)
+\\
+\cite{microsoftCSStyle}: no ref to ternaries, small ref to lambdas as being `shorter' in at least some circumstances (event handling). No other relevant refs
+\\
+\cite{googleJSStyle}: some ref to arrow functions/lambda (should be noted that lambdas are a wider topic/construct and deserve higher importance than that of a construct as in this paper. This became apparent during proceeds), difficult to say if relevant. \codeword{for-of} loops preferred over all other for loops. \codeword{for-in} loops ONLY for dict-style objects/never arrays
+\\
+\cite{airbnbJSStyle}: ternaries should NOT be nested (hoorah a ref for this), use an if-elseif-else construct. Use \emph{iterators} over \codeword{for-in}/\codeword{for-of} (no ref to traditional for). Do not use unary increment/decrement for reasons of auto semicolon insertion (not relevant), for additional expression of mutation of a variable (very relevant), and for avoid misuse of pre/post increment/decrement (very relevant)
+\\
 \begin{landscape}
     \begin{figure}[htbp]
         \centering
