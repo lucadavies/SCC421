@@ -1,0 +1,28 @@
+- hypothesis unneeded
+- redo intro in full (probs)
+- "passive" recruiting of participants
+	- convenience sample
+	- generalisation
+	- number email to / percentage responded
+- threats to validity
+- what is the POINT?
+- "conventional wisdom"/from course/given "casual context/make it sound formal
+- more precision in objectives
+- Section refs have CAPTIAL S
+- avoid "a number of"
+- avoid "therein"/"thus"
+- number objectives
+- lose readily from objective 3
+- "sample of open source repos"
+- objectives: variety in DOING words (understand/analyse)
+- separate methods from objectives
+- objective = what -> how
+- ALWAYS link back to objectives
+- stretch objective? overall effect on code/codebases
+- Move constructs to background(?)
+- why survey?
+	- read some steady
+	- problems with methods at start
+- illustrate good survey design
+	- put survey questions in appendix
+	- BASICS why questions are as they, no "and"/"or", etc etc
