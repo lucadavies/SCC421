@@ -47,7 +47,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     Date: 01/06/2021
 \newpage
 \section*{Abstract}
-    As time has gone on, languages have become more developed themselves more advanced syntax constructs have been added alongside many "quality of life" type structures to make the writing code not only more efficient but also easier for developers. This report examines a number of these advanced constructs, drawing together both data from surveys taken by professional developers and data from analysis of a small number of large, active, open source code bases. Using a short but broad survey, data was collected on developers usage of these constructs and they provided information on how they felt these constructs affected their code and how often they used them, and how they thought they existed within the context of the wider industry. Analysis of code was carried using a combination of both simple regular expressions and via the user of lightweight tool to aid in the bulk processing of a large volume of source code file. It was found that ... don't know yet. FINISH ABSTRACT WITH RESULTS.
+    As time has gone on, languages have become more developed themselves more advanced syntax constructs have been added alongside many "quality of life" type structures to make the writing code not only more efficient but also easier for developers. This report examines seven of these advanced constructs, drawing together both data from surveys taken by professional developers and data from analysis of a four widely known, active, open source code bases. Using a short but broad survey, data was collected on developers' usage of these constructs and they provided information on how they felt these constructs affected their code and how often they used them, and how they thought they existed within the context of the wider industry. Analysis of code was carried using a combination of both simple regular expressions and via the user of lightweight tool to aid in the bulk processing of a large volume of source code file. It was found that ... don't know yet. FINISH ABSTRACT WITH RESULTS.
     \newline
     \newline
     [Is there any working docs?]
@@ -78,7 +78,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \end{itemize}
         \end{itemize}
         
-        \emph{Detailed descriptions of these constructs are given in section \ref{sec:dunno}}\\
+        \emph{Detailed descriptions of these constructs are given in Section \ref{subsec:constructs}}\\
 
         They may be used for multiple reasons, such as to make code simpler, or clearer. Other times, it may be style defined either by a programmer themselves, or the house rules of their organisation. No tool however it unable to be misused - overuse of these types of constructs or use of them in inappropriate places can in fact make code more complicated and harder to read than it would have been using more basic syntax. In this paper, we will study the above constructs and how they are used, with a view to making recommendations about they are best used, and where they are best avoided.
     \subsection{Motivation}
@@ -87,36 +87,94 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         There also seems to have been relatively little research into languages features such as that which will be examined here, either in terms of subjective readability or objective performance. It is hoped that by formally examining some of these constructs in a small selection of languages that the contribution provided will, if not self-contained, provide a launch pad for more thorough examination.
     \subsection{Aims \& Objectives}
         The aims of this report are as follows:
-        \begin{itemize}
-            \item To identify and understand the usage of a selection of advanced programming constructs (as defined in sections \ref{sec:overview} and \ref{subsec:constructs})
-            \item To collect data from a number of professional developers about when and how they think it is appropriate to use these constructs
-            \item To examine what guidance is readily available to developers in typical CI/CD toolchains
-            \item To examine a small number of large open-source repositories to assess whether these constructs are used consistently in practice
-        \end{itemize}
+        \begin{enumerate}
+            \item To understand the usage of seven advanced programming constructs (as defined in sections \ref{sec:overview} and \ref{subsec:constructs})
+            \item To study what reasons developers have to or to not use these constructs
+            \item To make take the first steps in creating formal, unified recommendations on the use of these constructs 
+        \end{enumerate}
+
+
+        These aims will be achieved via the following objectives:
+        \begin{enumerate}
+            \item Identify and understand the patterns in which the advanced programming constructs are used
+            \item Collect data from professional developers about when and how they think it is appropriate to use these constructs
+            \item Examine what guidance is available to developers on how to use these constructs
+            \item Analyse four open source repositories to assess how these constructs are used in practice
+        \end{enumerate}
+
+    \subsection{Methods}
+        A multifaceted approached was taken to achieve the above aims, incorporating multiple methods. First, a survey was carried out, to gather both qualitative and quantitative data direct from developers about how they use each of the constructs being examined - this helps address aim one. Quantitative data was collected, with regard to aim two, by employing static code analysis tools to analyse four open source GitHub repositories and `control' files (giving examples of both the constructs and their `plain' equivalents), in three programming languages. Aims one and two were also supported by the analysis of the commit history of the aforementioned four repositories for changes that include or exclude the use of the constructs in question. Lastly, aim three will be met via a culmination of all methods used, and some simple numerical analysis.
     \subsection{Report Structure}
         The remainder of this report will first detail further background research directly and indirectly related to this topic, before describing the methods and design of the study, followed by the results and information gained from the study, discussion on these results, before final conclusions.
 \newpage
 \section{Background}
 \label{sec:background}
-TODO as a matter of urgency...
-\\
-\cite{paradigmForStyleResearch}: style is intuitive, (1988) not much formal theory to style rules, easy to describe, hard to explain. Different styles are: general, contradictory, no conflict resolution, highly subjective (applies to auto analysers too), Berry-Meeking style score \emph{unrelated} to error proneness (additional ref here, page 1) Split style into typographic and structural (I'm concerned with structural, albeit fine-grained).
-Good quote: `It is the "perception and judgment" a writer exercises in selecting "from equally correct expressions, the one best suited to his material, audience, and intention'
-Readability and efficiency at odds with each other
-... more to be had here, 1988 is VERY old
-\\
-\cite{autoStyleFeedbackAtScale}: length is not a sole indicator ``excessive terseness is often worse than than verbosity'' (i.e. longer CAN be better).
-\\
-\cite{scaleDrivenHints} Even in 2016, nearly 30 years after \cite{paradigmForStyleResearch}, we still don't have a definite way to judge `good' style (see page 130/sec7 limitations)
-\\
-\cite{effectiveJava}: one of the defining Java style guides, `prefer for-each loops over traditional for loops' - aligns with data! Point this out later... This however is the only relevant reference to any of the constructs being studied (lambdas are talked about, but not in a directly relevant context)
-\\
-\cite{microsoftCSStyle}: no ref to ternaries, small ref to lambdas as being `shorter' in at least some circumstances (event handling). No other relevant refs
-\\
-\cite{googleJSStyle}: some ref to arrow functions/lambda (should be noted that lambdas are a wider topic/construct and deserve higher importance than that of a construct as in this paper. This became apparent during proceeds), difficult to say if relevant. \codeword{for-of} loops preferred over all other for loops. \codeword{for-in} loops ONLY for dict-style objects/never arrays
-\\
-\cite{airbnbJSStyle}: ternaries should NOT be nested (hoorah a ref for this), use an if-elseif-else construct. Use \emph{iterators} over \codeword{for-in}/\codeword{for-of} (no ref to traditional for). Do not use unary increment/decrement for reasons of auto semicolon insertion (not relevant), for additional expression of mutation of a variable (very relevant), and for avoid misuse of pre/post increment/decrement (very relevant)
-\\
+    At face-value, much of the grounding of this study may be considered conventional wisdom. That is, the constructs are simply used anywhere and everywhere according to when we as programmers deem it appropriate, without much prior thought or formal procedure. This once would have been the case for structural or physical style to our code, the way we lay our code out and arrange it around whitespace. Countless style guides have concerned themselves with this for many years, and there's still much debate around which brace style is the best in C-like languages, or how many spaces should be used to indent code blocks. It hasn't been until much more recent times, as software development houses have grown, and the computing industry as a whole has ballooned into the incredibly important sector it is today, that we have started to think more about the meta-style of our programming. Not how it's physically laid out, but how we layout our logic and design patterns. Somewhere between these two schools of thought lies the area this study is focussed on.
+
+    It does not appear, however, that a great deal has been written and published around how to best use many of the programming constructs that many programmers will use tens, if not hundreds, of times per day. What follows is a summary of much of the existing works that cover partially on wholly the same topics.
+    \subsection{Existing Literature}
+        As far back as the 1980s, \cite{berryMeekingStyle} proposed the Berry-Meeking Style Metric as a measure of good style and readability of code. This used style analysers adapted specifically to C to produce a metric denoting the `lucidity' of the code. The metric was derived from 11 different characteristics about a program: module length, identifier length, percentage of comment lines, amount of indentation, percentage of blank lines, line length, spaces within lines, percentage of constants, reserved words used, included files and number of gotos used. Zooming out from this level of metric-based scoring, \cite{paradigmForStyleResearch} collects a number of studies of together and notes how application of these types of style metrics not only lack correlation with error proneness, but also has unpredictable effects on complexity metrics. They go further to say that style is an `intuitive and elusive' concept, that is `highly individualistic' and simultaneously easy to see, but hard to define. Many differing style guides are either too general or subjective, contradictory between each other and with no guidance and how to manage these conflicts. They go on to liken the use programming style to ``the `perception and judgement' a writer exercises in selecting `from equally correct expressions, the one the best suited to his material, audience and intention'{}''. This is to say that the nuance of writing in English prose is present too in the style of code.
+
+        In more recent times, it is again reinforced that some simple metrics like program length cannot solely be used to measure the quality of code style. \cite{autoStyleFeedbackAtScale}, when showing a range of students' responses to a programming task (the shortest of which is unlikely to be rated the easiest to read), state that length is not a sole indicator of good style, and moreover that ``excessive terseness is often worse than that of verbosity''. We still don't have any \emph{definite} way to judge `good' style, with \cite{scaleDrivenHints} noting that their study on providing style hints to new programmers is limited by the fact the given `good' style is subjective and opinionated.
+
+        One of the defining style guides for Java, Effective Java \citep{effectiveJava} makes many assertions about how to use certain features of the Java language, but most of these do not reach the level of granularity focussed on in this study. The reference to anything close is that Java programmers should ``prefer for-each loops over traditional for loops''. Lambdas feature in their own chapter, but only with reference to \emph{how} to use them, not \emph{when}.
+
+        It is reasonable to think that official style guides published by programming language developers would be cover-all for all sorts of style, from the extraneous and finnicky to most basic syntax, but in fact, Microsoft's own style guide for C\# is somewhat short, and it's only relevant mention for this study being a note that lambdas are `shorter' and may thus be good substitutions for the more verbose regular methods that would be needed otherwise.
+
+        Two prevailing style guides for JavaScript have come into prominence the last few years, both with certain small conflicts and differences from each other. These are the Google style JavaScript style guide \citep{googleJSStyle}, and the Airbnb JavaScript style guide \citep{airbnbJSStyle}. The Google guide advocate for use of \codeword{for-of} loops over all other types of for loop in JavaScript, allowing \codeword{for-in} loops exceptionally for dict-style objects. The Airbnb guide, conversely to Google, requires use of \emph{iterators} over \codeword{for-in} or \codeword{for-of}, with no reference to standard for loops. It also makes one very relevant assertion: that ternaries should ``not be nested and generally be single line expressions''. Perhaps controversially, the Airbnb guide also rejects the use of the unary operators, \codeword{++} and \codeword{--}. This is primarily due to the fact that these statement cause automatic semicolon insertion and can cause silent errors. However, it is also reasoned that the more expressive \codeword{+=} and \codeword{-=} operators allow code to be easier to read and less error-prone.
+    \subsection{Constructs}
+        \label{subsec:constructs}
+        This section will give a more detail description of each of the constructs to be examined. The constructs were selected as they are all replaceable with simpler syntax (in most scenarios - lambdas being a occasional exception, see Section \ref{subsec:lambdas}) and, together, they represent a range of commonality from long-used compound assignment and unary increment operators at one end of the scale to much newer additions such as the null-coalescing and -conditional operators. The constructs are as follows:
+        \begin{itemize}
+            \item Ternary/in-line If Statements
+                \begin{itemize}
+                    \item Reduces the common \codeword{if} \dots \codeword{else} \dots pattern into a single line of the form \codeword{a ? b : c}, where \codeword{a} is a conditional expression, \codeword{b} is the body of the \codeword{if} and \codeword{c} is the body of the \codeword{else}. While it may be possible in some languages to have multiple statement in the `b' and `c' sections of a ternary, but standard syntax only permits a single statement.
+                \end{itemize}
+            \item Lambdas and Anonymous Functions
+                \begin{itemize}
+                    \item A lambda expression is any expression involving a function used as an argument, just as in Lambda Calculus. Though this is not required, lambdas most often take the form of anonymous (unnamed) functions defined in-line. \citep{javaLambdas}.
+                \end{itemize}
+            \item Null-coalescing Operator
+                \begin{itemize}
+                    \item Used to provide a default value in place of a null value. Replaces a null-check (using an if statement) with a single assignment of the form \newline\codeword{a = possiblyNullValue  ?? valueIfNull} where \codeword{a} is of a nullable type. \citep{cs5Spec}.
+                \end{itemize}
+            \item Null-conditional Operator
+                \begin{itemize}
+                    \item Used to access a member or element of its operand \emph{if and only if} that operand evaluates to non-null. Otherwise, it returns null. \citep{cs6Spec}. This allows a member/element access operation to be carried out without a null-check on the base operand, only on the evaluated value.
+                \end{itemize}
+             \item Foreach Loops
+                \begin{itemize}
+                    \item Used to simplify for loops for the purposes of iterating over an abstract data structure, usually a type of some form of collection of like objects; those that can be indexed into to retrieve an element. For example, in C\#, a \codeword{foreach} loop may be used to iterate over the elements of an instance of any class that implements the \codeword{IEnumerable} interface. The same applies to Java with its \codeword{Iterable} interface. In C\#, if \codeword{numList} is of type \codeword{List<int>}:
+                    \\
+                    \codeword{for (int i = 0; i < numList.Count; i++)}\\
+                    \{\\
+                    \hspace*{1cm}\codeword{total += numList[i];}\\
+                    \}
+                    \\\\
+                    Can be written as:\\
+                    \codeword{foreach (int num in numList)}\\
+                    \{\\
+                    \hspace*{1cm}\codeword{total += num;}\\
+                    \}
+                \end{itemize}
+            \item Unary Increment Operator
+                \begin{itemize}
+                    \item Used to increment or decrement an integer variable by one. Often seen in for loops to increment the index variable.
+                    \item For example:\\
+                    \codeword{a = a + 1;}\\\\
+                    Can be written as:\\
+                    \codeword{a++;}
+                \end{itemize}
+            \item Compound Assignment Operators
+                \begin{itemize}
+                    \item Used to effectively ``append'' to a variable's value, compressing three references to variables/literals into two. In most supporting languages, a compound assignment operator exists for all basic arithmetic operators, logic operators and some others (such as in string concatenation).
+                    \item For example:\\
+                    \codeword{a = a * 2;}\\\\
+                    Can be written as:\\
+                    \codeword{a *= 2}
+                \end{itemize}
+        \end{itemize}
+    
 \begin{landscape}
     \begin{figure}[htbp]
         \centering
@@ -128,59 +186,6 @@ Readability and efficiency at odds with each other
 \end{landscape}
 \newpage
 \section{Study Design}
-    \subsection{Constructs}
-    \label{subsec:constructs}
-    The section will give a more detail description of each of the constructs to be examined. The constructs were selected as they are all replaceable with simpler syntax (in most scenarios - lambdas being a occasional exception, see section \ref{subsec:lambdas}) and, together, they represent a range of commonality from long-used compound assignment and unary increment operators at one end of the scale to much newer additions such as the null-coalescing and -conditional operators. The constructs are as follows:
-    \begin{itemize}
-        \item Ternary/in-line If Statements
-            \begin{itemize}
-                \item Reduces the common \codeword{if} \dots \codeword{else} \dots pattern into a single line of the form \codeword{a ? b : c}, where \codeword{a} is a conditional expression, \codeword{b} is the body of the \codeword{if} and \codeword{c} is the body of the \codeword{else}. While it may be possible in some languages to have multiple statement in the `b' and `c' sections of a ternary, but standard syntax only permits a single statement.
-            \end{itemize}
-        \item Lambdas and Anonymous Functions
-            \begin{itemize}
-                \item A lambda expression is any expression involving a function used as an argument, just as in Lambda Calculus. Though this is not required, lambdas most often take the form of anonymous (unnamed) functions defined in-line. \citep{javaLambdas}.
-            \end{itemize}
-        \item Null-coalescing Operator
-            \begin{itemize}
-                \item Used to provide a default value in place of a null value. Replaces a null-check (using an if statement) with a single assignment of the form \newline\codeword{a = possiblyNullValue  ?? valueIfNull} where \codeword{a} is of a nullable type. \citep{cs5Spec}.
-            \end{itemize}
-        \item Null-conditional Operator
-            \begin{itemize}
-                \item Used to access a member or element of its operand \emph{if and only if} that operand evaluates to non-null. Otherwise, it returns null. \citep{cs6Spec}. This allows a member/element access operation to be carried out without a null-check on the base operand, only on the evaluated value.
-            \end{itemize}
-         \item Foreach Loops
-            \begin{itemize}
-                \item Used to simplify for loops for the purposes of iterating over an abstract data structure, usually a type of some form of collection of like objects; those that can be indexed into to retrieve an element. For example, in C\#, a \codeword{foreach} loop may be used to iterate over the elements of an instance of any class that implements the \codeword{IEnumerable} interface. The same applies to Java with its \codeword{Iterable} interface. In C\#, if \codeword{numList} is of type \codeword{List<int>}:
-                \\
-                \codeword{for (int i = 0; i < numList.Count; i++)}\\
-                \{\\
-                \hspace*{1cm}\codeword{total += numList[i];}\\
-                \}
-                \\\\
-                Can be written as:\\
-                \codeword{foreach (int num in numList)}\\
-                \{\\
-                \hspace*{1cm}\codeword{total += num;}\\
-                \}
-            \end{itemize}
-        \item Unary Increment Operator
-            \begin{itemize}
-                \item Used to increment or decrement an integer variable by one. Often seen in for loops to increment the index variable.
-                \item For example:\\
-                \codeword{a = a + 1;}\\\\
-                Can be written as:\\
-                \codeword{a++;}
-            \end{itemize}
-        \item Compound Assignment Operators
-            \begin{itemize}
-                \item Used to effectively ``append'' to a variable's value, compressing three references to variables/literals into two. In most supporting languages, a compound assignment operator exists for all basic arithmetic operators, logic operators and some others (such as in string concatenation).
-                \item For example:\\
-                \codeword{a = a * 2;}\\\\
-                Can be written as:\\
-                \codeword{a *= 2}
-            \end{itemize}
-    \end{itemize}
-
     \subsection{Survey}
     \label{subsec:survey}
         One of the facets of this study was to capture and analyse the perceptions and thoughts of a number of professional software developers with regard to the constructs being examined. This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies.
@@ -201,23 +206,22 @@ Readability and efficiency at odds with each other
                 \item Do participants rewrite code \emph{to use} or \emph{to not use} the constructs?
             \end{enumerate}
             
-            Hypothesis/expected results
         \subsubsection{Participants}
-            Participants were recruited passively from within the Information Systems Services department (ISS) within Lancaster University by means of a blanket email sent out to all teams and filtered down via regular communications channels within the department. This gathered 40 responses in total, 23 of which completed the survey and may be considered valid responses.
+            A convenience sample of participating developers was recruited from within the Information Systems Services department (ISS) within Lancaster University by means of a blanket email sent out to all teams and filtered down via regular communications channels within the department. This gathered 40 responses in total, 23 of which completed the survey and may be considered valid responses.
             
             Due to the distribution method, there is no guarantee that all respondents are software developers by profession, however, all participants had a minimum of one year of programming experience, nearly half falling into the 1-4 years of experience category, with three participants having between 10 and 14 years experience and the remaining 8 having over 20 years of experience. This statistic was the only personal data collected and does not identify participants.
         \subsubsection{Questions}
             The survey was created using Qualtrics, as provided by Lancaster University, and consisted of a maximum of 16 questions and a minimum of 2 questions (depending on certain answers).
-            Participants were first asked to indicate which of the constructs they were aware of so that only questions and option relating to those constructs they were aware of were shown to them. For each construct they were of, participants were asked to a series of questions design to address the questions listed in section \ref{subsubsec:surveyQuestions}, focussing on: frequency of usage, reasons to and to not use each construct, perception on code performance, and perception of industry-wide usage per-language.
+            Participants were first asked to indicate which of the constructs they were aware of so that only questions and option relating to those constructs they were aware of were shown to them. For each construct they were of, participants were asked to a series of questions design to address the questions listed in Section \ref{subsubsec:surveyQuestions}, focussing on: frequency of use, reasons to and to not use each construct, perception on code performance, and perception of industry-wide usage per-language.
             
-            Lastly, participants were asked if they had any further comments, which invited some very interesting points that will be discussed alongside the rest of the results in section \ref{subsec:results}.
+            Lastly, participants were asked if they had any further comments, which invited some very interesting points that will be discussed alongside the rest of the results in Section \ref{subsec:results}.
     \subsection{Static Code Analysis}
         Static code analysis is concerned with checking programs and code for errors without the need to actually execute it. That is, a static code analysis tool will read the source code (or the compiled intermediary language in some cases), construct some form of abstract model of the program and then run a series of tests (often pattern-matching in nature) to detect well-known possible pit-falls, bugs, and problems \cite{staticCodeAnalysis}.
 
         These tools will often make recommendations on how source code may be improved in numerous way beyond explicit bugs and problems, such as stylistic improvement that make use of advanced syntax whatever given language is being analysed - advanced syntax akin to the constructs being examined here. Accordingly, static analysis tools were employed to investigate whether or not they made any recommendations for or against any of the constructs in question. SonarQube and Semgrep were selected for this purpose as they both support all three languages being subject to analysis, they are both under recent, active development, and because they both have free variants. Both tools were run against sample control code files and large open source repositories in the earlier mentioned three languages: C\#, JavaScript, and Java.
             
         \subsubsection{Sample Code Files}
-            The sample code files were created to act as a baseline or control test to see if SonarQube or Semgrep made any note at all about the bare usage and/or inclusion of any of the constructs.
+            The sample code files were created to act as a baseline or control test to see if SonarQube or Semgrep made any note at all about the bare use and/or inclusion of any of the constructs.
 
             Each file contains a bare (non-contextualised) example of each of the constructs placed directly alongside their `simple syntax' functionally equivalent counterparts. Each file is valid syntax for its language, and all of them may be executed, though none of them have a true entry point or way to actually \emph{run} the code within itself - the functions and methods are present purely to \emph{be present} so that they may be analysed by SonarQube and Semgrep. Though there are differences between the three languages, the form of the sample code was kept as similar as possible to preserve their purpose as control samples, without adding deliberately unusual syntax that may contaminate the output of SonarQube and Semgrep.
         \subsubsection{Open Source Repositories}
@@ -247,19 +251,21 @@ Readability and efficiency at odds with each other
             \end{tabular}
         \end{center}
 
-        Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on usage of any of the constructs. Each type of change was documented and counted per commit.
+        Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on use of any of the constructs. Each type of change was documented and counted per commit.
 
 \newpage
 \section{Results}
     \subsection{Survey}
     \label{subsec:results}
-        As described in section \ref{subsec:survey}, a survey was conducted with a number of experienced professional software developers and programmers. This revealed a number of interesting patterns of usage (or lack of, therein) of the constructs, and some interesting perceptions that may prove useful in future research focussed on performance and usage in the wider industry.
+        As described in Section \ref{subsec:survey}, a survey was conducted with experienced professional software developers and programmers. This revealed interesting patterns of usage (or lack of usage) of the constructs, and some interesting perceptions that may prove useful in future research focussed on performance and use in the wider industry.
 
-        The following sections will detail the discovered patterns, grouped by the overarching category of information acquired in the survey.
+        The following sections will detail the results of the survey, including threats to the usefulness of the survey and the patterns discovered by the survey.
+        \subsubsection{Threats to Survey}
+            As mentioned in the introduction, the survey participants were only a convenience sample of developers. This means that the results may not be generalised very easily to a wider group of developers. The results may be generalised \emph{within} ISS but not outside. Further research and more significant surveying should be undertaken to verify if the results found within ISS may be applied to a wider populace of developers.
+
+            Despite this, a survey still provides a very quick and  easy way to gather information from a sample size much larger than would be trivial than many other methods.
         \subsubsection{Awareness}
             Awareness of the constructs was gathered by a simple multiple choice question with a binary yes/no for each. Participants could indicate whether or not were familiar with all, some, or none of the constructs.
-            \\\newline
-            Hypothesis: \textit{All participants will be aware of unary and compound operators, most will be aware of ternary/in-line if-statements and lambdas, some will be aware of null-coalesce, and few will be aware of null-conditionals.}
             \\\newline
             All participants were aware of unary operators and ternary/in-line if-statements, nearly all were aware of compound operators and lambdas, and most were aware of null-coalesce and null-conditional. Figure \ref{fig:awareness} shows these results in a graphic format.
 
@@ -270,12 +276,10 @@ Readability and efficiency at odds with each other
                 \label{fig:awareness}
             \end{figure}
 
-            The hypothesis was partially met, the most stand-out discrepancy being that though the relative position was as predicted, \emph{absolute} awareness of the null-coalesce and -conditional operators was markedly higher than expected. This can likely be attributed to the fact that participants were all from within ISS, where the  technology stack contains a significant amount of C\#, in which these operators are often seen. If the survey were repeated over more diverse and broad range of developers working in more varied technology stacks (for example, those focussed much more on Java, or C/C++), it is reasonable to assume that awareness of these operators would be less. This is a trend that is repeated elsewhere in the results set.
+            The most stand-out piece of information here is that the \emph{absolute} awareness of the null-coalesce and -conditional operators was markedly higher than might be expected. This can likely be attributed to the fact that participants were all from within ISS, where the  technology stack contains a significant amount of C\#, in which these operators are often seen. If the survey were repeated over more diverse and broad range of developers working in more varied technology stacks (for example, those focussed much more on Java, or C/C++), it is reasonable to assume that awareness of these operators would be less. This is a trend that is repeated elsewhere in the results set.
             It is also of note (if not significantly so) that not \emph{all} participants were aware of compound assignment operators, whereas all participants \emph{were} aware of ternaries - a ranking inverse to what was expected. However, the difference in the numbers are not statistically significant, comprising no more than one or two responses. To draw any conclusion from this datum would require it being replicated in a greater sample set.
-        \subsubsection{Usage Frequency}
+        \subsubsection{Frequency of Use}
             To assess how often participants use each of the constructs, they were asked specifically: \textit{In places where they can be used, how often do you use each of these constructs in your code?}, that is, ``for every chance you \emph{could} use the construct, how often do you?''
-            \\\newline
-            Hypothesis: \textit{Unary and compound operators are used always, for each loops are used either always or frequently, ternaries and lambdas are used sometimes, and null-coalesce and null-conditional are used rarely.}
             \\\newline
             It was the extreme ends of the scales in this question that provided the most interesting results here. Firstly, and perhaps reassuringly, only one data point was recorded, for any construct, under the `never' option, with just one respondent indicating that they never use the null-coalesce operator. Conversely, `for each' was the most selected construct in the `always' category, with 44\% of participants selecting this option, followed closely by compound assignment operators at 41\%.
 
@@ -288,8 +292,8 @@ Readability and efficiency at odds with each other
                 \label{fig:freqUse}
             \end{figure}
 
-            As is visible in figure \ref{fig:freqUse}, the usage of lambdas in moderation is the most agreed upon data point here, with just over 70\% of responses labelled `sometimes' for lambdas. This aligns with the hypothesis for lambdas. This is likely explainable by a variety of reasons, not least is the fact that lambdas are very powerful and complex structures, much more so than the other constructs being studied, and as such, the number of situations where they \emph{can} be used likely greatly exceeds the number situations where they \emph{should} be used. This distinction around lambdas becomes more apparent in later questions.
-            Of note, again, is the misalignment of the hypothesis with the results of the null-coalesce and null-conditional operators. Although the numbers of participants familiar with these operators is fewer, those that were aware of them do not shy away from them, using them with comparatively similar frequency to the other constructs.
+            As is visible in figure \ref{fig:freqUse}, the use of lambdas in moderation is the most agreed upon data point here, with just over 70\% of responses labelled `sometimes' for lambdas. This is likely explainable by a variety of reasons, not least is the fact that lambdas are very powerful and complex structures, much more so than the other constructs being studied, and as such, the number of situations where they \emph{can} be used likely greatly exceeds the number situations where they \emph{should} be used. This distinction around lambdas becomes more apparent in later questions.
+            Of note, again, the results for the null-coalesce and null-conditional operators. Although the numbers of participants familiar with these operators is fewer, those that were aware of them do not shy away from them, using them with comparatively similar frequency to the other constructs.
         \subsubsection{Reasons To Use}
             Participants were then asked to indicate \emph{why} they chose to use each given construct. The four options were presented:
             \begin{itemize}
@@ -299,8 +303,6 @@ Readability and efficiency at odds with each other
                 \item ``It makes code run faster''
             \end{itemize}
             All, some, or none of the options may have been selected. Where the exclusive option ``None of these'' was selected, participants were prompted to give their own reason.
-            \\\newline
-            Hypothesis: \textit{Style is a primary factor for usage of ternary if-statements, null-coalesce, null-conditional, for each, unary operators. Reasons of simplicity are also key for usage of lambdas, null-coalesce, null-conditional, for each, and unary and compound operators. Additionally, lambdas and for each make code clearer. Null-coalesce may also be used for reasons of speed/efficiency.}
             \\\newline
 
             `Well yes but actually no.'
@@ -356,8 +358,8 @@ Readability and efficiency at odds with each other
 \bibliography{ref}
 \newpage
 \section*{Appendix}
-    \subsection*{Appendix 1: []}
-        []
-    \subsection*{Appendix 2: []}
-        []
+    \subsection*{Appendix 1: Project Proposal}
+        \includepdf[pages=-]{../Ref/proposal}
+    \subsection*{Appendix 2: Survey}
+    \includepdf[pages=-]{../Ref/survey}
 \end{document}
