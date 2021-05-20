@@ -83,9 +83,11 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
         They may be used for multiple reasons, such as to make code simpler, or clearer. Other times, it may be style defined either by a programmer themselves, or the house rules of their organisation.  In this paper, we will study the above constructs and how they are used, with a view to making recommendations about they are best used, and where they are best avoided.
     \subsection{Motivation}
-        The primary drive for this study came from my experience during my industrial placement (SCC.419). As briefly mentioned above, the codebase I was working on was extensive and developed by numerous developers over the course of the last two decades or so. There were times that code was either made easier or harder not by its flow, but by the way it was written. The first instance that came to my attention was a ternary if-statement used that was so long that it needed to be split across four lines, had a second and third ternary in the true \emph{and} false branch of the enclosing ternary, with lengthy expressions being evaluated from there. In this instance, it would have been significantly clearer to use a regular if-statement. Despite this the existence of ternary if-statements is still useful, but it brings to question where these constructs and other similar constructs should best be used.
+        The primary drive for this study stems from my experience during my industrial placement (SCC.419). As briefly mentioned above, the codebase I was working on was extensive and developed by numerous developers over the course of the last two decades or so. There were times that code was either made easier or harder not by its flow, but by the way it was written. The first instance that came to my attention was a ternary if-statement used that was so long that it needed to be split across four lines, had a second and third ternary in the true \emph{and} false branch of the enclosing ternary, with lengthy expressions being evaluated from there. In this instance, it can be assumed that it would have been significantly clearer to use a regular if-statement. Despite this the existence of ternary if-statements is still useful, but it brings to question where these constructs and other similar constructs should best be used.
 
-        There also seems to have been relatively little research into languages features such as that which will be examined here, either in terms of subjective readability or objective performance. It is hoped that by formally examining some of these constructs in a small selection of languages that the contribution provided will, if not self-contained, provide a launch pad for more thorough examination.
+        There also seems to have been relatively little research into languages features such as these, either in terms of subjective readability or objective performance. Some studies I have come across in research even make explicit note of the fact their definition of `good style' is subjective and opinion-based, albeit from that of perceived experts. Using experts in a field is always a good sign, but if there really is very little guidance to any level of programmer, then it stands to reason that much of what even experts think is good style, could be from personal experience alone, or at least somewhat unacademic.
+        
+        It is hoped that by formally examining these constructs in an academic context that the produced research will a launch pad or grounding for more thorough examination across the software development industry as a whole.
     \subsection{Aims \& Objectives}
         The aims of this report are as follows:
         \begin{enumerate}
@@ -97,14 +99,22 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
         These aims will be achieved via the following objectives:
         \begin{enumerate}
-            \item Identify and understand the patterns in which the advanced programming constructs are used
-            \item Collect data from professional developers about when and how they think it is appropriate to use these constructs
-            \item Examine what guidance is available to developers on how to use these constructs
-            \item Analyse four open source repositories to assess how these constructs are used in practice
+            \item Collect data from professional developers about when and how they think it is appropriate to use these constructs via a survey
+            \item Investigate what guidance is available to developers on how to use these constructs by examining available style documents provided by developers and online
+            \item Examine the recommendations made by static code analysis tools on specifically written `control' code files
+            \item Analyse four open source repositories to assess how these constructs are used in practice both by hand and using static code analysis tools
+            \item Conduct profiling and performance tests of the constructs (stretch objective)
         \end{enumerate}
 
     \subsection{Methods}
-        A multifaceted approached was taken to achieve the above aims, incorporating multiple methods. First, a survey was carried out, to gather both qualitative and quantitative data direct from developers about how they use each of the constructs being examined - this helps address aim one. Quantitative data was collected, with regard to aim two, by employing static code analysis tools to analyse four open source GitHub repositories and `control' files (giving examples of both the constructs and their `plain' equivalents), in three programming languages. Aims one and two were also supported by the analysis of the commit history of the aforementioned four repositories for changes that include or exclude the use of the constructs in question. Lastly, aim three will be met via a culmination of all methods used, and some simple numerical analysis.
+        A multifaceted approached was taken to achieve the above aims, incorporating multiple methods. First, a survey was carried out, to gather both qualitative and quantitative data direct from developers about how they use each of the constructs being examined - this helps address aim one. A survey was chosen as it provides a comparatively easy method to gather answers to base questions from a large sample size.
+        Quantitative data was collected, with regard to aim two, by employing static code analysis tools to analyse four open source GitHub repositories and `control' files (giving examples of both the constructs and their `plain' equivalents), in three programming languages. Static analysis tools were employed as they most likely represent actual tools developers may use to check their code, and thus the rules and recommendations that will be levelled against their code in a real scenario.
+        Aims one and two were also supported by the analysis of the commit history of the aforementioned four repositories for changes that include or exclude the use of the constructs in question. Lastly, aim three will be met via a culmination of all methods used, and some simple numerical analysis.
+
+        \subsubsection{Threats to Validity}
+            Due to time constraints and limits of contacts, the survey was only able to encompass one group of programmers, all from within one company. Although the technology stack the developers in question may have been exposed to consisted primarily of C\# and JavaScript, this potentially means participants may have been answering questions with little knowledge on Java. The results of the survey are also difficult to generalise, as there are many factors which may affect responses that are limited to this one group of developers.
+
+            The survey was distributed widely within ISS, giving approximately 60 potential respondents. Of those, there are 44recorded responses  (~70\% response rate), 23 of which are completed, valid responses (~40\% valid responses).
     \subsection{Report Structure}
         The remainder of this report will first detail further background research directly and indirectly related to this topic, before describing the methods and design of the study, followed by the results and information gained from the study, discussion on these results, before final conclusions.
 \newpage
@@ -122,10 +132,10 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
         It is reasonable to think that official style guides published by programming language developers would be cover-all for all sorts of style, from the extraneous and finnicky to most basic syntax, but in fact, Microsoft's own style guide for C\# is somewhat short, and it's only relevant mention for this study being a note that lambdas are `shorter' and may thus be good substitutions for the more verbose regular methods that would be needed otherwise.
 
-        Two prevailing style guides for JavaScript have come into prominence the last few years, both with certain small conflicts and differences from each other. These are the Google style JavaScript style guide \citep{googleJSStyle}, and the Airbnb JavaScript style guide \citep{airbnbJSStyle}. The Google guide advocate for use of \codeword{for-of} loops over all other types of for loop in JavaScript, allowing \codeword{for-in} loops exceptionally for dict-style objects. The Airbnb guide, conversely to Google, requires use of \emph{iterators} over \codeword{for-in} or \codeword{for-of}, with no reference to standard for loops. It also makes one very relevant assertion: that ternaries should ``not be nested and generally be single line expressions''. Perhaps controversially, the Airbnb guide also rejects the use of the unary operators, \codeword{++} and \codeword{--}. This is primarily due to the fact that these statement cause automatic semicolon insertion and can cause silent errors. However, it is also reasoned that the more expressive \codeword{+=} and \codeword{-=} operators allow code to be easier to read and less error-prone.
+        Two prevailing style guides for JavaScript have come into prominence the last few years, both with certain small conflicts and differences from each other. These are the Google style JavaScript style guide \citep{googleJSStyle}, and the Airbnb JavaScript style guide \citep{airbnbJSStyle}. The Google guide advocate for use of \codeword{for-of} loops over all other types of \codeword{for} loop in JavaScript, allowing \codeword{for-in} loops exceptionally for dict-style objects. The Airbnb guide, conversely to Google, requires use of \emph{iterators} over \codeword{for-in} or \codeword{for-of}, with no reference to standard for loops. It also makes one very relevant assertion: that ternaries should ``not be nested and generally be single line expressions''. Perhaps controversially, the Airbnb guide also rejects the use of the unary operators, \codeword{++} and \codeword{--}. This is primarily due to the fact that these statement cause automatic semicolon insertion and can cause silent errors. However, it is also reasoned that the more expressive \codeword{+=} and \codeword{-=} operators allow code to be easier to read and less error-prone.
     \subsection{Constructs}
         \label{subsec:constructs}
-        This section will give a more detail description of each of the constructs to be examined. The constructs were selected as they are all replaceable with simpler syntax (in most scenarios - lambdas being a occasional exception, see Section \ref{subsec:lambdas}) and, together, they represent a range of commonality from long-used compound assignment and unary increment operators at one end of the scale to much newer additions such as the null-coalescing and -conditional operators. The constructs are as follows:
+        This section will give a more detailed description of each of the constructs to be examined. The constructs were selected for a number of reasons - firstly, they are all replaceable with simpler syntax (lambdas being a occasional exception, see Section \ref{subsubsec:lambdas}), conventional wisdom would dictate that some are rather commonly used (compound assignment / unary operators) and conversely that some are used much less (null-coalesce / null-conditional). Initial thoughts of some of the constructs came about from seeing then during my work for SCC.419. The constructs in question are detailed below:
         \begin{itemize}
             \item Ternary/in-line If Statements
                 \begin{itemize}
@@ -160,7 +170,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \end{itemize}
             \item Unary Increment Operator
                 \begin{itemize}
-                    \item Used to increment or decrement an integer variable by one. Often seen in for loops to increment the index variable.
+                    \item Used to increment or decrement an integer variable by one. Often seen in \codeword{for} loops to increment the index variable.
                     \item For example:\\
                     \codeword{a = a + 1;}\\\\
                     Can be written as:\\
@@ -189,7 +199,19 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 \section{Study Design}
     \subsection{Survey}
     \label{subsec:survey}
-        One of the facets of this study was to capture and analyse the perceptions and thoughts of a number of professional software developers with regard to the constructs being examined. This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies.
+        One of the facets of this study was to capture and analyse the perceptions and thoughts of a number of professional software developers with regard to the constructs being examined.
+        
+        This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies. This allowed better questions to be written, that ensured they were no longer than necessary, used no double negatives, were not leading questions, only attempted to address one issue, and were not too vague. The design was also guided by these sources to include at least one open-ended question to allow participants to put forward any exceptional or unexpected information that could prove highly valuable to the study. Rightfully, notable mention is made at all stages to use of appropriate moral and ethical frameworks. In this instance, very little in the way of any problematic material is examined. The most personal question asked in the survey is how many years participants have been programming for - no other questions of a remotely personal nature are asked.
+
+        Using the Qualtrics platform also allowed the usability of the survey to be examined by the Qualtrics' inbuilt system. This advised the design of the survey to be as easy to use as possible, increasing the likelihood of respondents completing their submissions. The only exception to this was the use of matrix table questions, which are not particularly friendly to mobile users. Despite this, they were used as they provided the best and most concise way to display the literal matrix of options available due to the presence of multiple constructs the question pertains to. Figure \ref{fig:matrixTable} shows one such question. The full survey is available in Appendix \ref{apx:survey}
+        
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\textwidth]{matrixTable}
+            \caption{A matrix table question used in the survey.}
+            \label{fig:matrixTable}
+        \end{figure}
+
         \subsubsection{Questions}
         \label{subsubsec:surveyQuestions}
             Prior to designing, it was established that the survey must be able to provide insight that may help to answer the following questions:
@@ -260,7 +282,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \label{subsec:results}
         As described in Section \ref{subsec:survey}, a survey was conducted with experienced professional software developers and programmers. This revealed interesting patterns of usage (or lack of usage) of the constructs, and some interesting perceptions that may prove useful in future research focussed on performance and use in the wider industry.
 
-        The following sections will detail the results of the survey, including threats to the usefulness of the survey and the patterns discovered by the survey.
+        The following sections will detail the results of the survey, including threats to the usefulness of the survey and the patterns discovered by the survey. All percentage values given have been rounded to two significant figures.
         \subsubsection{Threats to Survey}
             As mentioned in the introduction, the survey participants were only a convenience sample of developers. This means that the results may not be generalised very easily to a wider group of developers. The results may be generalised \emph{within} ISS but not outside. Further research and more significant surveying should be undertaken to verify if the results found within ISS may be applied to a wider populace of developers.
 
@@ -288,7 +310,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
             \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.8\textwidth]{freqUse}
+                \includegraphics[width=0.9\textwidth]{freqUse}
                 \caption{Frequency with which participants said they used advanced constructs, grouped by construct}
                 \label{fig:freqUse}
             \end{figure}
@@ -304,9 +326,35 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \item ``It makes code run faster''
             \end{itemize}
             All, some, or none of the options may have been selected. Where the exclusive option ``None of these'' was selected, participants were prompted to give their own reason.
-            \\\newline
 
-            `Well yes but actually no.'
+            The trend here was extremely clear: the most common reasons for using any of the constructs was for clarity and simplicity. ``It makes code clearer'' and ``It makes code simpler'' took 39\% and 42\% of all selections made respectively. The data for the selections totalled across each construct is shown in Figure \ref{fig:toUsePie}.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{toUsePie}
+                \caption{Reasons to use constructs totalled across all constructs.}
+                \label{fig:toUsePie}
+            \end{figure}
+
+            Six participants selected `None of these' for at least one construct, two of whom selected this option for all constructs they were aware of and both instead said that they choose to use the constructs based on personal preference or habit. Another two selected this option for lambdas alone, one saying that they are aware of don't use lambdas, and the other highlighting a possible flaw in this study regarding lambdas. The participant noted that there are places where ``there is no rational alternative to using a lambda expression. It does not make the code simpler or clearer, it's just \textbf{necessary} to use a lambda.'' This brought to attention the fact that lambdas may be a more functional language feature, not fitting with the other constructs here. This is discussed further in Section \ref{subsubsec:lambdas}.
+            One participant also said that they would generally use `map' instead of a \codeword{foreach} loop, claiming ``it helps avoid `off by one' errors''. Off-by-one-errors occur when iterating over an array or other list of \textit{m} through \textit{n} items. Asking how many items there are (how many loop iterations are required), the intuitive answer of \textit{m} - \textit{n} is incorrect, the correct answer being (\textit{m} - \textit{n}) + 1. This is illustrated using a specific type of off-by-one error, a \textit{fencepost error} in Figure \ref{fig:fencepost}.
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.5\textwidth]{fencepost}
+                \caption{If you have a fence with 10 posts, how many bounded sections exist between the posts? The intuitive answer is 10, but it is in fact 11. This is a specific off-by-one error.}
+                \label{fig:fencepost}
+            \end{figure}
+
+            It is not clear what advantages a `map' function has over a \codeword{foreach} loop to avoid off-by-one errors. In fact, conventional wisdom dictates that \codeword{foreach} loops, by nature should, avoid these errors by virtue of the fact that they\emph{remove} the need for a programmer to calculate the necessary number of loop iterations. It is plausible to suggest that this response was given by mistake, instead meaning to refer to traditional \codeword{for} loops, rather than \codeword{foreach} loops.
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{toUse}
+                \caption{Reasons to use constructs grouped by construct.}
+                \label{fig:toUse}
+            \end{figure}
+
+            Figure \ref{fig:toUse} part repeats the data above, again showing that clarity and simplicity are the most common reasons. We can also see that the split is \emph{mostly} even between these two reasons, null-coalesce being a slight exception, with nearly double as many responses selecting simplicity over clarity. Null-conditional follows this pattern, but the difference is less pronounced.
+            Other notable statistics are: no participants said that they used null-coalesce or -conditional due to company style, and the three constructs that had code run-speed selected. Two participants selected this for lambdas, and one each both selected this for \codeword{foreach} loops and unary operators. These are statistically insignificant, but it is still of note that none of the other constructs had any selections regarding faster code running.
         \subsubsection{Reasons To Not Use}
             []
         \subsubsection{Performance}
@@ -347,6 +395,9 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \item GitHub repo selection: mistakenly thought it was `top of all repos for lang., it was not. (Check Tracy emails for reference and remedy, time permitting)'
         \end{itemize}
 
+        \subsubsection{Lambdas}
+        \label{subsubsec:lambdas}
+
         
     \subsection{Negative Impacting Circumstances}
         The on-going coronavirus pandemic is still very much a factor in the lives us all. :(
@@ -359,8 +410,9 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 \bibliography{ref}
 \newpage
 \section*{Appendix}
-    \subsection*{Appendix 1: Project Proposal}
+    \subsection*{A: Project Proposal}
         \includepdf[pages=-]{../Ref/proposal}
-    \subsection*{Appendix 2: Survey}
-    \includepdf[pages=-]{../Ref/survey}
+    \subsection*{B: Survey}
+    \label{apx:survey}
+        \includepdf[pages=-]{../Ref/survey}
 \end{document}
