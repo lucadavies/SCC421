@@ -1,0 +1,36 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Overview}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Motivation}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Aims \046 Objectives}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Methods}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Report Structure}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Background}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Existing Literature}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Constructs}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Study Design}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Survey}{section.3}% 11
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Questions}{subsection.3.1}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Participants}{subsection.3.1}% 13
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Questions}{subsection.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.2}{Static Code Analysis}{section.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Sample Code Files}{subsection.3.2}% 16
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Open Source Repositories}{subsection.3.2}% 17
+\BOOKMARK [2][-]{subsection.3.3}{Git Commit Analysis}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Results}{}% 19
+\BOOKMARK [2][-]{subsection.4.1}{Survey}{section.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Threats to Survey}{subsection.4.1}% 21
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Awareness}{subsection.4.1}% 22
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Frequency of Use}{subsection.4.1}% 23
+\BOOKMARK [3][-]{subsubsection.4.1.4}{Reasons To Use}{subsection.4.1}% 24
+\BOOKMARK [3][-]{subsubsection.4.1.5}{Reasons To Not Use}{subsection.4.1}% 25
+\BOOKMARK [3][-]{subsubsection.4.1.6}{Performance}{subsection.4.1}% 26
+\BOOKMARK [3][-]{subsubsection.4.1.7}{Usage In Wider Industry}{subsection.4.1}% 27
+\BOOKMARK [2][-]{subsection.4.2}{Static Code Analysis}{section.4}% 28
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Sample Code Files}{subsection.4.2}% 29
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Real-World Code Bases}{subsection.4.2}% 30
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 31
+\BOOKMARK [2][-]{subsection.5.1}{Review of Aims}{section.5}% 32
+\BOOKMARK [2][-]{subsection.5.2}{Reflections}{section.5}% 33
+\BOOKMARK [2][-]{subsection.5.3}{Negative Impacting Circumstances}{section.5}% 34
+\BOOKMARK [2][-]{subsection.5.4}{Future Research}{section.5}% 35
+\BOOKMARK [2][-]{subsection.5.5}{Closing Statement}{section.5}% 36
