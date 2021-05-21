@@ -53,8 +53,8 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     [Is there any working docs?]
 \newpage
 \tableofcontents
-\newpage
 
+\newpage
 \section{Introduction}
     \subsection{Overview}
     \label{sec:overview}
@@ -136,6 +136,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \subsection{Constructs}
         \label{subsec:constructs}
         This section will give a more detailed description of each of the constructs to be examined. The constructs were selected for a number of reasons - firstly, they are all replaceable with simpler syntax (lambdas being a occasional exception, see Section \ref{subsubsec:lambdas}), conventional wisdom would dictate that some are rather commonly used (compound assignment / unary operators) and conversely that some are used much less (null-coalesce / null-conditional). Initial thoughts of some of the constructs came about from seeing then during my work for SCC.419. The constructs in question are detailed below:
+        \newpage
         \begin{itemize}
             \item Ternary/in-line If Statements
                 \begin{itemize}
@@ -282,7 +283,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \label{subsec:results}
         As described in Section \ref{subsec:survey}, a survey was conducted with experienced professional software developers and programmers. This revealed interesting patterns of usage (or lack of usage) of the constructs, and some interesting perceptions that may prove useful in future research focussed on performance and use in the wider industry.
 
-        The following sections will detail the results of the survey, including threats to the usefulness of the survey and the patterns discovered by the survey. All percentage values given have been rounded to two significant figures.
+        The following sections will detail the results of the survey, including threats to the usefulness of the survey and the patterns discovered by the survey. All percentage values given have been rounded to 1 decimal place.
         \subsubsection{Threats to Survey}
             As mentioned in the introduction, the survey participants were only a convenience sample of developers. This means that the results may not be generalised very easily to a wider group of developers. The results may be generalised \emph{within} ISS but not outside. Further research and more significant surveying should be undertaken to verify if the results found within ISS may be applied to a wider populace of developers.
 
@@ -326,13 +327,14 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \item ``It makes code run faster''
             \end{itemize}
             All, some, or none of the options may have been selected. Where the exclusive option ``None of these'' was selected, participants were prompted to give their own reason.
+            \\
 
-            The trend here was extremely clear: the most common reasons for using any of the constructs was for clarity and simplicity. ``It makes code clearer'' and ``It makes code simpler'' took 39\% and 42\% of all selections made respectively. The data for the selections totalled across each construct is shown in Figure \ref{fig:toUsePie}.
+            The trend here was extremely clear: the most common reasons for using any of the constructs was for clarity and simplicity. ``It makes code clearer'' and ``It makes code simpler'' took 39.4\% and 42.3\% of all selections made respectively. The data for the selections totalled across each construct is shown in Figure \ref{fig:toUsePie}.
 
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.9\textwidth]{toUsePie}
-                \caption{Reasons to use constructs totalled across all constructs.}
+                \caption{Reasons to use constructs, totalled across all constructs.}
                 \label{fig:toUsePie}
             \end{figure}
 
@@ -349,14 +351,67 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.9\textwidth]{toUse}
-                \caption{Reasons to use constructs grouped by construct.}
+                \caption{Reasons to use constructs grouped by construct. Figures normalised to percentages per construct.}
                 \label{fig:toUse}
             \end{figure}
 
             Figure \ref{fig:toUse} part repeats the data above, again showing that clarity and simplicity are the most common reasons. We can also see that the split is \emph{mostly} even between these two reasons, null-coalesce being a slight exception, with nearly double as many responses selecting simplicity over clarity. Null-conditional follows this pattern, but the difference is less pronounced.
-            Other notable statistics are: no participants said that they used null-coalesce or -conditional due to company style, and the three constructs that had code run-speed selected. Two participants selected this for lambdas, and one each both selected this for \codeword{foreach} loops and unary operators. These are statistically insignificant, but it is still of note that none of the other constructs had any selections regarding faster code running.
+            Other notable statistics are: no participants said that they used null-coalesce or -conditional due to company style, and the three constructs that had code run speed selected. Two participants selected this for lambdas, and one each both selected this for \codeword{foreach} loops and unary operators. These are statistically insignificant, but it is still of note that none of the other constructs had any selections regarding faster code running.
         \subsubsection{Reasons To Not Use}
-            []
+            To provide the other half of the story to the previous section, participants were also asked about the reasons they choose to \emph{not} use the constructs. Similar to before, the options presented were:
+            \begin{itemize}
+                \item ``It is company style''
+                \item ``It would make code less clear''
+                \item ``It would make code more complex''
+                \item ``It would make code run slower''
+            \end{itemize}
+            With an additional ``None of the above'' option, selection of which reveals an additional question for participants to again give their own reason.
+            \\
+
+            Reasons of clarity and complexity were the most selected again, with 48.2\% of all selections attributing maintaining the clarity of code as a reason to not use a given construct, and complexity at 23.9\%. More than double the proportion of selections were present for ``None of these'' compared to the when asked for reason \emph{to} the constructs - here, 16.2\% of selections were placed here. The reasons provided by these respondents were quite varied but very interesting and are all worthy of discussion:
+
+            \begin{itemize}
+                \item Personal preference
+                \begin{itemize}
+                    \item Mentioned explicitly by three, and implicitly by one, of the ten individuals who gave their own reasons.
+                    \item One noted that ``as long as code is well documented you can use any of them''.
+                    \item One wrote that there is no company style for these constructs and that there is instead guidance on larger/less granular things like examples of a model class. This is contradicted by other responses, though it's plausible the two are subject to different standards.
+                    \item The third, the only of the ten that overlap with those that selected this option on the previous question. Simply stating that it is personal preference.
+                    \item The final reason links usage of compound of unary operators goes against their preference to use a `functional style' and to `avoid mutability of variables'. This raises interesting questions about the use of functional programming ideas in non-functional paradigms.
+                \end{itemize}
+                \item `I [almost] always use this construct'
+                \begin{itemize}
+                    \item Two participants said they would always use unary increment operators
+                    \item One said they would always use compound operators
+                    \item Another said the only time there would not use null-coalesce/null-conditional is when null checking is not required
+                \end{itemize}
+                \item Other/Unqualified
+                \begin{itemize}
+                    \item One participant stated that a \codeword{for} loop may be preferable to a \codeword{foreach} loop when the index variable is needed. They then go on to say that it also `depends how I'm feeling'.
+                    \item Regarding lambdas and unary and compound operators, one participant said: ``sometimes these operators don't account for requirements such as type checking or formatting'' without any more description.
+                    \item One participant claimed that \codeword{foreach} loops may introduce errors, but did not explain further.
+                \end{itemize}
+            \end{itemize}
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{toNotUsePie}
+                \caption{Reasons to not use constructs, totalled across all constructs.}
+                \label{fig:toNotUsePie}
+            \end{figure}
+
+            Only 4.5\% selected ``It would make code run slower'' - logically, this would make sense factually too, as most of these constructs are plain syntactic differences that, with most modern compilers and interpreters, are likely to produce the same bytecode and/or machine code. Lambdas and \codeword{foreach} are likely the only exceptions to this. The former has other potential implications beyond just how it looks on-screen, the latter (depending on language) may be a change from an array index to initialising an iterator and calling on that instead. This is reflected in the thoughts of participants in Figure \ref{fig:toNotUse}, showing that these two constructs were the only two to have received the selection pertaining to code run speed.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{toNotUse}
+                \caption{Reasons to not use constructs grouped by construct. Figures normalised to percentages per construct.}
+                \label{fig:toNotUse}
+            \end{figure}
+
+            The breakdown in Figure \ref{fig:toNotUse} also confirms that clarity was the most common reason selected by a wide margin for four of the constructs, but not for unary and compound operators (multiple reasons, described above) and 
+            for \codeword{foreach} loops (run speed was a concern as described immediately above).
+            All constructs had a small number of responses claiming company style as reasons for not using them, but this is a relatively small number compared to the proportion that cited clarity or complexity or their reason.
         \subsubsection{Performance}
             []
         \subsubsection{Usage In Wider Industry}
@@ -366,7 +421,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         \subsubsection{Sample Code Files}
             Bugger all picked up, tools do not care
             \begin{itemize}
-                \item Picked up basic for in place of JS for-to (not for/each)
+                \item Picked up basic \codeword{for} in place of JS \codeword{for-to} (not \codeword{for/each})
             \end{itemize}
         \subsubsection{Real-World Code Bases}
             []
@@ -393,6 +448,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         \begin{itemize}
             \item survey: what does "complexity" mean? Computational? That'd be covered by slow/faster?
             \item GitHub repo selection: mistakenly thought it was `top of all repos for lang., it was not. (Check Tracy emails for reference and remedy, time permitting)'
+            \item Use/Not Use, discrepancy in tense used in presented options, potentially created a bias toward `use', although this would have bene introduced AFTER the `use' question (participants can step backward through survey however)
         \end{itemize}
 
         \subsubsection{Lambdas}
