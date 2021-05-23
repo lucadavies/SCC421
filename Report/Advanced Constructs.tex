@@ -51,6 +51,8 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \newline
     \newline
     [Is there any working docs?]
+    \newline
+    %Special Thanks?
 \newpage
 \tableofcontents
 
@@ -92,7 +94,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         The aims of this report are as follows:
         \begin{enumerate}
             \item To understand the usage of seven advanced programming constructs (as defined in sections \ref{sec:overview} and \ref{subsec:constructs})
-            \item To study what reasons developers have to or to not use these constructs
+            \item To study what reasons developers have to, or to not, use these constructs
             \item To make take the first steps in creating formal, unified recommendations on the use of these constructs 
         \end{enumerate}
 
@@ -136,7 +138,6 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \subsection{Constructs}
         \label{subsec:constructs}
         This section will give a more detailed description of each of the constructs to be examined. The constructs were selected for a number of reasons - firstly, they are all replaceable with simpler syntax (lambdas being a occasional exception, see Section \ref{subsubsec:lambdas}), conventional wisdom would dictate that some are rather commonly used (compound assignment / unary operators) and conversely that some are used much less (null-coalesce / null-conditional). Initial thoughts of some of the constructs came about from seeing then during my work for SCC.419. The constructs in question are detailed below:
-        \newpage
         \begin{itemize}
             \item Ternary/in-line If Statements
                 \begin{itemize}
@@ -312,7 +313,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.9\textwidth]{freqUse}
-                \caption{Frequency with which participants said they used advanced constructs, grouped by construct}
+                \caption{Frequency with which participants said they used advanced constructs, grouped by construct. (n.b. figures normalised to percentages)}
                 \label{fig:freqUse}
             \end{figure}
 
@@ -326,20 +327,13 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \item ``It makes codes simpler''
                 \item ``It makes code run faster''
             \end{itemize}
-            All, some, or none of the options may have been selected. Where the exclusive option ``None of these'' was selected, participants were prompted to give their own reason.
-            \\
+            One or more of the above options may have been selected, with an exclusive option: ``None of these'' present too. If this was selected, participants were prompted to give their own reason.
+            \newline
 
             The trend here was extremely clear: the most common reasons for using any of the constructs was for clarity and simplicity. ``It makes code clearer'' and ``It makes code simpler'' took 39.4\% and 42.3\% of all selections made respectively. The data for the selections totalled across each construct is shown in Figure \ref{fig:toUsePie}.
 
-            \begin{figure}[htbp]
-                \centering
-                \includegraphics[width=0.9\textwidth]{toUsePie}
-                \caption{Reasons to use constructs, totalled across all constructs.}
-                \label{fig:toUsePie}
-            \end{figure}
-
             Six participants selected `None of these' for at least one construct, two of whom selected this option for all constructs they were aware of and both instead said that they choose to use the constructs based on personal preference or habit. Another two selected this option for lambdas alone, one saying that they are aware of don't use lambdas, and the other highlighting a possible flaw in this study regarding lambdas. The participant noted that there are places where ``there is no rational alternative to using a lambda expression. It does not make the code simpler or clearer, it's just \textbf{necessary} to use a lambda.'' This brought to attention the fact that lambdas may be a more functional language feature, not fitting with the other constructs here. This is discussed further in Section \ref{subsubsec:lambdas}.
-            One participant also said that they would generally use `map' instead of a \codeword{foreach} loop, claiming ``it helps avoid `off by one' errors''. Off-by-one-errors occur when iterating over an array or other list of \textit{m} through \textit{n} items. Asking how many items there are (how many loop iterations are required), the intuitive answer of \textit{m} - \textit{n} is incorrect, the correct answer being (\textit{m} - \textit{n}) + 1. This is illustrated using a specific type of off-by-one error, a \textit{fencepost error} in Figure \ref{fig:fencepost}.
+            One participant also said that they would generally use `map' instead of a \codeword{foreach} loop, claiming ``it helps avoid `off by one' errors''. Off-by-one-errors occur when iterating over an array or other list of \textit{m} through \textit{n} items. Asking how many items there are (how many loop iterations are required), the intuitive answer of \textit{m} - \textit{n} is incorrect, the correct answer being (\textit{m} - \textit{n}) + 1. This is illustrated using a specific type of off-by-one error, a \textit{fencepost error}, in Figure \ref{fig:fencepost}.
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.5\textwidth]{fencepost}
@@ -348,15 +342,23 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \end{figure}
 
             It is not clear what advantages a `map' function has over a \codeword{foreach} loop to avoid off-by-one errors. In fact, conventional wisdom dictates that \codeword{foreach} loops, by nature should, avoid these errors by virtue of the fact that they\emph{remove} the need for a programmer to calculate the necessary number of loop iterations. It is plausible to suggest that this response was given by mistake, instead meaning to refer to traditional \codeword{for} loops, rather than \codeword{foreach} loops.
-            \begin{figure}[htbp]
-                \centering
-                \includegraphics[width=0.9\textwidth]{toUse}
-                \caption{Reasons to use constructs grouped by construct. Figures normalised to percentages per construct.}
-                \label{fig:toUse}
-            \end{figure}
 
             Figure \ref{fig:toUse} part repeats the data above, again showing that clarity and simplicity are the most common reasons. We can also see that the split is \emph{mostly} even between these two reasons, null-coalesce being a slight exception, with nearly double as many responses selecting simplicity over clarity. Null-conditional follows this pattern, but the difference is less pronounced.
             Other notable statistics are: no participants said that they used null-coalesce or -conditional due to company style, and the three constructs that had code run speed selected. Two participants selected this for lambdas, and one each both selected this for \codeword{foreach} loops and unary operators. These are statistically insignificant, but it is still of note that none of the other constructs had any selections regarding faster code running.
+            
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{toUsePie}
+                \caption{Reasons to use constructs, totalled across all constructs.}
+                \label{fig:toUsePie}
+            \end{figure}
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{toUse}
+                \caption{Reasons to use constructs grouped by construct. (n.b. Figures normalised to percentages per construct)}
+                \label{fig:toUse}
+            \end{figure}
+
         \subsubsection{Reasons To Not Use}
             To provide the other half of the story to the previous section, participants were also asked about the reasons they choose to \emph{not} use the constructs. Similar to before, the options presented were:
             \begin{itemize}
@@ -365,8 +367,8 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \item ``It would make code more complex''
                 \item ``It would make code run slower''
             \end{itemize}
-            With an additional ``None of the above'' option, selection of which reveals an additional question for participants to again give their own reason.
-            \\
+            As before, one or more of the above options may have been selected, with a ``None of these'' option that if prompted participants to give their own reason if selected.
+            \newline
 
             Reasons of clarity and complexity were the most selected again, with 48.2\% of all selections attributing maintaining the clarity of code as a reason to not use a given construct, and complexity at 23.9\%. More than double the proportion of selections were present for ``None of these'' compared to the when asked for reason \emph{to} the constructs - here, 16.2\% of selections were placed here. The reasons provided by these respondents were quite varied but very interesting and are all worthy of discussion:
 
@@ -399,23 +401,61 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \caption{Reasons to not use constructs, totalled across all constructs.}
                 \label{fig:toNotUsePie}
             \end{figure}
-
-            Only 4.5\% selected ``It would make code run slower'' - logically, this would make sense factually too, as most of these constructs are plain syntactic differences that, with most modern compilers and interpreters, are likely to produce the same bytecode and/or machine code. Lambdas and \codeword{foreach} are likely the only exceptions to this. The former has other potential implications beyond just how it looks on-screen, the latter (depending on language) may be a change from an array index to initialising an iterator and calling on that instead. This is reflected in the thoughts of participants in Figure \ref{fig:toNotUse}, showing that these two constructs were the only two to have received the selection pertaining to code run speed.
-
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.9\textwidth]{toNotUse}
-                \caption{Reasons to not use constructs grouped by construct. Figures normalised to percentages per construct.}
+                \caption{Reasons to not use constructs grouped by construct. (n.b. Figures normalised to percentages per construct)}
                 \label{fig:toNotUse}
             \end{figure}
+
+            Only 4.5\% selected ``It would make code run slower'' - logically, this would make sense factually too, as most of these constructs are plain syntactic differences that, with most modern compilers and interpreters, are likely to produce the same bytecode and/or machine code. Lambdas and \codeword{foreach} are likely the only exceptions to this. The former has other potential implications beyond just how it looks on-screen, the latter (depending on language) may be a change from an array index to initialising an iterator and calling on that instead. This is reflected in the thoughts of participants in Figure \ref{fig:toNotUse}, showing that these two constructs were the only two to have received the selection pertaining to code run speed.
 
             The breakdown in Figure \ref{fig:toNotUse} also confirms that clarity was the most common reason selected by a wide margin for four of the constructs, but not for unary and compound operators (multiple reasons, described above) and 
             for \codeword{foreach} loops (run speed was a concern as described immediately above).
             All constructs had a small number of responses claiming company style as reasons for not using them, but this is a relatively small number compared to the proportion that cited clarity or complexity or their reason.
         \subsubsection{Performance}
-            []
+            As touched on previously, it was not expected with most of these constructs for there to be much of a bias with regard to performance (this is examined crudely in Section \ref{subsubsec:reSharper}). Participants were asked to state what, if any, effect they thought each construct would have on the performance of code.
+            \newline
+
+            In line with expectation, a large majority, 61.2\%, of the selections here were that of no change to performance. The second largest group was that of ``Don't know'' with 22.4\% of selections. Both these statistics are shown in Figure \ref{fig:performancePie}. It is likely that most high-level programmers (such as those using high-level languages like C\#, JavaScript, and Java0) either do not routinely give much consideration to such fine-grained efficiency, or are not concerned with relatively small performance variations that come from using these constructs.
+
+            The individual performance data also matches participants selections from previous question when grouped by construct: the majority for each is still ``No change'', but the stand out constructs that have a significant number of selections that are of increased or decreased performance are lambda expressions and \codeword{foreach} loops. Lambdas had the smallest proportion of selections for ``No change'', and the largest for ``Increased performance'', meanwhile \codeword{foreach} had the second smallest proportion of ``No change'' and the largest for ``Decreased performance''. The possible decrease in performance using \codeword{foreach} was discussed in the previous section.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{performancePie}
+                \caption{Selections for performance, totalled across all constructs.}
+                \label{fig:performancePie}
+            \end{figure}
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{performance}
+                \caption{Performance selections grouped by construct. (n.b. Figures normalised to percentages per construct)}
+                \label{fig:performance}
+            \end{figure}
+            
         \subsubsection{Usage In Wider Industry}
-            []
+            The final set of questions asked participants about their perception of the prevalence of the constructs in the wider industry of software development, asking whether they thought that use of each construct was above, on par, or below average across the industry in general. Figure \ref{fig:industry} collates results across all constructs for this question set.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{industry.png}
+                \caption{Responses on prevalence in wider industry compared to each language, displayed per construct. A typographical error meant that participants were asked about null-coalesce in Java: this should have been JavaScript, as Java has no null-coalesce operator. That portion of the results should be ignored. (n.b. Figures normalised to percentages and truncated scale, Null-coalesce and null-conditional operators are not present in Java, giving only two groupings)}
+                \label{fig:industry}
+            \end{figure}
+
+            In general, responses were quite scattered, and the most clearly discernible patterns are centred on the ``Don't know'' responses.
+
+            The most consistent pattern across the entire set of responses was that of uncertainty around usage of the constructs in Java. This will likely but due to the fact that ISS does not use Java in its tech stack anywhere. The most obvious case of this is for ternary if-statements, with 60.9\% of all responses for Java being ``Don't know''. All four options were roughly the same for C\# and JavaScript otherwise. Also, lambda expressions and \codeword{foreach} loops were perceived as being more common in C\# and JavaScript by a majority.
+
+            Aside from this, most results were quite close together, or scatter enough to hide any possible pattern that may be present. Looking at the wider picture, ternary if-statements were the only construct that received a significant number of selections in any language a notable number of ``Below average'' selections, suggesting that, generally, C\#, JavaScript, and Java use ternary if-statements less than other languages in the software development industry.
+
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{industryPie.png}
+                \caption{Responses on prevalence in wider industry compared to each language, totalled across all constructs and languages.}
+                \label{fig:indsutryPie}
+            \end{figure}
     \subsection{Static Code Analysis}
         []
         \subsubsection{Sample Code Files}
@@ -425,6 +465,9 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \end{itemize}
         \subsubsection{Real-World Code Bases}
             []
+        \subsubsection{ReSharper}
+        \label{subsubsec:reSharper}
+        []
 \newpage
 \section{Conclusion}
 \label{sec:conclusion}
