@@ -423,17 +423,10 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
             \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.9\textwidth]{performancePie}
-                \caption{Selections for performance, totalled across all constructs.}
-                \label{fig:performancePie}
-            \end{figure}
-            \begin{figure}[htbp]
-                \centering
-                \includegraphics[width=0.9\textwidth]{performance}
-                \caption{Performance selections grouped by construct. (n.b. Figures normalised to percentages per construct)}
+                \includegraphics[width=0.8\textwidth]{performance}
+                \caption{(a) Selections for performance, totalled across all constructs.\newline(b)Performance selections grouped by construct. (n.b. Figures normalised to percentages per construct)}
                 \label{fig:performance}
-            \end{figure}
-            
+            \end{figure}   
         \subsubsection{Usage In Wider Industry}
             The final set of questions asked participants about their perception of the prevalence of the constructs in the wider industry of software development, asking whether they thought that use of each construct was above, on par, or below average across the industry in general. Figure \ref{fig:industry} collates results across all constructs for this question set.
 
@@ -444,11 +437,49 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \label{fig:industry}
             \end{figure}
 
+            \begin{figure}[htbp]
+                \centering
+                \includegraphics[width=0.9\textwidth]{industry.png}
+                \caption{The same as Figure \ref{fig:industry}, but excluding ``Don't know'' responses.}
+                \label{fig:industryExcl}
+            \end{figure}
+
             In general, responses were quite scattered, and the most clearly discernible patterns are centred on the ``Don't know'' responses.
 
-            The most consistent pattern across the entire set of responses was that of uncertainty around usage of the constructs in Java. This will likely but due to the fact that ISS does not use Java in its tech stack anywhere. The most obvious case of this is for ternary if-statements, with 60.9\% of all responses for Java being ``Don't know''. All four options were roughly the same for C\# and JavaScript otherwise. Also, lambda expressions and \codeword{foreach} loops were perceived as being more common in C\# and JavaScript by a majority.
+            The most consistent pattern across the entire set of responses was that of uncertainty around usage of the constructs in Java. This will likely but due to the fact that ISS does not use Java in its tech stack anywhere. The most obvious case of this is for ternary if-statements, with 60.9\% of all responses for Java being ``Don't know''. Also, lambda expressions and \codeword{foreach} loops were perceived as being more common in C\# and JavaScript by a majority.
 
-            Aside from this, most results were quite close together, or scatter enough to hide any possible pattern that may be present. Looking at the wider picture, ternary if-statements were the only construct that received a significant number of selections in any language a notable number of ``Below average'' selections, suggesting that, generally, C\#, JavaScript, and Java use ternary if-statements less than other languages in the software development industry.
+            The following breakdown summarises results for each construct, excluding ``Don't know'' responses from figures:
+            
+            \begin{itemize}
+                \item In-line if / Ternary If Statements
+                \begin{itemize}
+                    \item the only construct that received a significant number of selections in any language a notable number of ``Below average'' selections, the other selections were also high giving a mean value corresponding to just marginally \emph{above} average for C\#, marginally \emph{below} average for JavaScript and just above the midpoint between below average and average for Java.
+                \end{itemize}
+                \item Lambda Expressions
+                \begin{itemize}
+                    \item At least one of each selection, but with ``Above average'' outstanding for C\#, and particularly so for JavaScript. C\# and JavaScript have a mean corresponding to just midway between average and above average, and Java a little above average
+                \end{itemize}
+                \item Null-coalesce
+                \begin{itemize}
+                    \item The mean for C\# gives a value a little above average, while, as mentioned above, a typographic error means no data was collected for JavaScript and the Java data is unusable.
+                \end{itemize}
+                \item Null-conditional
+                \begin{itemize}
+                    \item Both trend toward average/above average for with C\# having a mean lying at the midpoint between average and above average and JavaScript lying a little above average.
+                \end{itemize}
+                \item \codeword{Foreach} Loops
+                \begin{itemize}
+                    \item Alongside lambdas, the only other construct strongly perceived as ``Above average''. The mean value for C\# and Java is strongly toward above average while JavaScript has a mean a little above average.
+                \end{itemize}
+                \item Unary Increment Operators
+                \begin{itemize}
+                    \item Means were above average for all languages: C\# midway between average and above average, JavaScript marginally above, and Java strongly above average.                
+                \end{itemize}
+                \item Compound Assignment Operators
+                \begin{itemize}
+                    \item Means were again above average for all languages, a little above average for all three.  
+                \end{itemize}
+            \end{itemize}
 
             \begin{figure}[htbp]
                 \centering
@@ -456,6 +487,17 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \caption{Responses on prevalence in wider industry compared to each language, totalled across all constructs and languages.}
                 \label{fig:indsutryPie}
             \end{figure}
+
+            In Section \ref{sec:conclusion}, the Conclusion, we will compare the figures in this section with the data collected in the analysis of real-world codebases to see if there is a meaningful correlation by which we may state that the participants surveyed are well aware of the prevalence of use of these constructs.
+
+        \subsubsection{Free-form Comments}
+            The final question asked participants to indicate any other thoughts and notes they had around the topic at hand. This yielded some very interesting comments.
+
+            As has been mentioned already, most of these constructs come under the umbrella of `syntactic sugar', that which is meaningful only to a human developer, and function the same as their simpler counterparts at machine level. One participant noted this themselves, and further stated that these constructs should be used to save space and time, so long as code readability is not compromised. One more nuanced response gave significantly more detail, opening with a phrase that sums up the very issue of knowing when to use the constructs: ``Most of these questions [...] are more properly answered `As appropriate''', going on to say that runtime performance ought to be measured only in context, not in isolation. They apply this both across different scenarios in the same language and across different languages. They also highlight that in the present day ``we're waiting for [input/output] from the disk or network - the time spent executing each one of those constructs pales in comparison''. The same comment again reaffirms that ``everything depends on circumstances'', such as in safety-critical systems where understandability and correctness are of ultimate importance. In such situations, it may be advisable to only use basic syntax and work around that as an axiom, but then again, it may not - proving the point that the context and situation may be one of the most important factors in usage of such advanced constructs, and may also go some way to explain why there seems to be little explicit guidance on this matter.
+
+            Another comment stated again that the constructs being examined are syntactic sugar, however, this was written in a way that implied ``and so they don't really matter''. This may not have been the case, but it would be more explanation as how uncertain the situation appears to be around when and how to use such constructs. The same comment separates lambdas out as not syntactic sugar, but a structure that permits more functional practices that can ``fundamentally change how your system is built and hence how it is complier optimised''. This is one of the pieces of information gathered during the process that has quite clearly marked out lambdas as not quite fitting into the same category as the rest of the constructs.
+
+            Lastly, one participant notes that there are times when some of these constructs simply cannot be used, giving the example of writing entity framework expressions in C\# using LINQ. It is perhaps up for debate is LINQ counts as C\# on more than technicality, but it is a valid point that there are places where certain syntax cannot be written or where it available syntax is otherwise limited. However, these situations are a form of edge-case, and are such an edge-case that, should standardised document be written to define how to use the constructs examined here, it could easily make exceptions for such situations.
     \subsection{Static Code Analysis}
         []
         \subsubsection{Sample Code Files}
