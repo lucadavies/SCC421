@@ -5,12 +5,12 @@ import java.util.function.Consumer;
 public class Example
 {
 // TERNARY
-    String DisplayTempA(double temp)
+    static String ternaryAdv(double temp)
     {
         return temp < 20.0 ? "Cold." : "Perfect!";
     }
     //-
-    String DisplayTempB(double temp)
+    static String ternaryPlain(double temp)
     {
         if (temp < 20.0)
         {
@@ -23,48 +23,77 @@ public class Example
     }
 
 // LAMBDA EXPRESSIONS
-    Consumer<String> greetA = (name) ->
+    static void lambdaAdv(String name)
     {
-        String greeting = "Hello " + name + "!";
-        System.out.println(greeting);
-    };
-    //-
-    void greetB(String name)
+        Consumer<String> foo = (s) ->
+        {
+            String greeting = "Hello " + s + "!";
+            System.out.println(greeting);
+        };
+
+        foo.accept(name);
+    }
+    
+    static void lambdaPlain(String name)
     {
         String greeting = "Hello " + name + "!";
         System.out.println(greeting);
     }
 
 // UNARY INC/DECR.
-    void incrDecr()
+    static void incrDecrAdv()
     {
-        int x;
-        int y;
-        int z;
+        int x = 0;
+        int y = 0;
+        int z = 0;
         //setup
         x = 3;
         y = x++;
         z = ++x;
-        //-
+
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(z);
+    }
+
+    static void incrDecrPlain()
+    {
+        int x = 0;
+        int y = 0;
+        int z = 0;
+        //setup
         x = 3;
+
         y = x;
         x = x + 1;
+
         z = x + 1;
         x = x + 1;
+
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(z);
     }
 
 // COMPOUND ASSIGNMENT
-    void compoundAssign()
+    static void compoundAssignAdv()
     {
-        int d = 2;
+        int x = 2;
         //setup
-        d += 3;
-        //-
-        d = d + 3;
+        x += 3;
+        System.out.println(x);
+    }
+
+    static void compoundAssignPlain()
+    {
+        int x = 2;
+        //setup
+        x = x + 3;
+        System.out.println(x);
     }
 
 // FOREACH
-    void foreach()
+    static void foreachAdv()
     {
         ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(10, 99, 4, 65, 38, 42));
         int total = 0;
@@ -73,11 +102,34 @@ public class Example
         {
             total += i;
         }
-        //-
+
+        System.out.println(total);
+    }
+
+    static void foreachPlain()
+    {
+        ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(10, 99, 4, 65, 38, 42));
+        int total = 0;
+        //setup
         for (int i = 0; i < nums.size(); i++)
         {
             total += nums.get(i);
         }
+
+        System.out.println(total);
     }
-    
+
+    public static void main(String[] args)
+    {
+        ternaryAdv(10);
+        ternaryPlain(10);
+        lambdaAdv("Alice");
+        lambdaPlain("Bob");
+        incrDecrAdv();
+        incrDecrPlain();
+        compoundAssignAdv();
+        compoundAssignPlain();
+        foreachAdv();
+        foreachPlain();
+    }
 }
