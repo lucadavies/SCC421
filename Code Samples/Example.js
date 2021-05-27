@@ -41,7 +41,7 @@ class Example
     {
         let a = null;
         let b = null;
-        b = a ?? -1;
+        b = a ?? new Person();
 
         console.log(b);
     }
@@ -56,7 +56,7 @@ class Example
         }
         else
         {
-            b = -1;
+            b = new Person();
         }
 
         console.log(b);

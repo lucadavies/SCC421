@@ -1,24 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-class Example
+class Adv
 {
     // TERNARY
     static string ternaryAdv(double temp)
     {
         return temp < 20.0 ? "Cold." : "Perfect!";
-    }
-
-    static string ternaryPlain(double temp)
-    {
-        if (temp < 20.0)
-        {
-            return "Cold.";
-        }
-        else
-        {
-            return "Perfect!";
-        }
     }
 
     // LAMBDA EXPRESSIONS
@@ -33,12 +21,6 @@ class Example
         foo(name);
     }
 
-    static void lambdaPlain(string name)
-    {
-        string greeting = "Hello " + name + "!";
-        Console.WriteLine(greeting);
-    }
-
     // NULL-COALESCE
     static void nullCoalesceAdv()
     {
@@ -50,24 +32,6 @@ class Example
         Console.WriteLine(b);
     }    
 
-    static void nullCoalescePlain()
-    {
-        Person a = null;
-        //setup
-        Person b;
-        if (a != null)
-        {
-            b = a;
-        }
-        else
-        {
-            b = new Person();
-        }
-
-        Console.WriteLine(b);
-    }
-    
-
     // NULL-CONDITIONAL
     static void nullConditionalAdv()
     {
@@ -78,22 +42,7 @@ class Example
         name = p?.firstName;
 
         Console.WriteLine(name);
-    }
-
-    static void nullConditionalPlain()
-    {
-        Person p = new Person();
-        //setup
-        var name = "p is null, no name";
-
-        if (p != null)
-        {
-            name = p.firstName;
-        }
-
-        Console.WriteLine(name);
-    }
-    
+    }    
 
     // UNARY INC/DECR.
     static void incrDecrAdv()
@@ -111,39 +60,12 @@ class Example
         Console.WriteLine(z);
     }
 
-    static void incrDecrPlain()
-    {
-        int x = 0;
-        int y = 0;
-        int z = 0;
-        //setup
-        x = 3;
-
-        y = x;
-        x = x + 1;
-
-        z = x + 1;
-        x = x + 1;
-
-        Console.WriteLine(x);
-        Console.WriteLine(y);
-        Console.WriteLine(z);
-    }
-
     // COMPOUND ASSIGNMENT
     static void compoundAssignAdv()
     {
         int x = 2;
         //setup
         x += 3;
-        Console.WriteLine(x);
-    }
-
-    static void compoundAssignPlain()
-    {
-        int x = 2;
-        //setup
-        x = x + 3;
         Console.WriteLine(x);
     }
 
@@ -161,35 +83,15 @@ class Example
         Console.WriteLine(total);
     }
 
-    static void foreachPlain()
-    {
-        List<int> nums = new List<int> {10, 99, 4, 65, 38, 42};
-        int total = 0;
-        //setup
-        for (int i = 0; i < nums.Count; i++)
-        {
-            total += nums[i];
-        }
-
-        Console.WriteLine(total);
-    }
-
     static void Main(string[] args)
     {
         ternaryAdv(10);
-        ternaryPlain(10);
         lambdaAdv("Alice");
-        lambdaPlain("Bob");
         nullCoalesceAdv();
-        nullCoalescePlain();
         nullConditionalAdv();
-        nullConditionalPlain();
         incrDecrAdv();
-        incrDecrPlain();
         compoundAssignAdv();
-        compoundAssignPlain();
         foreachAdv();
-        foreachPlain();
     }
 }
     
