@@ -157,7 +157,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \end{itemize}
              \item Foreach Loops
                 \begin{itemize}
-                    \item Used to simplify for loops for the purposes of iterating over an abstract data structure, usually a type of some form of collection of like objects; those that can be indexed into to retrieve an element. For example, in C\#, a \codeword{foreach} loop may be used to iterate over the elements of an instance of any class that implements the \codeword{IEnumerable} interface. The same applies to Java with its \codeword{Iterable} interface. In C\#, if \codeword{numList} is of type \codeword{List<int>}:
+                    \item Used to simplify for loops for the purposes of iterating over an abstract data structure, usually a type of some form of collection of like objects; those that can be indexed into to retrieve an element. For example, in C\#, a foreach loop may be used to iterate over the elements of an instance of any class that implements the \codeword{IEnumerable} interface. The same applies to Java with its \codeword{Iterable} interface. In C\#, if \codeword{numList} is of type \codeword{List<int>}:
                     \\
                     \codeword{for (int i = 0; i < numList.Count; i++)}\\
                     \{\\
@@ -246,6 +246,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         These tools will often make recommendations on how source code may be improved in numerous way beyond explicit bugs and problems, such as stylistic improvement that make use of advanced syntax whatever given language is being analysed - advanced syntax akin to the constructs being examined here. Accordingly, static analysis tools were employed to investigate whether or not they made any recommendations for or against any of the constructs in question. SonarQube and Semgrep were selected for this purpose as they both support all three languages being subject to analysis, they are both under recent, active development, and because they both have free variants. Both tools were run against sample control code files and large open source repositories in the earlier mentioned three languages: C\#, JavaScript, and Java.
             
         \subsubsection{Sample Code Files}
+        \label{subsubsec:sampleFile}
             The sample code files were created to act as a baseline or control test to see if SonarQube or Semgrep made any note at all about the bare use and/or inclusion of any of the constructs.
 
             Each file contains a bare (non-contextualised) example of each of the constructs placed directly alongside their `simple syntax' functionally equivalent counterparts. Each file is valid syntax for its language, and all of them may be executed, though none of them have a true entry point or way to actually \emph{run} the code within itself - the functions and methods are present purely to \emph{be present} so that they may be analysed by SonarQube and Semgrep. Though there are differences between the three languages, the form of the sample code was kept as similar as possible to preserve their purpose as control samples, without adding deliberately unusual syntax that may contaminate the output of SonarQube and Semgrep.
@@ -277,6 +278,15 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         \end{center}
 
         Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on use of any of the constructs. Each type of change was documented and counted per commit.
+
+    \subsection{Intermediate Language Comparison}
+        The final part of this study was brought about during the progress of the preceding work. Analysis of the survey results raised some interesting points and potential ideas around what may make certain constructs more or less suited to use generally and/or in any given place in code.
+
+        C\# and Java, while both are complied languages, they are compiled to an intermediate language which is then interpreted by a virtual machine for execution. This means that we may examine the intermediate language (IL) to understand if there are any clear differences between the plain and advanced forms of syntax and constructs. This would be a somewhat crude way to go about attempting to gauge the difference in performance or efficiency, but merely examining and commenting no the difference in C\# and Java's respective ILs can prove to valuable supporting material to this study.
+        
+        The code files used to generate the IL code contained the same code as in the sample files mentioned in Section \ref{subsubsec:sampleFile} with one change: the sample code files have consecutive functions, one in plain syntax, one using an advance construct. To make analysis and comparison easier, the plain and advanced syntax functions were extracted into separate files so that there was a plain syntax \emph{file} and an advanced syntax \emph{file}. This allowed ease of comparison using git integrations with Visual Studio Code to perform a \codeword{git diff} to see the similarities and differences easily. 
+
+        For C\#, the online tool SharpLab \footnote{https://sharplab.io/} was used to produce .NET Common Intermediate Language using the Microsoft's Roslyn  compiler. For Java, `JVM Bytecode Viewer' for Visual Studio Code \footnote{https://marketplace.visualstudio.com/items?itemName=mnxn.jvm-bytecode-viewer} was used to locally open the .class files produced by the JDK to view the code.
 
 \newpage
 \section{Results}
@@ -333,7 +343,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             The trend here was extremely clear: the most common reasons for using any of the constructs was for clarity and simplicity. ``It makes code clearer'' and ``It makes code simpler'' took 39.4\% and 42.3\% of \emph{all} selections made respectively. The data for the selections totalled across each construct is shown in Figure \ref{fig:toUsePie}.
 
             Six participants selected `None of these' for at least one construct, two of whom selected this option for all constructs they were aware of and both instead said that they choose to use the constructs based on personal preference or habit. Another two selected this option for lambdas alone, one saying that they are aware of, but don't use lambdas, and the other highlighting a possible flaw in this study regarding lambdas. This participant noted that there are places where ``there is no rational alternative to using a lambda expression. It does not make the code simpler or clearer, it's just \textbf{necessary} to use a lambda.'' This brought to attention the fact that lambdas may be a more functional language feature, not fitting with the other constructs here which can mostly be categorised as `syntactic sugar'. This is discussed further in Section \ref{subsubsec:lambdas}.
-            One participant also said that they would generally use `map' instead of a \codeword{foreach} loop. `Map' is presumably referring to the \codeword{map()} in JavaScript and similar that may be called on an array to perform a function on all elements of the array - the function is taken by \codeword{map()} as an argument, either via lambda or regular method or function. They claim using \codeword{map()} ``helps avoid `off by one' errors''.  Off-by-one-errors occur when iterating over an array or other list of \textit{m} through \textit{n} items and having the wrong index by one. For example, if you were to ask how many items there are (how many loop iterations are required) in a collection, the intuitive answer of \textit{m} - \textit{n} is incorrect, the correct answer being (\textit{m} - \textit{n}) + 1. This is illustrated using a specific type of off-by-one error, a \textit{fencepost error}, as illustrated in Figure \ref{fig:fencepost}.
+            One participant also said that they would generally use `map' instead of a foreach loop. `Map' is presumably referring to the \codeword{map()} in JavaScript and similar that may be called on an array to perform a function on all elements of the array - the function is taken by \codeword{map()} as an argument, either via lambda or regular method or function. They claim using \codeword{map()} ``helps avoid `off by one' errors''.  Off-by-one-errors occur when iterating over an array or other list of \textit{m} through \textit{n} items and having the wrong index by one. For example, if you were to ask how many items there are (how many loop iterations are required) in a collection, the intuitive answer of \textit{m} - \textit{n} is incorrect, the correct answer being (\textit{m} - \textit{n}) + 1. This is illustrated using a specific type of off-by-one error, a \textit{fencepost error}, as illustrated in Figure \ref{fig:fencepost}.
             \begin{figure}[htbp]
                 \centering
                 \includegraphics[width=0.5\textwidth]{fencepost}
@@ -341,10 +351,10 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \label{fig:fencepost}
             \end{figure}
 
-            It is not clear what advantages a `map' function has over a \codeword{foreach} loop to avoid off-by-one errors. In fact, conventional wisdom dictates that \codeword{foreach} loops, by nature should, avoid these errors by virtue of the fact that they\emph{remove} the need for a programmer to calculate the necessary number of loop iterations or use an index at all. It is plausible to suggest that this response was given by mistake, instead meaning to refer to traditional \codeword{for} loops, rather than \codeword{foreach} loops.
+            It is not clear what advantages a `map' function has over a foreach loop to avoid off-by-one errors. In fact, conventional wisdom dictates that foreach loops, by nature should, avoid these errors by virtue of the fact that they\emph{remove} the need for a programmer to calculate the necessary number of loop iterations or use an index at all. It is plausible to suggest that this response was given by mistake, instead meaning to refer to traditional for loops, rather than foreach loops.
 
             Figure \ref{fig:toUse} part repeats the data above, again showing that clarity and simplicity are the most common reasons. We can also see that the split is \emph{mostly} even between these two reasons, null-coalesce being a slight exception, with nearly double as many responses selecting simplicity over clarity. Null-conditional follows this pattern, but the difference is less pronounced.
-            Other notable statistics are: no participants said that they used null-coalesce or -conditional due to company style, and the three constructs that had code run speed selected. Two participants selected this for lambdas, and one each both selected this for \codeword{foreach} loops and unary operators. These are statistically insignificant, but it is still of note that none of the other constructs had any selections regarding faster code execution.
+            Other notable statistics are: no participants said that they used null-coalesce or -conditional due to company style, and the three constructs that had code run speed selected. Two participants selected this for lambdas, and one each both selected this for foreach loops and unary operators. These are statistically insignificant, but it is still of note that none of the other constructs had any selections regarding faster code execution.
             
             \begin{figure}[htbp]
                 \centering
@@ -389,9 +399,9 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \end{itemize}
                 \item Other/Unqualified
                 \begin{itemize}
-                    \item One participant stated that a \codeword{for} loop may be preferable to a \codeword{foreach} loop when the index variable is needed. They then go on to say that it also `depends how I'm feeling'.
+                    \item One participant stated that a for loop may be preferable to a foreach loop when the index variable is needed. They then go on to say that it also `depends how I'm feeling'.
                     \item Regarding lambdas and unary and compound operators, one participant said: ``sometimes these operators don't account for requirements such as type checking or formatting'' without any more description.
-                    \item One participant claimed that \codeword{foreach} loops may introduce errors, but did not explain further.
+                    \item One participant claimed that foreach loops may introduce errors, but did not explain further.
                 \end{itemize}
             \end{itemize}
 
@@ -408,17 +418,17 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \label{fig:toNotUse}
             \end{figure}
 
-            Only 4.5\% selected ``It would make code run slower'' - logically, this would make sense, factually too, as most of these constructs are plain syntactic differences that, with most modern compilers and interpreters, may produce the same bytecode and/or machine code. Lambdas and \codeword{foreach} loops are likely the only exceptions to this. The former has other potential implications beyond just how it looks on-screen, the latter (depending on language) may be a change from an array index to initialising an iterator and calling on that instead. This is reflected in the thoughts of participants in Figure \ref{fig:toNotUse}, showing that these two constructs were the only two to have received any selections pertaining to code run speed.
+            Only 4.5\% selected ``It would make code run slower'' - logically, this would make sense, factually too, as most of these constructs are plain syntactic differences that, with most modern compilers and interpreters, may produce the same bytecode and/or machine code. Lambdas and foreach loops are likely the only exceptions to this. The former has other potential implications beyond just how it looks on-screen, the latter (depending on language) may be a change from an array index to initialising an iterator and calling on that instead. This is reflected in the thoughts of participants in Figure \ref{fig:toNotUse}, showing that these two constructs were the only two to have received any selections pertaining to code run speed.
 
-            The breakdown in Figure \ref{fig:toNotUse} also confirms that clarity was the most common reason selected, leadings by a wide margin for four of the constructs, but not for unary and compound operators (multiple reasons, described above) and for \codeword{foreach} loops (run speed was a concern as described immediately above).
+            The breakdown in Figure \ref{fig:toNotUse} also confirms that clarity was the most common reason selected, leadings by a wide margin for four of the constructs, but not for unary and compound operators (multiple reasons, described above) and for foreach loops (run speed was a concern as described immediately above).
             All constructs had a small number of responses claiming company style as reasons for not using them, but this is a relatively small number compared to the proportion that cited clarity or complexity for their reason.
         \subsubsection{Performance}
             As touched on previously, it was not expected with most of these constructs for there to be much of a bias with regard to performance (this is examined crudely in Section \ref{subsubsec:sharpLab}). Participants were asked to state what, if any, effect they thought each construct would have on the performance of code.
             \newline
 
-            In line with expectation, a large majority, 61.2\%, of the selections here indicated no change to performance. The second largest group was ``Don't know'' with 22.4\% of selections. Both these statistics are shown in Figure \ref{fig:performancePie}. It is likely that most high-level programmers (such as those using high-level languages like C\#, JavaScript, and Java) either do not routinely give much consideration to such fine-grained efficiency, or are not concerned with relatively small performance variations that come from using these constructs.
+            In line with expectation, a large majority, 61.2\%, of the selections here indicated no change to performance. The second largest group was ``Don't know'' with 22.4\% of selections. Both these statistics are shown in Figure \ref{fig:performance}b. It is likely that most high-level programmers (such as those using high-level languages like C\#, JavaScript, and Java) either do not routinely give much consideration to such fine-grained efficiency, or are not concerned with relatively small performance variations that come from using these constructs.
 
-            The individual performance data also matches participants' selections from the previous question when grouped by construct: the majority for each is still ``No change'', but the stand out constructs that have a significant number of selections of increased or decreased performance are lambda expressions and \codeword{foreach} loops. Lambdas had the smallest proportion of selections for ``No change'', and the largest for ``Increased performance'', meanwhile \codeword{foreach} had the second smallest proportion of ``No change'' and the largest for ``Decreased performance''. The possible decrease in performance using \codeword{foreach} was discussed in the previous section.
+            The individual performance data also matches participants' selections from the previous question when grouped by construct: the majority for each is still ``No change'', but the stand out constructs that have a significant number of selections of increased or decreased performance are lambda expressions and foreach loops. Lambdas had the smallest proportion of selections for ``No change'', and the largest for ``Increased performance'', meanwhile foreach had the second smallest proportion of ``No change'' and the largest for ``Decreased performance''. The possible decrease in performance using foreach was discussed in the previous section.
 
             \begin{figure}[htbp]
                 \centering
@@ -445,7 +455,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
             In general, responses were quite scattered, and the most clearly discernible patterns are centred on the ``Don't know'' responses.
 
-            The most consistent pattern across the entire set of responses was that of uncertainty around usage of the constructs in Java. This will likely but due to the fact that ISS does not use Java in its tech stack anywhere. The most obvious case of this is for ternary if-statements, with 60.9\% of all responses for Java being ``Don't know''. Also, lambda expressions and \codeword{foreach} loops were perceived as being more common in C\# and JavaScript by a majority.
+            The most consistent pattern across the entire set of responses was that of uncertainty around usage of the constructs in Java. This will likely but due to the fact that ISS does not use Java in its tech stack anywhere. The most obvious case of this is for ternary if-statements, with 60.9\% of all responses for Java being ``Don't know''. Also, lambda expressions and foreach loops were perceived as being more common in C\# and JavaScript by a majority.
 
             The following breakdown summarises results for each construct, excluding ``Don't know'' responses from figures:
             
@@ -466,7 +476,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \begin{itemize}
                     \item Both trend toward average/above average for with C\# having a mean lying at the midpoint between average and above average and JavaScript lying a little above average.
                 \end{itemize}
-                \item \codeword{Foreach} Loops
+                \item Foreach Loops
                 \begin{itemize}
                     \item Alongside lambdas, the only other construct strongly perceived as ``Above average''. The mean value for C\# and Java is strongly toward above average while JavaScript has a mean a little above average.
                 \end{itemize}
@@ -506,10 +516,51 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \end{itemize}
         \subsubsection{Real-World Code Bases}
             []
-        \subsubsection{SharpLab}
+        \subsubsection{Intermediate Language Comparison}
         \label{subsubsec:sharpLab}
-            Fed .cs files into SharpLab (footnote: https://sharplab.io/) to get Roslyn CIL code.
+            To aid in confirming or denying some of the claims made in the survey by some participants, and to provide more general information about the constructs, the intermediate language code produced C\# and Java compilers was compared for both their `plain' and `advanced' syntax.
 
+            C\# was complied using SharpLab and the Roslyn compiler from March 3\textsuperscript{rd} 2021. Java was compiled locally with JDK version 14.0.1 and the .class files were read by the JVM Bytecode Viewer extension for Visual Studio Code.
+
+            The comparison will be broken down by construct and the detailed per language:
+
+            \begin{itemize}
+                \item In-line / Ternary If-statement
+                \begin{itemize}
+                    \item C\#
+                    \item Java
+                \end{itemize}
+                \item Lambda Expressions
+                \begin{itemize}
+                    \item C\#
+                    \item Java
+                \end{itemize}
+                \item Null-coalesce (C\# only)
+                \begin{itemize}
+                    \item C\#
+                \end{itemize}
+                \item Null-conditional (C\# only)
+                \begin{itemize}
+                    \item C\#
+                \end{itemize}
+                \item Unary Increment Operators
+                \begin{itemize}
+                    \item C\#
+                    \item Java
+                \end{itemize}
+                \item Compound Assignment Operators
+                \begin{itemize}
+                    \item C\#
+                    \item Java
+                \end{itemize}
+                \item Foreach Loops
+                \begin{itemize}
+                    \item C\#
+                    \item Java
+                \end{itemize}
+            \end{itemize}
+
+            C\#
             \begin{itemize}
                 \item ~55 lines of gubbins to define lambda (probably, check) in Adv
                 \item ternary: both `short-circuit' and exit at end of each branch (logic inverted in plain?)
@@ -518,9 +569,19 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \item Null-coalesce Adv doesn't declare variables, only uses stack (likely a context thing)
                 \item Similar to coalesce, conditional doesn't declare locals (likely a context thing)
                 \item Optimisation going on in conditional, missing literal, extra branch op
-                \item increment Adv slightly LONGER somehow, even this isn't 1-to-1
+                \item increment Adv slightly LONGER somehow, even this isn't 1-to-1.
+                \item Increment Adv uses 2 add operations where plain uses 3. Because ++/-- causes a value COPY that has been optimised into existence by default, despite requiring more instructions
                 \item Compound assignment IS 1-to-1
-                \item ?
+                \item Foreach Adv markedly longer. Requires try-finally to ensure enumerator is disposed
+            \end{itemize}
+            
+            Java
+            \begin{itemize}
+                \item Ternary identical EXCEPT: plain return INSIDE if like in source, Adv always runs to the closing Return instruction.
+                \item Lambda shorter in place, but has more code in `bootstrap function' elsewhere
+                \item Increment Adv is better..! Yay! (maybe) JVM has an increment instruction (with variable number to increment by) so it compiles 1-to-1 to an increment instruction.
+                \item Compound assignment uses same instruction as above, using the variable number to increment and increments by the desired value. Plain just loads, adds, stores, quite long-windedly
+                \item Foreach, both same length in-place, but Adv calls an different internal methods and has an extra method call, AND has additional gubbins for those methods.
             \end{itemize}
 \newpage
 \section{Conclusion}
