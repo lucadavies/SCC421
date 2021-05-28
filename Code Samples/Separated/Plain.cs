@@ -47,11 +47,15 @@ class Plain
     {
         Person p = new Person();
         //setup
-        var name = "p is null, no name";
+        string name;
 
         if (p != null)
         {
             name = p.firstName;
+        }
+        else
+        {
+            name = null;
         }
 
         Console.WriteLine(name);

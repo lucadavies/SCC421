@@ -93,7 +93,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \subsection{Aims \& Objectives}
         The aims of this report are as follows:
         \begin{enumerate}
-            \item To understand the usage of seven advanced programming constructs (as defined in sections \ref{sec:overview} and \ref{subsec:constructs})
+            \item To understand the usage of seven advanced programming constructs (as defined in Sections \ref{sec:overview} and \ref{subsec:constructs})
             \item To study what reasons developers have to, or to not, use these constructs
             \item To make take the first steps in creating formal, unified recommendations on the use of these constructs 
         \end{enumerate}
@@ -214,7 +214,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \label{fig:matrixTable}
         \end{figure}
 
-        \subsubsection{Questions}
+        \subsubsection{Research Questions}
         \label{subsubsec:surveyQuestions}
             Prior to designing, it was established that the survey must be able to provide insight that may help to answer the following questions:
             \begin{enumerate}
@@ -527,61 +527,37 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \begin{itemize}
                 \item In-line / Ternary If-statement
                 \begin{itemize}
-                    \item C\#
-                    \item Java
+                    \item \textbf{C\#} - Both versions are the same length, and both use two return statements (as is used in the plain source code). In the source code, the Boolean expression used is \codeword{temp < 20.0}: in the \emph{plain} IL, the logic for the condition is inverted, using a `branch if greater than or equal' instruction while the advanced IL uses a `branch if less than' instruction as would normally be assumed.
+                    \item \textbf{Java} - Plain follows the source code one-to-one, using two return instructions at the end of each code branch, whereas advanced uses a \codeword{goto} instruction on the true branch to jump to a single return instruction used by both code branches. This means that on one code branch, one additional instruction will be executed when using a ternary if statement. In the same fashion is in C\#'s plain IL, both Java IL versions invert the Boolean logic and use a `branch if greater than or equal' instruction.
                 \end{itemize}
                 \item Lambda Expressions
                 \begin{itemize}
-                    \item C\#
-                    \item Java
+                    \item \textbf{C\#} - The lambda in the advanced version is much more complex in IL than in source: a form of an entire class is created to hold the actual method that is defined in line in source. This class has a public and private constructor and the wanted method, generating 54 lines of code that an completely absent in the plain version. The method itself within this class is identical to that of the plain version. The actual code that \emph{calls} the lambda is only three instructions, compared to the plain version's six, however, this is also preceded by nine additional instructions that create and load an instance of the lambda's class. For such a small code snippet as is used here, it seems as though the potential overhead of a lambda may not necessary. In the case of reuse however, this could change. This also goes further still to showing that lambdas are a deeper construct than they had were initially given credit for in this study.
+                    \item \textbf{Java} - Very similar to C\# again, the in-place calling of the lambda is shorter than the plain equivalent, but there is additional code elsewhere in the file, effectively defining the lambda method as if it were a regular method (which is again the same length of the plain method). The inclusion of a lambda also adds 22 entries to the constant pool to help find the lambda method and call it at runtime. In Java, this boilerplate amounts to 43 additional lines in unedited bytecode.
                 \end{itemize}
                 \item Null-coalesce (C\# only)
                 \begin{itemize}
-                    \item C\#
+                    \item \textbf{C\#} - The plain version here is quite one-to-one with the source, declaring two \codeword{Person} variables and assigning them within code branches as expected. In contrast, the advanced version only uses the stack, and does not declare any local variables. This also has the side effect of requiring a bigger stack allocation to run the method, the advanced version requiring a size of eight to the plain version's one. This format is likely attributed to some degree of optimisation taking place by seeing that the variable in the condition is only null ever set to null in the method. This optimisation is potentially dependant on the context.
                 \end{itemize}
                 \item Null-conditional (C\# only)
                 \begin{itemize}
-                    \item C\#
+                    \item \textbf{C\#} - Similar to null-coalesce, the advanced version is shorter and declares no local variables, instead using only the stack. This may again be an example of contextual optimisation.
                 \end{itemize}
                 \item Unary Increment Operators
                 \begin{itemize}
-                    \item C\#
-                    \item Java
+                    \item \textbf{C\#} - Neither the plain nor advanced versions are mapped one-to-one in IL. The plain version uses two local variables for \codeword{y} and \codeword{z}, and \codeword{x} is maintained on the stack. In the advanced version, \codeword{x} and \codeword{y} are stored locally and \codeword{z} is maintained on the stack. Slightly different optimisation paths have been taken here producing slightly different code paths to the same result, the advanced version being two instructions longer. If all three variables used in this method were used more elsewhere, it is likely that all three would be stored in a local variable rather than one residing only on the stack.
+                    \item \textbf{Java} - The plain IL is a one-to-one mapping of the source code with no optimisation visible. However, in the advanced IL makes use of a dedicated increment instruction, \codeword{iinc}, that directly maps to the \codeword{++} operator in the source code. This reduces the length of the IL by four instructions due to not needing to store the value back in the local variable as frequently.
                 \end{itemize}
                 \item Compound Assignment Operators
                 \begin{itemize}
-                    \item C\#
-                    \item Java
+                    \item \textbf{C\#} - No local variable is used, the value to print is maintained only on the stack for both advanced and plain, there is no difference between the add operation in the IL.
+                    \item \textbf{Java} - Unlike in C\#, no optimisation is present for the plain IL, as it maps directly to the source code. In the advanced IL however, \codeword{iinc} is used to increment the value of a local variable by three (an argument to the IL instruction), cutting the instruction count by three.
                 \end{itemize}
                 \item Foreach Loops
                 \begin{itemize}
-                    \item C\#
-                    \item Java
+                    \item \textbf{C\#} - The plain IL is again effectively a one-to-one mapping of the for loop, albeit with the ordering of the three statements in the for loop signature moved to where the are actually executed. The advanced IL is eight lines longer, but both versions use the same number of external method calls within the loop itself. The advanced IL also requires the try-finally and an additional method call to dispose of the enumerator used to iterate over the list is properly after the looping is complete.
+                    \item \textbf{Java} - Both versions are quite similar, sharing most normal instructions, but different external methods are called albeit that they are performing the same function (condition: \codeword{size()} vs. \codeword{hasNext()}, get element: \codeword{get()} vs. \codeword{next()}). The advanced IL does have an additional method call to get the iterator itself. Both are the same length in-place, but as with the lambdas expression, this generated more code elsewhere, namely in the constant pool, adding 35 entries, compared to the regular for loop adding only 28.
                 \end{itemize}
-            \end{itemize}
-
-            C\#
-            \begin{itemize}
-                \item ~55 lines of gubbins to define lambda (probably, check) in Adv
-                \item ternary: both `short-circuit' and exit at end of each branch (logic inverted in plain?)
-                \item Lambda in Adv has much gubbins, beyond me, Roslyn/CIL expert better suited (looks like it creates a class instance and calls the lambda form within that class? Further evidence toward the fact that lambdas are more complicated than initially given credit for)
-                \item Null-coalesce, not just 1-to-1 at all, Adv is much shorter, only one branch op
-                \item Null-coalesce Adv doesn't declare variables, only uses stack (likely a context thing)
-                \item Similar to coalesce, conditional doesn't declare locals (likely a context thing)
-                \item Optimisation going on in conditional, missing literal, extra branch op
-                \item increment Adv slightly LONGER somehow, even this isn't 1-to-1.
-                \item Increment Adv uses 2 add operations where plain uses 3. Because ++/-- causes a value COPY that has been optimised into existence by default, despite requiring more instructions
-                \item Compound assignment IS 1-to-1
-                \item Foreach Adv markedly longer. Requires try-finally to ensure enumerator is disposed
-            \end{itemize}
-            
-            Java
-            \begin{itemize}
-                \item Ternary identical EXCEPT: plain return INSIDE if like in source, Adv always runs to the closing Return instruction.
-                \item Lambda shorter in place, but has more code in `bootstrap function' elsewhere
-                \item Increment Adv is better..! Yay! (maybe) JVM has an increment instruction (with variable number to increment by) so it compiles 1-to-1 to an increment instruction.
-                \item Compound assignment uses same instruction as above, using the variable number to increment and increments by the desired value. Plain just loads, adds, stores, quite long-windedly
-                \item Foreach, both same length in-place, but Adv calls an different internal methods and has an extra method call, AND has additional gubbins for those methods.
             \end{itemize}
 \newpage
 \section{Conclusion}

@@ -13,13 +13,8 @@ public class Adv
 // LAMBDA EXPRESSIONS
     static void lambdaAdv(String name)
     {
-        Consumer<String> foo = (s) ->
-        {
-            String greeting = "Hello " + s + "!";
-            System.out.println(greeting);
-        };
-
-        foo.accept(name);
+        String greeting = "Hello " + name + "!";
+        System.out.println(greeting);
     }
 
 // UNARY INC/DECR.

@@ -76,7 +76,7 @@
         void nullConditionalPlain () cil managed 
     {
         // Method begins at RVA 0x20a4
-        // Code size 29 (0x1d)
+        // Code size 27 (0x1b)
         .maxstack 1
         .locals init (
             [0] class Person p,
@@ -85,24 +85,27 @@
 
         IL_0000: newobj instance void Person::.ctor()
         IL_0005: stloc.0
-        IL_0006: ldstr "p is null, no name"
-        IL_000b: stloc.1
-        IL_000c: ldloc.0
-        IL_000d: brfalse.s IL_0016
+        IL_0006: ldloc.0
+        IL_0007: brfalse.s IL_0012
 
-        IL_000f: ldloc.0
-        IL_0010: callvirt instance string Person::get_firstName()
-        IL_0015: stloc.1
+        IL_0009: ldloc.0
+        IL_000a: callvirt instance string Person::get_firstName()
+        IL_000f: stloc.1
+        // sequence point: hidden
+        IL_0010: br.s IL_0014
 
-        IL_0016: ldloc.1
-        IL_0017: call void [System.Console]System.Console::WriteLine(string)
-        IL_001c: ret
+        IL_0012: ldnull
+        IL_0013: stloc.1
+
+        IL_0014: ldloc.1
+        IL_0015: call void [System.Console]System.Console::WriteLine(string)
+        IL_001a: ret
     } // end of method Plain::nullConditionalPlain
 
     .method private hidebysig static 
         void incrDecrPlain () cil managed 
     {
-        // Method begins at RVA 0x20d0
+        // Method begins at RVA 0x20cc
         // Code size 33 (0x21)
         .maxstack 3
         .locals init (
@@ -136,7 +139,7 @@
     .method private hidebysig static 
         void compoundAssignPlain () cil managed 
     {
-        // Method begins at RVA 0x20fd
+        // Method begins at RVA 0x20f9
         // Code size 9 (0x9)
         .maxstack 8
 
@@ -150,7 +153,7 @@
     .method private hidebysig static 
         void foreachPlain () cil managed 
     {
-        // Method begins at RVA 0x2108
+        // Method begins at RVA 0x2104
         // Code size 89 (0x59)
         .maxstack 3
         .locals init (
@@ -213,7 +216,7 @@
             string[] args
         ) cil managed 
     {
-        // Method begins at RVA 0x216d
+        // Method begins at RVA 0x2169
         // Code size 51 (0x33)
         .maxstack 8
 
@@ -233,7 +236,7 @@
     .method public hidebysig specialname rtspecialname 
         instance void .ctor () cil managed 
     {
-        // Method begins at RVA 0x21a1
+        // Method begins at RVA 0x219d
         // Code size 7 (0x7)
         .maxstack 8
 
@@ -260,7 +263,7 @@
         .custom instance void [System.Private.CoreLib]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
             01 00 00 00
         )
-        // Method begins at RVA 0x21a9
+        // Method begins at RVA 0x21a5
         // Code size 7 (0x7)
         .maxstack 8
 
@@ -277,7 +280,7 @@
         .custom instance void [System.Private.CoreLib]System.Runtime.CompilerServices.CompilerGeneratedAttribute::.ctor() = (
             01 00 00 00
         )
-        // Method begins at RVA 0x21b1
+        // Method begins at RVA 0x21ad
         // Code size 8 (0x8)
         .maxstack 8
 
@@ -290,7 +293,7 @@
     .method public hidebysig specialname rtspecialname 
         instance void .ctor () cil managed 
     {
-        // Method begins at RVA 0x21a1
+        // Method begins at RVA 0x219d
         // Code size 7 (0x7)
         .maxstack 8
 
