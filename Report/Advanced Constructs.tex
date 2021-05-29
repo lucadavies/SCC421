@@ -47,7 +47,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     Date: 01/06/2021
 \newpage
 \section*{Abstract}
-    As time has gone on, programming languages have become more developed and more advanced syntax constructs have been added alongside many "quality of life" type structures to make the writing code not only more efficient but also easier for developers. This study examines seven of these advanced constructs, drawing together both data from surveys taken by professional developers and data from analysis of four widely known, active, open source code bases. Using a short but broad survey, data was collected on developers' usage of these constructs. This showed that developers primary concern when choosing how to write code lies with keeping it clear and simple, but that their definition of these things come more from their own personal preference, not style guides. Analysis of open source code was carried using a combination of simple regular expressions and hand analysis. A commits were found that enforce use of some constructs and replaced the plain syntax in nearly all occurrences. Examining of the the intermediate languages of compiled C\# and Java also showed some marked differences in the produced code dependant on the syntax used. Constructs that conventinally might be thought of as interchangable do have a visible effect on intermediate code.
+    As time has gone on, programming languages have become more developed and more advanced syntax constructs have been added alongside many "quality of life" type structures to make the writing code not only more efficient but also easier for developers. This study examines seven of these advanced constructs, drawing together both data from surveys taken by professional developers and data from analysis of four widely known, active, open source code bases. Using a short but broad survey, data was collected on developers' usage of these constructs. This showed that developers primary concern when choosing how to write code lies with keeping it clear and simple, but that their definition of these things come more from their own personal preference, not style guides. Analysis of open source code was carried using a combination of simple regular expressions and hand analysis. A commits were found that enforce use of some constructs and replaced the plain syntax in nearly all occurrences. Examining of the the intermediate languages of compiled C\# and Java also showed some marked differences in the produced code dependant on the syntax used. Constructs that conventionally might be thought of as interchangeable do have a visible effect on intermediate code.
     \newline
     \newline
     [Is there any working docs?]
@@ -99,7 +99,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
         There also seems to have been relatively little research into languages features such as these, either in terms of subjective readability or objective performance. Some studies I have come across in research even make explicit note of the fact their definition of `good style' is subjective and opinion-based, albeit from that of perceived experts. Using experts in a field is always a good sign, but if there really is very little guidance to any level of programmer, then it stands to reason that much of what even experts think is good style, could be from personal experience alone, or at least somewhat unacademic.
         
-        It is hoped that by formally examining these constructs in an academic context that the produced research will a launch pad or grounding for more thorough examination across the software development industry as a whole. Research into this topic has the potential to positively influence industry-wide best practices, both directly with developers themselves, and wtih authors of standards and programming guides. Essentially, this research is of direct relation to code style in general, which is equally important to anyone writing code in any high-level programming languages and even some lower-level languages as well.
+        It is hoped that by formally examining these constructs in an academic context that the produced research will a launch pad or grounding for more thorough examination across the software development industry as a whole. Research into this topic has the potential to positively influence industry-wide best practices, both directly with developers themselves, and with authors of standards and programming guides. Essentially, this research is of direct relation to code style in general, which is equally important to anyone writing code in any high-level programming languages and even some lower-level languages as well.
     \subsection{Aims \& Objectives}
         The aims of this report are as follows:
         \begin{enumerate}
@@ -217,7 +217,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \label{subsec:survey}
         One of the facets of this study was to capture and analyse the perceptions and thoughts of a number of professional software developers with regard to the constructs being examined.
         
-        This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies. This allowed better questions to be written, that ensured they were no longer than necessary, used no double negatives, were not leading questions, only attempted to address one issue, and were not too vague. The design was also guided by these sources to include at least one open-ended question to allow participants to put forward any exceptional or unexpected information that could prove highly valuable to the study. In the literature, rightfully, notable mention is made at all stages to the use of appropriate moral and ethical frameworks. In this instance, very little in the way of any problematic material is examined, and no issues arose during the ethics apporval process in the University. The most personal question asked in the survey is how many years participants have been programming for - no other questions of a remotely personal nature are asked.
+        This was carried out using a survey, constructed following guidelines laid down by both published literature (\cite{goodSurveys1}, \cite{goodSurveys2}) as well as a small amount of grey literature provided by higher education bodies. This allowed better questions to be written, that ensured they were no longer than necessary, used no double negatives, were not leading questions, only attempted to address one issue, and were not too vague. The design was also guided by these sources to include at least one open-ended question to allow participants to put forward any exceptional or unexpected information that could prove highly valuable to the study. In the literature, rightfully, notable mention is made at all stages to the use of appropriate moral and ethical frameworks. In this instance, very little in the way of any problematic material is examined, and no issues arose during the ethics approval process in the University. The most personal question asked in the survey is how many years participants have been programming for - no other questions of a remotely personal nature are asked.
 
         Using the Qualtrics platform also allowed the usability of the survey to be examined by Qualtrics' inbuilt system. This advised the design of the survey to be as easy to use as possible, increasing the likelihood of respondents completing their submissions. The only element of the survey to go against this was the use of matrix table questions, which are not particularly friendly to mobile users. Despite this, they were used as they provided the best and most concise way to display the literal matrix of options available due to the presence of multiple constructs per question. Figure \ref{fig:matrixTable} shows one such question. The full survey is available in Appendix \ref{apx:survey}
         
@@ -230,7 +230,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
         \subsubsection{Research Questions}
         \label{subsubsec:surveyQuestions}
-            Prior to designing, it was established that the survey must be able to provide insight that may help to answer key research questions. As software development and programming are taught in a multitude of different ways, we can make no assumptions about how familiar participants would be with any of the constructs. To address this, the base questions had to answered: \emph{What} constructs do they know of? \emph{When} do they use the constructs? \emph{Why} do they use the constructs? From this, some additional, more speculative questoins could be asked. The following questions were formulated to best gather as much information as possible:
+            Prior to designing, it was established that the survey must be able to provide insight that may help to answer key research questions. As software development and programming are taught in a multitude of different ways, we can make no assumptions about how familiar participants would be with any of the constructs. To address this, the base questions had to answered: \emph{What} constructs do they know of? \emph{When} do they use the constructs? \emph{Why} do they use the constructs? From this, some additional, more speculative questions could be asked. The following questions were formulated to best gather as much information as possible:
             \begin{enumerate}
                 \item Are the participants \emph{aware} of the constructs?
                 \item Do the participants \emph{use} the constructs?
@@ -263,9 +263,38 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         \label{subsubsec:sampleFile}
             The sample code files were created to act as a baseline or control test to see if SonarQube or Semgrep made any note at all about the bare use and/or inclusion of any of the constructs.
 
-            Each file contains a bare (non-contextualised) example of each of the constructs placed directly alongside their `simple syntax' functionally equivalent counterparts. Each file is valid syntax for its language, and all of them may be executed, though none of them have a true entry point or way to actually \emph{run} the code within itself - the functions and methods are present purely to \emph{be present} so that they may be analysed by SonarQube and Semgrep. Though there are differences between the three languages, the form of the sample code was kept as similar as possible to preserve their purpose as control samples, without adding deliberately unusual syntax that may contaminate the output of SonarQube and Semgrep.
+            Each file contains a bare (non-contextualised) example of each of the constructs placed directly alongside their `simple syntax' functionally equivalent counterparts. Each file is valid syntax for its language, and all of them may be executed, though none of them have a true entry point or way to actually \emph{run} the code within itself - the functions and methods are present purely to \emph{be present} so that they may be analysed by SonarQube and Semgrep. Though there are differences between the three languages, the form of the sample code was kept as similar as possible to preserve their purpose as control samples, without adding deliberately unusual syntax that may contaminate the output of SonarQube and Semgrep. The sample files can be found in Appendix \ref{apx:sampleCode}
         \subsubsection{Open Source Repositories}
             Four large, open source code repositories were selected from GitHub to be analysed for this study, one each in C\# and JavaScript, and two in Java. The selection process was thought to be a random selection from the first page of the most popular GitHub repos for each language, however, it was discovered late in the process the list from which the repos were selected was actually the `daily trending' listing.  Fortunately, the repos that were selected, while potentially not as representative as initially thought, are still very well known, very active repositories maintained by a diverse range of developers.
+
+            The four analysed repositories are:
+
+            \begin{itemize}
+                \item .NET Windows Forms
+                \begin{itemize}
+                    \item https://github.com/dotnet/winforms
+                    \item Commits: 4,339
+                \end{itemize}
+                    Windows Forms is a .NET Core UI framework for building Windows desktop applications.
+                \item Checkstyle
+                \begin{itemize}
+                    \item https://github.com/checkstyle/checkstyle
+                    \item Commits: 10,272
+                \end{itemize}
+                    Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard. By default it supports the Google Java Style Guide and Sun Code Conventions, but is highly configurable. It can be invoked with an ANT task and a command line program.
+                \item Signal-Server
+                \begin{itemize}
+                    \item https://github.com/signalapp/Signal-Server
+                    \item Commits: 1,639
+                \end{itemize}
+                Server supporting the Signal Private Messenger applications on Android, Desktop, and iOS
+                \item NPM CLI
+                \begin{itemize}
+                    \item https://github.com/npm/cli
+                    \item Commits: 10,263
+                \end{itemize}
+                The package manager for JavaScript
+            \end{itemize}
     \subsection{Git Commit Analysis}
         To supplement the static analysis of the repositories, manual, by-hand analysis of the commits made to these repositories was also undertaken.
 
@@ -340,6 +369,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             As is visible in figure \ref{fig:freqUse}, the use of lambdas in moderation is the most agreed upon data point here, with just over 70\% of responses labelled `sometimes' for lambdas. This is likely explainable by a variety of reasons, not least is the fact that lambdas are very powerful and complex structures, much more so than the other constructs being studied, and as such, the number of situations where they \emph{can} be used likely greatly exceeds the number situations where they \emph{should} be used. This distinction around lambdas becomes more apparent in later questions.
             Of note, again, are the results for the null-coalesce and null-conditional operators. Although the numbers of participants familiar with these operators is fewer, those that were aware of them do not shy away from them, using them with comparatively similar frequency to the other constructs.
         \subsubsection{Reasons To Use}
+        \label{subsubsec:toUse}
             Participants were then asked to indicate \emph{why} they chose to use each given construct. The four options were presented:
             \begin{itemize}
                 \item ``It is company style''
@@ -433,7 +463,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             The breakdown in Figure \ref{fig:toNotUse} also confirms that clarity was the most common reason selected, leadings by a wide margin for four of the constructs, but not for unary and compound operators (multiple reasons, described above) and for foreach loops (run speed was a concern as described immediately above).
             All constructs had a small number of responses claiming company style as reasons for not using them, but this is a relatively small number compared to the proportion that cited clarity or complexity for their reason.
         \subsubsection{Performance}
-            As touched on previously, it was not expected with most of these constructs for there to be much of a bias with regard to performance (this is examined crudely in Section \ref{subsubsec:sharpLab}). Participants were asked to state what, if any, effect they thought each construct would have on the performance of code.
+            As touched on previously, it was not expected with most of these constructs for there to be much of a bias with regard to performance (this is examined crudely in Section \ref{subsec:ilComp}). Participants were asked to state what, if any, effect they thought each construct would have on the performance of code.
             \newline
 
             In line with expectation, a large majority, 61.2\%, of the selections here indicated no change to performance. The second largest group was ``Don't know'' with 22.4\% of selections. Both these statistics are shown in Figure \ref{fig:performance}b. It is likely that most high-level programmers (such as those using high-level languages like C\#, JavaScript, and Java) either do not routinely give much consideration to such fine-grained efficiency, or are not concerned with relatively small performance variations that come from using these constructs.
@@ -523,57 +553,71 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
             Despite this, a survey still provided a very quick and  easy way to gather information from a sample size much larger than would be feasible using many other methods.
     \subsection{Static Code Analysis}
-        []
+        SonarQube and semgrep are both static code analysis tools that analyse code and make recommendations and highlight problems without actually executing the code itself. Both of these tools were used to analyse both the sample code files (see Appendix \ref{apx:sampleCode}) and the four GitHub repos. For C\#, SonarScanner for .NET was used as well as the developmental semgrep ruleset for C\#. For JavaScript and Java, both were supported by semgrep rules sets `ci' and `r2c-ci', and both had their own eponymous rulesets too. Standard SonarQube also supports both languages as standard.
         \subsubsection{Sample Code Files}
-            Bugger all picked up, tools do not care
-            \begin{itemize}
-                \item Picked up basic \codeword{for} in place of JS \codeword{for-to} (not \codeword{for/each})
-            \end{itemize}
+            SonarQube and Semgrep raised almost alarmingly little issue with the sample code file in all three languages. Only a single relevant recommendation was made by both tools together.
+            In C\#, SonarQube gave a couple of warnings regarding the lack of use of a namespace. Aside from this, neither SonarQube, nor Semgrep reported any issues at all. In JavaScript, one warning was raised, picking up the use of a basic for loop in place of a \codeword{for-to} loop (one of JavaScript's advanced loops, not dissimilar to a foreach loop). This was the only relevant recommendation. In Java, again, neither tool picked up any problems that are relevant to this study.
+
+            This is quite a surprising development at face value, but in truth, it's highly likely that these tools are designed to be run on code with significantly more context that is available in the sample code files. The code here is the effective minimum amount of code that could be written to include each construct (or plain equivalent) while still being compilable. In production code, with significant more meaning around what any given variable and code branch is required for, such static analysis tools may be able to provide more useful recommendations.
         \subsubsection{Real-World Code Bases}
+            Of the four repos selected, the two Java codebases could not be analysed due to issues with their build tools and their integration with SonarQube preventing the projects being build. Semgrep was however able to process the code of these repos.
+
+            Codebases of this size are more what SonarQube and Semgrep are meant to be analysing, however, due to the fact that all four repos are large, actively developed, open-source projects, it was to be assumed from the start that there would many issues found. This is very much reflected in the results, or rather, the lack of results.
+
+            The Signal Server repository garnered the most issue reports from Semgrep, though none of them were relevant. All of `r2c-ci', `ci', and `java' rulesets picked up on the use of the insecure SHA-1 hash function, and the `java' ruleset marked out a number of places claiming they were susceptible to SQL injection attacks. The only issues found being that of security is somewhat ironic for a purported secure messaging service, but this is not the focus of this study.
+
+            In the Checkstyle code, all three applicable rulesets picked up one issue, that being an always true comparison (e.g. \codeword{x == x}). Being the tool it is, this is almost certainly intentional, acting as a test rule for the style analysis that Checkstyle itself performs.
+
+            Analysis of the Node Package Manager Command Line Interface with Semgrep was the most bare, with the `ci', `r2c-ci' and `javascript' rulesets all failing to highlight any issues at all. SonarQube, however, did highlight multiple possible bugs and security issues. Of the 37 bug issues raised, two instances of the same issues were relevant: recommending replacing a use of a map function with a forEach function instead, as the return value of the map function isn't used. All of 77 potential security issues were also not relevant to the scope of this study.
+
+            Lastly, the Windows Forms repository. Although Semgrep claims it has a developmental configuration prepared for C\#, this was not available for use at this time. SonarScanner for .NET and SonarQube were able to analyse C\# code, but the results revealed zero problems of any type.
+            \\
+            Although it was expected that there wouldn't be a huge number of issues raised in the code of such commonly used applications, the results were still quite disappointing in volume. The only truly important piece of data derived from this was from the NPM CLI repository, suggesting use of a forEach function over a map function. Though these two constructs are semantically very similar and not \emph{quite} what is being examined here, it does link well back to Section \ref{subsubsec:toUse}, where one survey participant noted that they would generally opt to use map instead of foreach - the opposite of this recommendation. This mismatch could easily be borne from developers selecting `good style' based primarily on personal preference over anything more concrete.
+    \subsection{Git Commit Analysis}
             []
-        \subsubsection{Intermediate Language Comparison}
-        \label{subsubsec:sharpLab}
-            To aid in confirming or denying some of the claims made in the survey by some participants, and to provide more general information about the constructs, the intermediate language code produced C\# and Java compilers was compared for both their `plain' and `advanced' syntax.
+    \subsection{Intermediate Language Comparison}
+    \label{subsec:ilComp}
+        To aid in confirming or denying some of the claims made in the survey by some participants, and to provide more general information about the constructs, the intermediate language code produced C\# and Java compilers was compared for both their `plain' and `advanced' syntax.
 
-            C\# was complied using SharpLab and the Roslyn compiler from March 3\textsuperscript{rd} 2021. Java was compiled locally with JDK version 14.0.1 and the .class files were read by the JVM Bytecode Viewer extension for Visual Studio Code.
+        C\# was complied using SharpLab and the Roslyn compiler from March 3\textsuperscript{rd} 2021. Java was compiled locally with JDK version 14.0.1 and the .class files were read by the JVM Bytecode Viewer extension for Visual Studio Code.
 
-            The comparison will be broken down by construct and the detailed per language:
+        The comparison will be broken down by construct and the detailed per language:
 
+        \begin{itemize}
+            \item In-line / Ternary If-statement
             \begin{itemize}
-                \item In-line / Ternary If-statement
-                \begin{itemize}
-                    \item \textbf{C\#} - Both versions are the same length, and both use two return statements (as is used in the plain source code). In the source code, the Boolean expression used is \codeword{temp < 20.0}: in the \emph{plain} IL, the logic for the condition is inverted, using a `branch if greater than or equal' instruction while the advanced IL uses a `branch if less than' instruction as would normally be assumed.
-                    \item \textbf{Java} - Plain follows the source code one-to-one, using two return instructions at the end of each code branch, whereas advanced uses a \codeword{goto} instruction on the true branch to jump to a single return instruction used by both code branches. This means that on one code branch, one additional instruction will be executed when using a ternary if statement. In the same fashion is in C\#'s plain IL, both Java IL versions invert the Boolean logic and use a `branch if greater than or equal' instruction.
-                \end{itemize}
-                \item Lambda Expressions
-                \begin{itemize}
-                    \item \textbf{C\#} - The lambda in the advanced version is much more complex in IL than in source: a form of an entire class is created to hold the actual method that is defined in line in source. This class has a public and private constructor and the wanted method, generating 54 lines of code that an completely absent in the plain version. The method itself within this class is identical to that of the plain version. The actual code that \emph{calls} the lambda is only three instructions, compared to the plain version's six, however, this is also preceded by nine additional instructions that create and load an instance of the lambda's class. For such a small code snippet as is used here, it seems as though the potential overhead of a lambda may not necessary. In the case of reuse however, this could change. This also goes further still to showing that lambdas are a deeper construct than they had were initially given credit for in this study.
-                    \item \textbf{Java} - Very similar to C\# again, the in-place calling of the lambda is shorter than the plain equivalent, but there is additional code elsewhere in the file, effectively defining the lambda method as if it were a regular method (which is again the same length of the plain method). The inclusion of a lambda also adds 22 entries to the constant pool to help find the lambda method and call it at runtime. In Java, this boilerplate amounts to 43 additional lines in unedited bytecode.
-                \end{itemize}
-                \item Null-coalesce (C\# only)
-                \begin{itemize}
-                    \item \textbf{C\#} - The plain version here is quite one-to-one with the source, declaring two \codeword{Person} variables and assigning them within code branches as expected. In contrast, the advanced version only uses the stack, and does not declare any local variables. This also has the side effect of requiring a bigger stack allocation to run the method, the advanced version requiring a size of eight to the plain version's one. This format is likely attributed to some degree of optimisation taking place by seeing that the variable in the condition is only null ever set to null in the method. This optimisation is potentially dependant on the context.
-                \end{itemize}
-                \item Null-conditional (C\# only)
-                \begin{itemize}
-                    \item \textbf{C\#} - Similar to null-coalesce, the advanced version is shorter and declares no local variables, instead using only the stack. This may again be an example of contextual optimisation.
-                \end{itemize}
-                \item Unary Increment Operators
-                \begin{itemize}
-                    \item \textbf{C\#} - Neither the plain nor advanced versions are mapped one-to-one in IL. The plain version uses two local variables for \codeword{y} and \codeword{z}, and \codeword{x} is maintained on the stack. In the advanced version, \codeword{x} and \codeword{y} are stored locally and \codeword{z} is maintained on the stack. Slightly different optimisation paths have been taken here producing slightly different code paths to the same result, the advanced version being two instructions longer. If all three variables used in this method were used more elsewhere, it is likely that all three would be stored in a local variable rather than one residing only on the stack.
-                    \item \textbf{Java} - The plain IL is a one-to-one mapping of the source code with no optimisation visible. However, in the advanced IL makes use of a dedicated increment instruction, \codeword{iinc}, that directly maps to the \codeword{++} operator in the source code. This reduces the length of the IL by four instructions due to not needing to store the value back in the local variable as frequently.
-                \end{itemize}
-                \item Compound Assignment Operators
-                \begin{itemize}
-                    \item \textbf{C\#} - No local variable is used, the value to print is maintained only on the stack for both advanced and plain, there is no difference between the add operation in the IL.
-                    \item \textbf{Java} - Unlike in C\#, no optimisation is present for the plain IL, as it maps directly to the source code. In the advanced IL however, \codeword{iinc} is used to increment the value of a local variable by three (an argument to the IL instruction), cutting the instruction count by three.
-                \end{itemize}
-                \item Foreach Loops
-                \begin{itemize}
-                    \item \textbf{C\#} - The plain IL is again effectively a one-to-one mapping of the for loop, albeit with the ordering of the three statements in the for loop signature moved to where the are actually executed. The advanced IL is eight lines longer, but both versions use the same number of external method calls within the loop itself. The advanced IL also requires the try-finally and an additional method call to dispose of the enumerator used to iterate over the list is properly after the looping is complete.
-                    \item \textbf{Java} - Both versions are quite similar, sharing most normal instructions, but different external methods are called albeit that they are performing the same function (condition: \codeword{size()} vs. \codeword{hasNext()}, get element: \codeword{get()} vs. \codeword{next()}). The advanced IL does have an additional method call to get the iterator itself. Both are the same length in-place, but as with the lambdas expression, this generated more code elsewhere, namely in the constant pool, adding 35 entries, compared to the regular for loop adding only 28.
-                \end{itemize}
+                \item \textbf{C\#} - Both versions are the same length, and both use two return statements (as is used in the plain source code). In the source code, the Boolean expression used is \codeword{temp < 20.0}: in the \emph{plain} IL, the logic for the condition is inverted, using a `branch if greater than or equal' instruction while the advanced IL uses a `branch if less than' instruction as would normally be assumed.
+                \item \textbf{Java} - Plain follows the source code one-to-one, using two return instructions at the end of each code branch, whereas advanced uses a \codeword{goto} instruction on the true branch to jump to a single return instruction used by both code branches. This means that on one code branch, one additional instruction will be executed when using a ternary if statement. In the same fashion is in C\#'s plain IL, both Java IL versions invert the Boolean logic and use a `branch if greater than or equal' instruction.
             \end{itemize}
+            \item Lambda Expressions
+            \begin{itemize}
+                \item \textbf{C\#} - The lambda in the advanced version is much more complex in IL than in source: a form of an entire class is created to hold the actual method that is defined in line in source. This class has a public and private constructor and the wanted method, generating 54 lines of code that an completely absent in the plain version. The method itself within this class is identical to that of the plain version. The actual code that \emph{calls} the lambda is only three instructions, compared to the plain version's six, however, this is also preceded by nine additional instructions that create and load an instance of the lambda's class. For such a small code snippet as is used here, it seems as though the potential overhead of a lambda may not necessary. In the case of reuse however, this could change. This also goes further still to showing that lambdas are a deeper construct than they had were initially given credit for in this study.
+                \item \textbf{Java} - Very similar to C\# again, the in-place calling of the lambda is shorter than the plain equivalent, but there is additional code elsewhere in the file, effectively defining the lambda method as if it were a regular method (which is again the same length of the plain method). The inclusion of a lambda also adds 22 entries to the constant pool to help find the lambda method and call it at runtime. In Java, this boilerplate amounts to 43 additional lines in unedited bytecode.
+            \end{itemize}
+            \item Null-coalesce (C\# only)
+            \begin{itemize}
+                \item \textbf{C\#} - The plain version here is quite one-to-one with the source, declaring two \codeword{Person} variables and assigning them within code branches as expected. In contrast, the advanced version only uses the stack, and does not declare any local variables. This also has the side effect of requiring a bigger stack allocation to run the method, the advanced version requiring a size of eight to the plain version's one. This format is likely attributed to some degree of optimisation taking place by seeing that the variable in the condition is only null ever set to null in the method. This optimisation is potentially dependant on the context.
+            \end{itemize}
+            \item Null-conditional (C\# only)
+            \begin{itemize}
+                \item \textbf{C\#} - Similar to null-coalesce, the advanced version is shorter and declares no local variables, instead using only the stack. This may again be an example of contextual optimisation.
+            \end{itemize}
+            \item Unary Increment Operators
+            \begin{itemize}
+                \item \textbf{C\#} - Neither the plain nor advanced versions are mapped one-to-one in IL. The plain version uses two local variables for \codeword{y} and \codeword{z}, and \codeword{x} is maintained on the stack. In the advanced version, \codeword{x} and \codeword{y} are stored locally and \codeword{z} is maintained on the stack. Slightly different optimisation paths have been taken here producing slightly different code paths to the same result, the advanced version being two instructions longer. If all three variables used in this method were used more elsewhere, it is likely that all three would be stored in a local variable rather than one residing only on the stack.
+                \item \textbf{Java} - The plain IL is a one-to-one mapping of the source code with no optimisation visible. However, in the advanced IL makes use of a dedicated increment instruction, \codeword{iinc}, that directly maps to the \codeword{++} operator in the source code. This reduces the length of the IL by four instructions due to not needing to store the value back in the local variable as frequently.
+            \end{itemize}
+            \item Compound Assignment Operators
+            \begin{itemize}
+                \item \textbf{C\#} - No local variable is used, the value to print is maintained only on the stack for both advanced and plain, there is no difference between the add operation in the IL.
+                \item \textbf{Java} - Unlike in C\#, no optimisation is present for the plain IL, as it maps directly to the source code. In the advanced IL however, \codeword{iinc} is used to increment the value of a local variable by three (an argument to the IL instruction), cutting the instruction count by three.
+            \end{itemize}
+            \item Foreach Loops
+            \begin{itemize}
+                \item \textbf{C\#} - The plain IL is again effectively a one-to-one mapping of the for loop, albeit with the ordering of the three statements in the for loop signature moved to where the are actually executed. The advanced IL is eight lines longer, but both versions use the same number of external method calls within the loop itself. The advanced IL also requires the try-finally and an additional method call to dispose of the enumerator used to iterate over the list is properly after the looping is complete.
+                \item \textbf{Java} - Both versions are quite similar, sharing most normal instructions, but different external methods are called albeit that they are performing the same function (condition: \codeword{size()} vs. \codeword{hasNext()}, get element: \codeword{get()} vs. \codeword{next()}). The advanced IL does have an additional method call to get the iterator itself. Both are the same length in-place, but as with the lambdas expression, this generated more code elsewhere, namely in the constant pool, adding 35 entries, compared to the regular for loop adding only 28.
+            \end{itemize}
+        \end{itemize}
 \newpage
 \section{Conclusion}
 \label{sec:conclusion}
@@ -620,4 +664,6 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \subsection*{B: Survey}
     \label{apx:survey}
         \includepdf[pages=-]{../Ref/survey}
+    \subsection*{C Sample Code Files}
+    \label{apx:sampleCode}
 \end{document}
