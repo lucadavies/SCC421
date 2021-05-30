@@ -256,7 +256,8 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
             Each file contains a bare (non-contextualised) example of each of the constructs placed directly alongside their `simple syntax' functionally equivalent counterparts. Each file is valid syntax for its language, and all of them may be executed, though none of them have a true entry point or way to actually \emph{run} the code within itself - the functions and methods are present purely to \emph{be present} so that they may be analysed by SonarQube and Semgrep. Though there are differences between the three languages, the form of the sample code was kept as similar as possible to preserve their purpose as control samples, without adding deliberately unusual syntax that may contaminate the output of SonarQube and Semgrep. The sample files can be found in Appendix \ref{apx:sampleCode}
         \subsubsection{Open Source Repositories}
-            Four large, open source code repositories were selected from GitHub to be analysed for this study, one each in C\# and JavaScript, and two in Java. The selection process was thought to be a random selection from the first page of the most popular GitHub repos for each language, however, it was discovered late in the process the list from which the repos were selected was actually the `daily trending' listing.  Fortunately, the repos that were selected, while potentially not as representative as initially thought, are still very well known, very active repositories maintained by a diverse range of developers.
+        \label{subsubsec:osRepos}
+            Four large, open source code repositories were selected from GitHub to be analysed for this study, one each in C\# and JavaScript, and two in Java. The selection process was thought to be a random selection from the first page of the most popular GitHub repos for each language, however, it was discovered late in the process the list from which the repos were selected was actually the `trending today' listing.  Fortunately, the repos that were selected, while potentially not as representative as initially thought, are still very well known, very active repositories maintained by a diverse range of developers.
 
             The four analysed repositories are:
 
@@ -536,8 +537,10 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \end{figure}
 
             In Section \ref{sec:conclusion}, the Conclusion, we will compare the figures in this section with the data collected in the analysis of real-world codebases to see if there is a meaningful correlation by which we may state that the participants surveyed are well aware of the prevalence of use of these constructs.
+            
 
         \subsubsection{Free-form Comments}
+        \label{subsubsec:freeFormComments}
             The final question asked participants to indicate any other thoughts and notes they had around the topic at hand. This yielded some very interesting comments.
 
             As has been mentioned already, most of these constructs come under the umbrella of `syntactic sugar', that which is meaningful only to a human developer, and function the same as their simpler counterparts at machine level. One participant noted this themselves, and further stated that these constructs should be used to save space and time, so long as code readability is not compromised. One more nuanced response gave much more detail, opening with a phrase that sums up the very issue of knowing when to use the constructs: ``Most of these questions [...] are more properly answered `As appropriate''', going on to say that runtime performance ought to be measured only in context, not in isolation. They apply this statement both across different scenarios in the same language and across different languages. They also highlight that in the present day ``we're waiting for [input/output] from the disk or network - the time spent executing each one of those constructs pales in comparison''. The same comment again reaffirms that ``everything depends on circumstances'', such as in safety-critical systems where code understandability and correctness are of ultimate importance. In such situations, it may be advisable to only use basic syntax and work around that as an axiom, but then again, it may not - proving the point that the context and situation may be one of the most important factors in usage of such advanced constructs, and may also go some way to explain why there seems to be little explicit guidance on this matter.
@@ -706,22 +709,36 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 Comparison of the intermediate languages of C\# and Java has fulfilled this aim in full.
         \end{itemize}
     \subsection{Reflections}
-        []
-        \begin{itemize}
-            \item survey: what does "complexity" mean? Computational? That'd be covered by slow/faster?
-            \item survey: more options for use/not use
-            \item GitHub repo selection: mistakenly thought it was `top of all repos for lang., it was not. (Check Tracy emails for reference and remedy, time permitting)'
-            \item Use/Not Use, discrepancy in tense used in presented options, potentially created a bias toward `use', although this would have bene introduced AFTER the `use' question (participants can step backward through survey however)
-        \end{itemize}
+        This section will briefly cover potential flaws and shortcoming within this study for future reference.
 
         \subsubsection{Lambdas}
         \label{subsubsec:lambdas}
+            As has been referenced multiple times throughout this report, lambdas as a construct and language feature stood out from the rest even the first survey results. During the proceeds of this study it came to light that lambdas are a much more complex and powerful language feature than just that of a differing, more friendly or more useful syntax structure. As mentioned by one participant in the survey results (see Section \ref{subsubsec:freeFormComments}), lambdas allow a programmer to use much more functional language paradigm practices that are normally available in procedural and object-oriented languages like C\# and Java. In the same vein in the survey results (see Section \ref{subsubsec:toUse}), it was noted that there are situations where a traditional method cannot be used in place of a lambda, a lambda expression is the \emph{only} option.
+            
+            This was also hinted at further when examined the intermediate language for both C\# and Java, as the inclusion of a lambda expression entailed the inclusion of a large amount of ancilliary code, more so than would have been expected by a layman given the framing of the seven constructs together.
+            
+            The conclusion to draw from this is that lambdas should not have been grouped with the other constructs here; it is a much more powerful language feature, such that to assume it has the same side-effects, requirements, and use cases of the other constructs will cause confusion and other issues, as evdienced throughout.
+        \subsubsection{Survey Wording}
+        \label{subsubsec:surveyWording}
+            There are a few questions in the survey which are not quite clear enough in what they mean. This particularly applies to in the `to use' and `to not use' questions. Reference is made to making code `simpler' and/or `clearer', and conversley to making code `less clear' and/or `more complex'. These terms are somewhat vague and open to interpretation, the word `complex' is also potentially confusing, and it could have implied reference to the cyclic complexity of the code and/or caused confusion among respondents.
 
+            Also in these two questions, while the options were open-end in a way (via providing the `None of these' option with a free-text box), there could have been and likely should have been a much richer selection of default options, such as options referencing online resources, books, colleagues, existing code, and so on.
+
+        \subsubsection{GitHub Repository Selection}
+            As was mentioned in Section \ref{subsubsec:osRepos}, the selection of GitHub repositories was intended to select the most popular repositories for each language, however, mistakenly, they were selected from the `trending today' list. Fortunately, this repositories were still large, well-maintained, and well-known repositories, but that was more by chance or accidental bias, than design due to this mistake.
         
     \subsection{Negative Impacting Circumstances}
-        The on-going coronavirus pandemic is still very much a factor in the lives us all. :(
+        The on-going coronavirus pandemic is still very much a factor in the lives us all, and this has been no different for myself during the entire timeline of this study and dissertation. Much like many, I have been relatively confined to one-room student accommodation for the duration of this full academic year as restrictions have loosened and tightened on and off over time. While far from the worst-affected, this has still had a marked effect on both my mental and physical health, and also my general productivity throughout.
     \subsection{Future Research}
-        []
+        Due to the apparent relative lack of formal research into this area, there is great potential for further research. In essence, these points can be distilled into repeating many of the study parts here, but over a larger/better sample set, now that a it has been found that there maybe information of interest in such a topic.
+        
+        Firstly, a similar survey (with issues noted in Section \ref{subsubsec:surveyWording} addressed) may be carried out over a much large population, using a much more generalisable sample of developers. This could help further understanding of the motivation behind programmers' use of certain language syntax and structures.
+            
+        If more time and resources are available, a larger number of static code analysis tools, included paid-for tools could be employed, or further still, dynamic/runtime analysis or profiling tools could be used to discover if any recommendations or issues are raised surrounding the advanced constructs then. Given the small amount of data gather from this in this study though, this may not be particularly high priority.
+        
+        With significantly more time, a larger number of large GitHub codebases could be hand analysed for every use of the constructs detailed in this study, perhaps to learn how much commited code uses such constructs from the first moment it is pushed or to otherwise more exhaustively check the use of the constructs in the same way carried out here.
+            
+        Finally, and perhaps most interestingly, in terms of providing hard data, accurate and fine-grained software profiling and benchmarking may be undertaken on sample code files as in this study to measure if there is a tangible effect on performance that comes from using any or all of these constructs. A deeper study still could attempt to strip out all uses of a construct from an application (or to replace all plain syntax with a construct version) and to then measure its performance to see then, in context, if the constructs have a measurable effect on performance.
     \subsection{Closing Statement}
         []
 
