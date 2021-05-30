@@ -101,6 +101,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
         
         It is hoped that by formally examining these constructs in an academic context that the produced research will a launch pad or grounding for more thorough examination across the software development industry as a whole. Research into this topic has the potential to positively influence industry-wide best practices, both directly with developers themselves, and with authors of standards and programming guides. Essentially, this research is of direct relation to code style in general, which is equally important to anyone writing code in any high-level programming languages and even some lower-level languages as well.
     \subsection{Aims \& Objectives}
+    \label{subsec:aimsAndObjs}
         The aims of this report are as follows:
         \begin{enumerate}
             \item To understand the usage of seven advanced programming constructs (as defined in Sections \ref{sec:overview} and \ref{subsec:constructs}).
@@ -201,16 +202,6 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                     \codeword{a *= 2}
                 \end{itemize}
         \end{itemize}
-    
-\begin{landscape}
-    \begin{figure}[htbp]
-        \centering
-        \vspace{2in}
-        \includegraphics[width=1.5\textheight]{timeline}
-        \caption{Timeline of the addition of advanced constructs to three modern languages.}
-        \label{fig:timeline}
-    \end{figure}
-\end{landscape}
 \newpage
 \section{Study Design}
     \subsection{Survey}
@@ -565,8 +556,9 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             SonarQube and Semgrep raised almost alarmingly little issue with the sample code file in all three languages. Only a single relevant recommendation was made by both tools together.
             In C\#, SonarQube gave a couple of warnings regarding the lack of use of a namespace. Aside from this, neither SonarQube, nor Semgrep reported any issues at all. In JavaScript, one warning was raised, picking up the use of a basic for loop in place of a \codeword{for-to} loop (one of JavaScript's advanced loops, not dissimilar to a foreach loop). This was the only relevant recommendation. In Java, again, neither tool picked up any problems that are relevant to this study.
 
-            This is quite a surprising development at face value, but in truth, it's highly likely that these tools are designed to be run on code with significantly more context that is available in the sample code files. The code here is the effective minimum amount of code that could be written to include each construct (or plain equivalent) while still being compilable. In production code, with significant more meaning around what any given variable and code branch is required for, such static analysis tools may be able to provide more useful recommendations.
+            This is quite a surprising development at face-value, but in truth, it's highly likely that these tools are designed to be run on code with significantly more context that is available in the sample code files. The code here is the effective minimum amount of code that could be written to include each construct (or plain equivalent) while still being compilable. In production code, with significant more meaning around what any given variable and code branch is required for, such static analysis tools may be able to provide more useful recommendations.
         \subsubsection{Real-World Code Bases}
+        \label{subsubsec:staticAnalysisRepos}
             Of the four repos selected, the two Java codebases could not be analysed due to issues with their build tools and their integration with SonarQube preventing the projects being build. Semgrep was however able to process the code of these repos.
 
             Codebases of this size are more what SonarQube and Semgrep are meant to be analysing, however, due to the fact that all four repos are large, actively developed, open-source projects, it was to be assumed from the start that there would many issues found. This is very much reflected in the results, or rather, the lack of results.
@@ -581,6 +573,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \\
             Although it was expected that there wouldn't be a huge number of issues raised in the code of such commonly used applications, the results were still quite disappointing in volume. The only truly important piece of data derived from this was from the NPM CLI repository, suggesting use of a forEach function over a map function. Though these two constructs are semantically very similar and not \emph{quite} what is being examined here, it does link well back to Section \ref{subsubsec:toUse}, where one survey participant noted that they would generally opt to use map instead of foreach - the opposite of this recommendation. This mismatch could easily be borne from developers selecting `good style' based primarily on personal preference over anything more concrete.
     \subsection{Git Commit Analysis}
+    \label{subsec:commitAnalysis}
         Manual analysis of the repos was initially intended to supplement the programmatic processing but in reality it has actually provided more tangible data. Commit messages were searched for keywords (see \ref{tab:keywords}) pertaining to each construct and marked for closer inspection if the message contained the search term in a meaningful context (e.g. ``for each'' actually referring to a loop, not just the generic phrasing). Of the 26,513 commits across all four repos, 22 commits appeared to have a commit message relevant to one of the search terms. This represents less than 0.1\% of the total number of commits, however, the keyword list and search method is neither exhaustive, nor able to find all instances of `plain' syntax being swapped for an advanced construct or vice-versa. It is expected that a lot of stylistic changes like this may be made as a matter of course in other more feature-centric commits and that, accordingly, the style changes may be omitted from the commit message. A total of 1,537 instances of relevant changes were identified across all commits, though it should be noted that 882 of those were in a single commit that mass-converted 441 C\# \codeword{get} and \codeword{set} methods to use lambda-type syntax together with replacing 441 if statement null-checks with the null-coalesce operator. This commit will be treated as an outlier for the remainder of this section and it's figure will be excluded (bringing the figures to: 21 commits/655 changes) unless otherwise stated. Of the remaining 655 changes, 624 came from the Windows Forms repo across 13 commits. Only a single commit with one change of interest was found in the Signal Server repo, with the final 30 changes split somewhat evenly between the NPM CLI and Checkstyle repos. A full breakdown of what constructs and type of change were identified in the commits is shown in Figure \ref{fig:commitBreakdown}.
 
         \begin{figure}[htbp]
@@ -657,25 +650,66 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 \newpage
 \section{Conclusion}
 \label{sec:conclusion}
-    []
+    This study has examined the ways and volumes in which seven different advanced programming language constructs (in three languages) are used by software developers and programmers. Upon seeing that there appears to be quite a lack of formal research into this topic, a survey was first carried out to collect information on how developers use these constructs and their thoughts on when and why the constructs should and shouldn't be used. To go beyond this, four open source repositories on GitHub were analysed first by static code analysis tools, and then manually by hand to find both what recommendations analysis tools do and don't give around the constructs, and to find the actual use these constructs see in real production code. As a final comparison, the intermediate language of C\# and Java were both compared to their source code for code the uses and doesn't use advanced constructs to learn if any of the constructs truly are `just' syntactic sugar and have no real effect on code in practice.
+    
+    This section will summarise the key findings from this study.
+    \subsection{Findings}
+        \subsubsection{Influences on Developers}
+            \textit{See also: Section \ref{subsec:survey}}
+            \newline
+
+            \noindent It was assumed at the start of this study that developers were most influenced by style guides provided by their organisation that defined how their code should be stylised. However, only a small number of survey participants attributed this to their reasons for using most of the constructs. Ternary if-statements and lambdas certainly had a non-trivial number of selections for this reason, but primarily, code simplicity and clarity were the main reasons selected. Some participants justified their motivations further in text, claiming that the main reason they style their code in any particular way was down to personal preference and their habits picked up during their early days and throughout their careers. While only a minority of participants explicitly stated personal preference as a reason, via lack of other suggestions, it is reasonable to assume that many more developers rely on their own personal preference to guide their programming style.
+
+            On the other side of the argument, the same principals applied: clarity was cited by nearly half of survey participants as the reason for them not to use any given construct, this being the most common reason for all seven constructs individually. Foreach loops were also marked out as possibly having a negative effect on the execution speed of code. This suggestion has not been tested formally in this study.
+
+            In terms of performance, it was strongly indicated that participants thought that either there would be no change in performance, or they didn't know what effect there be when using for six of the seven constructs. Foreach loops were the one exception, with a greater proportion than other constructs indicting that they thought there would be decreased performance using a foreach loop.
+
+            It was also discovered that there are some constructs that many developers will simply always use - namely, foreach loops (some in spite of the performance implications), unary increment/decrement operators, and compound assignment operators.
+            \\
+            Information Systems Services were also unable to provide any coding style guidelines for reference in this study. I am led to believe that there \emph{are} guides that have been distributed to developers, but over years these have been remade, edited, amended, beyond a point where there is no longer one consistent style document for reference. This may have introduced a bias in the survey results regarding company style's influence on developers.
+            \\
+
+            A set of `sample' code files were written to contain examples of all the constructs, both in their plain syntax form, and the equivalent using the constructs. These files were bare skeleton code with no real function other than to provide a compilable source code file the contained all of the constructs. These were passed into static analysis tools SonarQube and Semgrep to find if any recommendations were made that would could generally act as guidance to developers who run these tools against their code either as a one-off or as part of a CI/CD toolchain. Both tools reported next-to-nothing. The only relevant recommendation made was reported by SonarQube, recommending that a traditional for loop in JavaScript should be replaced by a \codeword{for-to} loop.
+
+            It's difficult to criticise the analysis tools here, as it's likely that they are designed to work on code that has much more context, not in the relative isolation afforded in the sample files.
+        \subsubsection{Construct Use in Real Code}
+            \textit{See also: Section \ref{subsubsec:staticAnalysisRepos}, Section \ref{subsec:commitAnalysis}}
+            \newline
+
+            \noindent The same static analysis tools as in the previous section were also used to process four open source GitHub repositories to similarly investigate if any recommendations would be made around the use of any of the constructs of interest. Both tools were not able to be used to process all repos due to various technical and feature availability factors. Given the results of the combinations of tools and repos that did work, it is unlikely that any major recommendations were missed, as once again nearly no relevant issues were reported, and those that were reported are not enough interest to repeat here.
+            
+            This lack of recommendations may can lead us to one of two conclusions: the code in question has already been run through these tools or similar to address any issues, \textbf{or} these tools are not very effective at raising, or simply do not raise, issue with the constructs being examined here.
+            \\
+
+            Manual analysis of the same code using more simplistic methods was able to provide much more insight into how the constructs are handled in real code. The focus was to identify any instances of syntax being swapped from plain syntax to construct or vice-versa. Excluding one commit (containing 441 instances of both a lambda and null-coalesce operator being added) as an outlier, the majority of changes (78\%) changed plain syntax to a construct. Of these, the most often changed was lambdas, specifically swapping out C\# \codeword{get {...}} and \codeword{set {...}} code blocks for lambda expressions instead.
+
+            The data gathered from this is not hugely informative at a granular level unless examining the specifics of each repository, however, zooming out the larger picture, we can see that in general, these constructs are preferred over plain syntax. There are a minority (4.1\%) of occasions where the plain is preferred. As most of the commits (95.3\%) examined came from one repo, the WinForms repo, it's possible that these results may not generalise well to other codebases. However, as the WinForms repo, albeit open source, is maintained by Microsoft, one of the largest technology companies in play today, it stands to reason that them and their practices will be looked upon and used as exemplar in many situations. Through this, these results may be able to be generalised further than would normally be expected.
+        \subsubsection{Effects of Constructs on Compiled Code}
+            \textit{See also: Section \ref{subsec:ilComp}}
+            \newline
+
+            \noindent For C\# and Java, an intermediate language is generated in compilation, this IL is then interpreted at execution time on a per-platform basis. A certain level of optimisation takes place at both compile-time and runtime, but at compile-time we are able to interrogate the IL to find what, if any, optimisation was taken around plain syntax vs. the advanced constructs. For this analysis, modified versions of the previously mentioned sample code was compiled, the modification being to split the plain and advanced syntax methods into their own files.
+
+            As is often the case to the eyes of a layman when looking at compiled code, some oddities arose without explanation. For example, the inversion of some Boolean login statements (that didn't happen when using a ternary vs. a regular if statement). Irrespective of use of syntax, it was found that C\# performed more optimisation at compile time than Java, that often would map one-to-one to the source code. C\# was particularly clever with null-coalesce and null-conditional, doing away with local variables in favour of using the stack in the sample. Java also displayed a tangible change when using unary increment operators over the plain equivalent, as the Java Bytecode instruction set includes an explicit instruction to handle incrementing by any value. Whether or not this translates at an actual improvement at runtime would require more and extensive testing.
+
+            Specific examples aside, none of the seven constructs were equal to their plain counterparts, all constructs generated different IL and are not the simple syntactic differences that some developers may consider them to be. Some differences are quite small (if-statement vs. ternary), but others create very different IL, requiring significant amounts of boilerplate and supporting code (lambdas and foreach loops, in both languages). This begs the question, certainly for some of the simpler constructs, is there a tangible, measurable performance difference between using plain or advanced syntax? If this difference, if present, variable on different execution platforms? This is outside the scope of this study but would be an interesting starting point for further study.
     \subsection{Review of Aims}
         The following list repeats the aims presented at the start of this report, with each aim followed by an overview of relevant results obtained.
         \begin{itemize}
-            \item \textcolor{gray}{\textit{[]}}
-                []
-            \item \textcolor{gray}{\textit{[]}}
-                []
-            \item \textcolor{gray}{\textit{[]}}
-                []
-            \item \textcolor{gray}{\textit{[]}}
-                []
-            \item \textcolor{gray}{\textit{}}
-                []
+            \item \textcolor{gray}{\textit{To understand the usage of seven advanced programming constructs.}}
+                This aim has been fulfilled majority by the results of the survey, but manual analysis of the GitHub repositories also provide additional insight toward this aim.
+            \item \textcolor{gray}{\textit{To study what reasons developers have to, or to not, use these constructs.}}
+                This aim has been fulfilled by the survey (as this was one of the survey's primary goals itself) and by the use of static code analysis tools showing that they may be unlikely to report issues around syntax constructs.
+            \item \textcolor{gray}{\textit{To research how these constructs are actually used in practice.}}
+                This aim has been fulfilled by the survey and manual analysis of the GitHub repos.
+            \item \textcolor{gray}{\textit{To examine the effects of using these constructs has on compiled code.}}
+                Comparison of the intermediate languages of C\# and Java has fulfilled this aim in full.
         \end{itemize}
     \subsection{Reflections}
         []
         \begin{itemize}
             \item survey: what does "complexity" mean? Computational? That'd be covered by slow/faster?
+            \item survey: more options for use/not use
             \item GitHub repo selection: mistakenly thought it was `top of all repos for lang., it was not. (Check Tracy emails for reference and remedy, time permitting)'
             \item Use/Not Use, discrepancy in tense used in presented options, potentially created a bias toward `use', although this would have bene introduced AFTER the `use' question (participants can step backward through survey however)
         \end{itemize}
