@@ -274,33 +274,36 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \begin{itemize}
                     \item https://github.com/dotnet/winforms
                     \item Commits: 4,339
+                    \item Windows Forms is a .NET Core UI framework for building Windows desktop applications.
                 \end{itemize}
-                    Windows Forms is a .NET Core UI framework for building Windows desktop applications.
                 \item Checkstyle
                 \begin{itemize}
                     \item https://github.com/checkstyle/checkstyle
                     \item Commits: 10,272
+                    \item Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard. By default it supports the Google Java Style Guide and Sun Code Conventions, but is highly configurable. It can be invoked with an ANT task and a command line program.
                 \end{itemize}
-                    Checkstyle is a development tool to help programmers write Java code that adheres to a coding standard. By default it supports the Google Java Style Guide and Sun Code Conventions, but is highly configurable. It can be invoked with an ANT task and a command line program.
                 \item Signal-Server
                 \begin{itemize}
                     \item https://github.com/signalapp/Signal-Server
                     \item Commits: 1,639
+                    \item Server supporting the Signal Private Messenger applications on Android, Desktop, and iOS
                 \end{itemize}
-                Server supporting the Signal Private Messenger applications on Android, Desktop, and iOS
                 \item NPM CLI
                 \begin{itemize}
                     \item https://github.com/npm/cli
                     \item Commits: 10,263
+                    \item The package manager for JavaScript
                 \end{itemize}
-                The package manager for JavaScript
             \end{itemize}
     \subsection{Git Commit Analysis}
         To supplement the static analysis of the repositories, manual, by-hand analysis of the commits made to these repositories was also undertaken.
 
-        The goal of this branch of the study was to understand if and how standards are being maintained within the repositories within reference to the constructs and to general style-keeping. This was carried out by cloning the repository and examining the commit history using \codeword{git log}. A list of keywords were run against the commit history using the \codeword{--grep=<pattern>} option to \codeword{git log}. The keywords used are listed below:
+        The goal of this branch of the study was to understand if and how standards are being maintained within the repositories within reference to the constructs and to general style-keeping. On a more functional level, the goal was to spot and highlight any cases of code being amended from `plain' syntax to using an advanced construct, or vice-versa. This was carried out by cloning the repository and examining the commit history. Due to the sheer number of total commits available in the selected repos (~26,500), it would be unfeasible to check every commit for every relevant kind of change in the timescale of this study. To overcome this, a list of keywords was run against the commit history using the \codeword{--grep=<pattern>} option to \codeword{git log}. The keywords used are listed below:
         
-        \begin{center}
+        %\begin{center}
+        \begin{table}[ht]
+            \label{tab:keywords}
+            \centering
             \begin{tabular}{ | l | l | }
                 \hline
                 \textbf{General} & style \\
@@ -318,9 +321,13 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
                 \textbf{Compound Operators} & compound, assign, \codeword{+=}, \codeword{-=}, \codeword{*=}, \codeword{/=}, \codeword{|=}, \codeword{&=} \\
                 \hline
             \end{tabular}
-        \end{center}
+            \caption{Keywords used in manual analysis of repository commit messages.}
+        \end{table}
+        %\end{center}
 
         Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on use of any of the constructs. Each type of change was documented and counted per commit.
+
+        After analysis was complete, my subjective classification was validated by use of a second rater and agreement was calculated using Cohen's Kappa. The kappa value obtained was \codeword{ k = 0.99}. According to \cite{cohensKappa}, this equates to an `almost perfect' agreement, and is more the high enough to proceed with analysis based on my classifications.
 
     \subsection{Intermediate Language Comparison}
         The final part of this study was brought about during the progress of the preceding work. Analysis of the survey results raised some interesting points and potential ideas around what may make certain constructs more or less suited to use generally and/or in any given place in code.
@@ -574,7 +581,36 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \\
             Although it was expected that there wouldn't be a huge number of issues raised in the code of such commonly used applications, the results were still quite disappointing in volume. The only truly important piece of data derived from this was from the NPM CLI repository, suggesting use of a forEach function over a map function. Though these two constructs are semantically very similar and not \emph{quite} what is being examined here, it does link well back to Section \ref{subsubsec:toUse}, where one survey participant noted that they would generally opt to use map instead of foreach - the opposite of this recommendation. This mismatch could easily be borne from developers selecting `good style' based primarily on personal preference over anything more concrete.
     \subsection{Git Commit Analysis}
-            []
+        Manual analysis of the repos was initially intended to supplement the programmatic processing but in reality it has actually provided more tangible data. Commit messages were searched for keywords (see \ref{tab:keywords}) pertaining to each construct and marked for closer inspection if the message contained the search term in a meaningful context (e.g. ``for each'' actually referring to a loop, not just the generic phrasing). Of the 26,513 commits across all four repos, 22 commits appeared to have a commit message relevant to one of the search terms. This represents less than 0.1\% of the total number of commits, however, the keyword list and search method is neither exhaustive, nor able to find all instances of `plain' syntax being swapped for an advanced construct or vice-versa. It is expected that a lot of stylistic changes like this may be made as a matter of course in other more feature-centric commits and that, accordingly, the style changes may be omitted from the commit message. A total of 1,537 instances of relevant changes were identified across all commits, though it should be noted that 882 of those were in a single commit that mass-converted 441 C\# \codeword{get} and \codeword{set} methods to use lambda-type syntax together with replacing 441 if statement null-checks with the null-coalesce operator. This commit will be treated as an outlier for the remainder of this section and it's figure will be excluded (bringing the figures to: 21 commits/655 changes) unless otherwise stated. Of the remaining 655 changes, 624 came from the Windows Forms repo across 13 commits. Only a single commit with one change of interest was found in the Signal Server repo, with the final 30 changes split somewhat evenly between the NPM CLI and Checkstyle repos. A full breakdown of what constructs and type of change were identified in the commits is shown in Figure \ref{fig:commitBreakdown}.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.9\textwidth]{commitBreakdown}
+            \caption{The breakdown of which constructs were relevant to changes found, broken down further into what type of change it was: change from plain syntax to use a construct, from one construct to another, or from a construct back to plain syntax. Where a construct has been changed to a different construct, the data was recorded under the construct that the code was change \emph{to}.}
+            \label{fig:commitBreakdown}
+        \end{figure}
+
+        As clearly shown, changes involving lambdas were by far the most common, representing 62.3\% of all changes. The most common type of change was that to amend plain syntax into an advanced construct equivalent. This also is true \emph{within} each construct except for null-conditionals, where just under a third of the changes modified a construct into a null-conditional operation. Specifically, all 25 were cases of changing a null-check with a ternary if-statement into a null-conditional operation. The 15 that began as plain syntax were regular if-statements. The single most common change was changing C\# property \codeword{get {...}} and \codeword{set {...}} code blocks into lambda expressions. An example of this is show in Figure \ref{fig:getSetEx}. Paradoxically, the reverse was also identified 19 times, abandoning lambdas to return to \codeword{get {...}}/\codeword{set {...}} code blocks, together with 5 instances of a being replaced with a method reference and a pair of cases in JavaScript where a \codeword{for-in} was replaced with a \codeword{forEach} function and an anonymous lambda expression.
+
+        \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.7\textwidth]{getSetEx}
+            \caption{A GitHub diff showing the change of a get block into a lambda expression in the Windows Forms repository.}
+            \label{fig:getSetEx}
+        \end{figure}
+
+        The  next most common construct to be subject to see change was the null-coalesce operator. Of the 133 changes, 65.4\% of the introductions of the null-coalesce operators were the expected `default' case: replacing a if-statement null-check. The remaining 34.6\% were only marginally different, replacing null-checks that used ternary if-statements over their regular counterparts. All of these changes were found in the C\# Winforms repo.
+
+        Next in terms of frequency was null-conditional, in a similar manner to null-coalesce, replacing if-statements and/or ternary if-statements, as described above. Just like with null-coalesce too, all of these changes were found in the Winforms repo.
+
+        Just behind that in number of occurrences is the use of compound assignment operators, with 37 instances of a change. All bar one of these instances was in the Winforms repo, with just a single replacement found in Checkstyle repo. There was little scope for how these operators could replace other syntax, but by way of confirmation, all occurrences simply replaced two discrete operators with their compound equivalent. These operators are generally very common, but by convention in teaching courses from many programmers' formative years, they are introduced early on as a useful shorthand - it makes sense then that it's less likely for developers to need to go back over code and introduce these operators, as the chances are that they are already there.
+
+        In-line if-statements were next, being introduced over standard if-statements 20 times, all in the Winforms repo. in the Checkstyle repo, there was also one instances of a ternary if-statement being replaced with a regular if-statement.
+
+        The second-least changed, foreach loops, has changes found across three repos, in all three languages present. 10 instances of a traditional for loop were replaced with a foreach loop, and 6 instances (in JavaScript) of a \codeword{forEach} function with a lambda being replaced by a \codeword{for-of} loop, one of a number of foreach-like looping structures available in JavaScript.
+
+        Finally, no changes involving unary increment/decrement operators were identified at all in the any of the 22 commits. In the same manner as with compound operators, unary operators are often introduced as common shorthand that many programmers will use out of habit. In this case, we can surmise that either these operators were not wanted or required, or perhaps more likely, they were already in use in all places deemed necessary by the repo contributors.
+
     \subsection{Intermediate Language Comparison}
     \label{subsec:ilComp}
         To aid in confirming or denying some of the claims made in the survey by some participants, and to provide more general information about the constructs, the intermediate language code produced C\# and Java compilers was compared for both their `plain' and `advanced' syntax.
