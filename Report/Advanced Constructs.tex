@@ -66,7 +66,6 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \newline
     Working documents such as sample source code files, full survey results, early planning material and a full git history may be accessed at https://github.com/lucadavies/SCC421.
     \newline
-    %Special Thanks?
 \newpage
 \setcounter{tocdepth}{3}
 \tableofcontents
@@ -322,7 +321,6 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
         The goal of this branch of the study was to understand if and how standards are being maintained within the repositories with reference to the constructs and to general style-keeping. On a more functional level, the goal was to spot and highlight any cases of code being amended from `plain' syntax to using an advanced construct, or vice-versa. This was carried out by cloning the repository and examining the commit history. Due to the sheer number of total commits available in the selected repos (approx. 26,500), it would be unfeasible to check every commit for every relevant kind of change in the timescale of this study. To overcome this, a list of keywords was run against the commit history to filter results using the \codeword{--grep=<pattern>} option to \codeword{git log}. The keywords used are listed in Table \ref{tab:keywords}:
         
-        %\begin{center}
         \begin{table}[ht]
             \centering
             \begin{tabular}{ | l | l | }
@@ -345,7 +343,6 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
             \caption{Keywords used in manual analysis of repository commit messages.\label{tab:keywords}}
             
         \end{table}
-        %\end{center}
 
         Some of these keywords generated cross-over between those meant to highlight changes around a particular construct, but this was unimportant as these keywords were only used to create a list of  `interesting' commits. Commits were deemed interesting if the commit message and/or description contained reference to any of the keywords in such a way that it seem plausible that a change was made regarding any relevant construct. For each commit in the resultant list, the changes were scrutinised closely to pick out changes made that: added, removed, altered, or commented on use of any of the constructs. Each type of change was documented and counted per commit.
 
@@ -354,7 +351,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
     \subsection{Intermediate Language Comparison}
         The final part of this study was brought about during the progress of the preceding work. Analysis of the survey results raised some interesting points and potential ideas around what may make certain constructs more or less suited to use generally, and in any given place in code.
 
-        C\# and Java, while both are compiled languages, they are compiled to an intermediate language which is then interpreted by a virtual machine for execution. This means that we may examine the intermediate language (IL) to understand if there are any clear differences between the plain and advanced forms of syntax and constructs. This would be a somewhat crude way to go about attempting to gauge the difference in performance or efficiency, but merely examining and commenting on the difference in C\# and Java's respective ILs can prove valuable as supporting material to this study.
+        Both C\# and Java are compiled to an intermediate language which is then interpreted by a virtual machine for execution. We can examine this intermediate language (IL) for any clear differences between the plain and advanced forms of syntax and constructs. This would be a somewhat crude way to go about attempting to gauge the difference in performance or efficiency, but merely examining and commenting on the difference in C\# and Java's respective ILs can prove valuable as supporting material to this study.
         
         The code files used to generate the IL code contained the same code as in the sample files mentioned in Section \ref{subsubsec:sampleFile} with one change: the sample code files have consecutive functions, one in plain syntax, one using an advance construct. To make analysis and comparison easier, the plain and advanced syntax functions were extracted into separate files so that there was a plain syntax \emph{file} and an advanced syntax \emph{file}. This allowed ease of comparison using git integrations with Visual Studio Code to perform a \codeword{git diff} to see the similarities and differences easily. 
 
@@ -721,6 +718,7 @@ Luca Davies \\ M.Sci. (Hons.) Computer Science (with Industrial Experience)}
 
             Specific examples aside, none of the seven constructs were equal to their plain counterparts, all constructs generated different IL and are not the simple syntactic differences that some developers may consider them to be. Some differences are quite small (if-statement vs. ternary), but others create very different IL, requiring significant amounts of boilerplate and supporting code (lambdas and foreach loops). This begs the question: is there a tangible, measurable performance difference between using plain or advanced syntax? Is this difference, if present, variable on different execution platforms? This is outside the scope of this study but would be an interesting starting point for further study.
 
+    \newpage
     \subsection{Review of Aims}
         The following list repeats the aims presented at the start of this report, with each aim followed by a description of how the aim was fulfilled.
         \begin{itemize}
